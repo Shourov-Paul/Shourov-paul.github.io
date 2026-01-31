@@ -1,12 +1,29 @@
 {
-  "priority": 4,
-  "title": "Ejucationzz",
-  "shortDescription": "Ejucationzz is a directory site I created for myself using Next.js. On Ejucationzz, you can find free and paid online and offline courses available in Pakistan. 14 academies and 12 main categories, each with subcategories, have been listed.",
-  "cover": "https://res.cloudinary.com/dyvkdwzcj/image/upload/v1598035107/pomodoro-clock_ctp2af.png",
-  "type": "New 🔥",
-  "livePreview": "https://example.com/Ejucationzz",
-  "siteAge": "4 months old",
-  "visitors": "100 Visitors",
-  "githubLink": "",
-  "earned": ""
+  "priority": 1,
+  "title": "Quadropod",
+  "shortDescription": "A four-legged robotic platform engineered for balance, mobility, and smart control—where hardware meets intelligent motion.",
+  "cover": "/images/quadropod_cover.png",
+  "livePreview": "",
+  "type": "Personal Project",
+  "siteAge": "DEC 2025",
+  "slug": "quadropod",
+  "detailSections": [
+    {
+      "title": "Introduction",
+      "content": "Quadropod is a four-legged robotic platform designed for stability and adaptability. Unlike wheeled robots, it can navigate uneven terrain with ease. This project explores the intersection of mechanical engineering, electronics, and software control loops."
+    },
+    {
+      "image": "/images/quadropod_cover.png"
+    },
+    {
+      "title": "Features",
+      "content": "• **Inverse Kinematics**: Calculates precise servo angles for smooth foot positioning.<br/>• **Self-Balancing**: Uses IMU data to maintain stability on slopes.<br/>• **Wireless Control**: Operated via a custom mobile app over Bluetooth/WiFi."
+    },
+    {
+      "title": "Tech Stack",
+      "code": "// Firmware Control Loop (C++)\nvoid loop() {\n  readSensors();\n  calculateIK();\n  updateServos();\n  delay(10);\n}",
+      "filename": "ControlLoop.cpp",
+      "language": "cpp"
+    }
+  ]
 }

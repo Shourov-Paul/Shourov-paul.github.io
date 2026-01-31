@@ -21,7 +21,9 @@
     },
     {
       "title": "Tech Stack",
-      "code": "// Firmware Control Loop (C++)\nvoid loop() {\n  readSensors();\n  calculateIK();\n  updateServos();\n  delay(10);\n}"
+      "code": "// Firmware Control Loop (C++)\nvoid loop() {\n  readSensors();\n  calculateIK();\n  updateServos();\n  delay(10);\n}",
+      "filename": "ControlLoop.cpp",
+      "language": "cpp"
     }
   ]
 }

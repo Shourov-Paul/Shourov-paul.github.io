@@ -18,6 +18,8 @@ export interface Project {
     content?: string
     image?: string
     code?: string
+    language?: string
+    filename?: string
   }[]
 }
 

@@ -1,6 +1,7 @@
 import { getAllProjects, getProjectBySlug } from '@/services'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import CodeBlock from '@/components/UI/CodeBlock'
 
 export async function generateStaticParams() {
     const projects = await getAllProjects()
@@ -57,9 +58,11 @@ const ProjectDetails = async ({ params }: { params: Promise<{ slug: string }> })
                         )}
 
                         {section.code && (
-                            <pre className="mt-4 overflow-x-auto rounded-lg bg-[#0d1f33] p-6 text-sm text-gray-100 shadow-inner">
-                                <code>{section.code}</code>
-                            </pre>
+                            <CodeBlock
+                                code={section.code}
+                                language={section.language}
+                                filename={section.filename}
+                            />
                         )}
                     </section>
                 ))}

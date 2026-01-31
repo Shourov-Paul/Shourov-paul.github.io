@@ -79,7 +79,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
                 width={150}
                 height={80}
                 alt="Project Cover"
-                className="h-[80px] w-[150px] cursor-pointer rounded-md object-cover shadow-[0px_1.66px_3.74px_-1.25px_#18274B1F] transition-transform duration-300 hover:scale-105"
+                className="h-[80px] w-[150px] cursor-pointer rounded-md object-cover shadow-[0px_1.66px_3.74px_-1.25px_#18274B1F] transition-all duration-300 hover:scale-105 hover:rounded-none"
               />
             </Link>
           ) : (
