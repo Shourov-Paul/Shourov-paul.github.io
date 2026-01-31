@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next'
 export const dynamic = 'force-static'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL!
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://shourov-paul.github.io'
 
   return [
     {
