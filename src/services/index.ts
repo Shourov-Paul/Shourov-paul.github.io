@@ -57,4 +57,9 @@ const getAllTestimonials = async (): Promise<Testimonial[]> => {
   }
 }
 
-export { getAllProjects, getAllTestimonials }
+const getProjectBySlug = async (slug: string): Promise<Project | undefined> => {
+  const projects = await getAllProjects()
+  return projects.find((project) => project.slug === slug)
+}
+
+export { getAllProjects, getAllTestimonials, getProjectBySlug }

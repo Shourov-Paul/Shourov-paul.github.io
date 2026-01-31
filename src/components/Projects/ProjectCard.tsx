@@ -1,5 +1,6 @@
 import { Project } from '@/lib/types'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Earning, GithubIcon, Likes, PreviewIcon, Star, Timer } from '../../utils/icons'
 
 const IconText: React.FC<{ icon: string; text: string }> = ({ icon, text }) => (
@@ -29,19 +30,36 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
     cover,
   } = data
 
+  const { slug } = data
+
   return (
-    <div className="bg-secondary border-border flex flex-col justify-between rounded-[14px] border p-5">
+    <div className="bg-secondary border-border flex flex-col justify-between rounded-[14px] border p-5 transition-transform hover:-translate-y-1 hover:shadow-lg">
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1">
-          <div className="flex flex-col flex-wrap gap-3 sm:flex-row sm:items-center">
-            <h3 className="text-secondary-content text-lg font-medium md:font-semibold">{title}</h3>
-            {type && (
-              <span
-                className={`h-7 w-fit rounded-md bg-[#FFFFFF1A] p-1 text-sm ${type === 'New 🔥' ? 'animate-blink text-tag' : 'text-accent'} backdrop-blur-[80px]`}>
-                {type}
-              </span>
-            )}
-          </div>
+          {slug ? (
+            <Link href={`/projects/${slug}`} className="block group">
+              <div className="flex flex-col gap-2">
+                <h3 className="text-secondary-content group-hover:text-accent text-lg font-medium transition-colors md:font-semibold">{title}</h3>
+                {type && (
+                  <span
+                    className={`h-7 w-fit rounded-md bg-[#FFFFFF1A] p-1 text-sm ${type === 'New 🔥' ? 'animate-blink text-tag' : 'text-accent'} backdrop-blur-[80px]`}>
+                    {type}
+                  </span>
+                )}
+              </div>
+            </Link>
+          ) : (
+            <div className="flex flex-col gap-2">
+              <h3 className="text-secondary-content text-lg font-medium md:font-semibold">{title}</h3>
+              {type && (
+                <span
+                  className={`h-7 w-fit rounded-md bg-[#FFFFFF1A] p-1 text-sm ${type === 'New 🔥' ? 'animate-blink text-tag' : 'text-accent'} backdrop-blur-[80px]`}>
+                  {type}
+                </span>
+              )}
+            </div>
+          )}
+
           <ul className="mt-3 flex flex-col flex-wrap gap-2 sm:flex-row sm:gap-4">
             {(visitors || numberOfSales) && (
               <IconText text={(visitors || numberOfSales)?.toString() || ''} icon={Likes} />
@@ -54,13 +72,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
           </ul>
         </div>
         <figure className="flex justify-end overflow-hidden">
-          <Image
-            src={cover}
-            width={150}
-            height={80}
-            alt="Project Cover"
-            className="h-[80px] w-[150px] rounded-md object-cover shadow-[0px_1.66px_3.74px_-1.25px_#18274B1F]"
-          />
+          {slug ? (
+            <Link href={`/projects/${slug}`}>
+              <Image
+                src={cover}
+                width={150}
+                height={80}
+                alt="Project Cover"
+                className="h-[80px] w-[150px] cursor-pointer rounded-md object-cover shadow-[0px_1.66px_3.74px_-1.25px_#18274B1F] transition-transform duration-300 hover:scale-105"
+              />
+            </Link>
+          ) : (
+            <Image
+              src={cover}
+              width={150}
+              height={80}
+              alt="Project Cover"
+              className="h-[80px] w-[150px] rounded-md object-cover shadow-[0px_1.66px_3.74px_-1.25px_#18274B1F]"
+            />
+          )}
         </figure>
       </div>
 

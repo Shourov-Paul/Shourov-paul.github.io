@@ -12,6 +12,13 @@ export interface Project {
   numberOfSales?: string
   type: string
   siteAge?: string
+  slug?: string
+  detailSections?: {
+    title?: string
+    content?: string
+    image?: string
+    code?: string
+  }[]
 }
 
 export interface Heading {

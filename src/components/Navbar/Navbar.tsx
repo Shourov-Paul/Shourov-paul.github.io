@@ -44,12 +44,14 @@ const Navbar = () => {
         {isVisible ? (
           <div className="text-primary-content md:hidden">MENU</div>
         ) : (
-          <Link href="/">
+          <a href="/">
             <div className="animate-fade-up text-primary-content relative flex items-center gap-3 transition-all duration-300 md:static">
               <Logo />
-              <span className="text-primary-content">SHOUROV PAUL</span>
+              <span className="text-primary-content hover:text-accent cursor-pointer text-lg font-bold transition-colors duration-300">
+                SHOUROV PAUL
+              </span>
             </div>
-          </Link>
+          </a>
         )}
 
         <div className="md:hidden">
