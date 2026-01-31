@@ -8,22 +8,26 @@ import Logo from './Logo'
 
 const navItems = [
   {
-    label: '_home',
+    label: 'HOME',
     href: '/',
   },
   {
-    label: '_projects',
+    label: 'PROJECTS',
     href: '/#projects',
   },
   {
-    label: '_services',
+    label: 'SERVICES',
     href: '/#services',
   },
   {
-    label: '_contact-me',
+    label: 'CONTACT ME',
     href: '/#contact',
   },
 ]
+
+import ScrollProgress from '../ScrollProgress/ScrollProgress'
+
+import ThemeMenu from '../Theme/ThemeMenu'
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -34,15 +38,16 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-primary border-border h-16 overflow-hidden border-b">
+    <nav className="bg-primary border-border relative h-16 border-b">
+      <ScrollProgress />
       <div className="mx-auto flex h-full w-dvw max-w-[1200px] items-center justify-between px-4 py-1">
         {isVisible ? (
-          <div className="text-primary-content md:hidden">_menu</div>
+          <div className="text-primary-content md:hidden">MENU</div>
         ) : (
           <Link href="/">
             <div className="animate-fade-up text-primary-content relative flex items-center gap-3 transition-all duration-300 md:static">
               <Logo />
-              <span className="text-primary-content">john_doe</span>
+              <span className="text-primary-content">SHOUROV PAUL</span>
             </div>
           </Link>
         )}
@@ -71,6 +76,9 @@ const Navbar = () => {
               </Link>
             </li>
           ))}
+          <li className="flex items-center justify-center border-border border-b px-4 py-7 md:ml-auto md:border-none md:py-0 md:pl-8">
+            <ThemeMenu />
+          </li>
         </ul>
       </div>
     </nav>

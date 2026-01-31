@@ -15,7 +15,7 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({ testimonials })
   return (
     <section id="testimonials">
       <SectionHeading
-        title="// Testimonials"
+        title="Testimonials"
         subtitle="Don't just take our word for it - see what actual users of our service have to say about their experience."
       />
 

@@ -6,7 +6,7 @@ const ServiceSection = () => {
   return (
     <section id="services" className="my-14">
       <SectionHeading
-        title="// Services / Offers:"
+        title="Services"
         subtitle="I offer a wide range of services to ensure you have the best written code and stay ahead in the competition."
       />
 

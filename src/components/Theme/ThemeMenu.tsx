@@ -26,22 +26,20 @@ const ThemeMenu = () => {
   }
 
   return (
-    <div ref={menuRef} className="fixed right-6 bottom-4 z-50 md:right-11 md:bottom-11">
-      <div
+    <div ref={menuRef} className="relative z-50">
+      <button
         onClick={() => setShowThemeMenu(!showThemeMenu)}
-        className="bg-neutral cursor-pointer rounded-full p-1.5 md:p-2">
-        <div className="bg-primary grid grid-cols-2 place-content-center gap-0.5 rounded-full p-1.5 md:p-2">
-          <div className="size-[7px] rounded-t-full rounded-bl-full bg-[#B13753] md:size-[10px]"></div>
-          <div className="size-[7px] rounded-t-full rounded-br-full bg-[#BAA32B] md:size-[10px]"></div>
-          <div className="size-[7px] rounded-tl-full rounded-b-full bg-[#3178C6] md:size-[10px]"></div>
-          <div className="size-[7px] rounded-tr-full rounded-b-full bg-[#50B359] md:size-[10px]"></div>
-        </div>
-      </div>
+        className="grid cursor-pointer grid-cols-2 place-content-center gap-0.5 p-1 transition-transform hover:scale-110">
+        <div className="size-[7px] rounded-t-full rounded-bl-full bg-[#B13753] md:size-[10px]"></div>
+        <div className="size-[7px] rounded-t-full rounded-br-full bg-[#BAA32B] md:size-[10px]"></div>
+        <div className="size-[7px] rounded-tl-full rounded-b-full bg-[#3178C6] md:size-[10px]"></div>
+        <div className="size-[7px] rounded-tr-full rounded-b-full bg-[#50B359] md:size-[10px]"></div>
+      </button>
 
       {showThemeMenu && (
-        <div className="bg-secondary animate-fade-in border-border absolute right-0 bottom-full mb-5 space-y-3 rounded-xl border p-3 md:space-y-4 md:p-5">
+        <div className="bg-secondary animate-fade-in border-border absolute right-0 top-full mt-4 space-y-3 rounded-xl border p-3 md:space-y-4 md:p-5">
           <div className="text-primary-content border-border flex items-center justify-between border-b pb-3 md:pb-4">
-            <span className="text-sm md:text-base">_select-theme</span>
+            <span className="text-sm md:text-base">SELECT THEME</span>
             <CloseIcon
               onClick={() => setShowThemeMenu(false)}
               className="h-3 w-3 cursor-pointer md:h-4 md:w-4"

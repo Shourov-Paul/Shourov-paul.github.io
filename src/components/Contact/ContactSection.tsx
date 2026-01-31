@@ -9,7 +9,7 @@ const ContactSection = () => {
       <div className="flex flex-col justify-between gap-8">
         <div>
           <h3 className="text-neutral text-3xl font-bold">Let's Talk</h3>
-          <h4 className="text-accent text-2xl font-bold md:text-3xl">We'd love to help</h4>
+          <h4 className="text-accent text-2xl font-bold md:text-3xl">I'd love to help</h4>
           <p className="text-neutral mt-8">
             Crafting innovative solutions to solve real-world problems
           </p>
@@ -18,14 +18,14 @@ const ContactSection = () => {
         <div className="space-y-2">
           <p className="text-neutral text-lg font-bold">Contact Information</p>
           <a
-            href="mailto:johndoe@gmail.com"
+            href="mailto:Shourovpal32@gmail.com"
             className="text-neutral hover:text-accent flex items-center gap-1 font-light transition-colors duration-300">
-            <MsgIcon /> johndoe@gmail.com
+            <MsgIcon /> Shourovpal32@gmail.com
           </a>
           <a
-            href="tel:+92 3123456789"
+            href="tel:+880 1629887610"
             className="text-neutral hover:text-accent flex items-center gap-1 font-light transition-colors duration-300">
-            <PhoneIcon /> +92 3123456789
+            <PhoneIcon /> +880 1629887610
           </a>
         </div>
       </div>
