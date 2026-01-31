@@ -1,9 +1,9 @@
 {
   "priority": 1,
-  "title": "Color Contrast Collection",
-  "shortDescription": "Curated Background with Text colors contrast, help you to pick best contrast for your websites",
-  "cover": "https://res.cloudinary.com/dyvkdwzcj/image/upload/v1645090814/color-contrast_n598kw.png",
+  "title": "Quadropod",
+  "shortDescription": "A four-legged robotic platform engineered for balance, mobility, and smart control—where hardware meets intelligent motion.",
+  "cover": "/images/quadropod_cover.png",
   "livePreview": "https://example.com/alpha",
-  "type": "Client Work 🙍‍♂️",
-  "siteAge": "1 month old"
+  "type": "Personal Project",
+  "siteAge": "DEC 2025"
 }
