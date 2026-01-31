@@ -1,13 +1,27 @@
 'use client'
 
-import action from '@/actions/contact-form'
-import { useActionState } from 'react'
+import { useState } from 'react'
 import Button from '../UI/Button'
 import Input from '../UI/Input'
 import Textarea from '../UI/Textarea'
 
 const ContactForm = () => {
-  const [status, formAction, isPending] = useActionState(action, null)
+  const [isPending, setIsPending] = useState(false)
+  const [status, setStatus] = useState<{ success: boolean; message: string } | null>(null)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsPending(true)
+
+    // Simulate submission delay
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    setIsPending(false)
+    setStatus({
+      success: true,
+      message: 'Thank you! The form is currently in demo mode on GitHub Pages.'
+    })
+  }
 
   if (status?.success) {
     return (
@@ -16,7 +30,7 @@ const ContactForm = () => {
   }
 
   return (
-    <form action={formAction}>
+    <form onSubmit={handleSubmit}>
       <Input label="Full name" id="name" name="name" placeholder="Your name here" required />
       <Input
         label="Email address"
@@ -35,7 +49,7 @@ const ContactForm = () => {
         rows={7}
         required
       />
-      {!status?.success && <p className="my-2 font-light text-red-600">{status?.message}</p>}
+      {!status?.success && status?.message && <p className="my-2 font-light text-red-600">{status?.message}</p>}
       <Button text={isPending ? 'Submitting...' : 'Submit'} disabled={isPending} />
     </form>
   )
