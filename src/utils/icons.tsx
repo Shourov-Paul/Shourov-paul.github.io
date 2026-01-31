@@ -5,6 +5,11 @@ import ExpressjsIcon from '../assets/icons/express.svg'
 import JavaScriptIcon from '../assets/icons/javascript.svg'
 import Likes from '../assets/icons/likes.svg'
 import NestjsIcon from '../assets/icons/nest.svg'
+import Fusion360Icon from '../assets/icons/Fusion360.svg'
+import KIcadIcon from '../assets/icons/KIcad.svg'
+import AdobePremeierProIcon from '../assets/icons/AdobePremierePro.svg'
+import ArduinoIDEIcon from '../assets/icons/ArduinoIDE.svg'
+import PythonIcon from '../assets/icons/Python.svg'
 import NextjsIcon from '../assets/icons/nextjs.svg'
 import NodejsIcon from '../assets/icons/nodejs.svg'
 import ReactIcon from '../assets/icons/react.svg'
@@ -326,6 +331,8 @@ const PhoneIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
 }
 
 export {
+  AdobePremeierProIcon,
+  ArduinoIDEIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
   BurgerIcon,
@@ -337,9 +344,11 @@ export {
   Earning,
   ExpressjsIcon,
   Facebook,
+  Fusion360Icon,
   GithubIcon,
   Instagram,
   JavaScriptIcon,
+  KIcadIcon,
   Likes,
   LinkedIn,
   MsgIcon,
@@ -348,6 +357,7 @@ export {
   NodejsIcon,
   PhoneIcon,
   PreviewIcon,
+  PythonIcon,
   ReactIcon,
   SocketIcon,
   Star,

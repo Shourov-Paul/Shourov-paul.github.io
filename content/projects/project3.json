@@ -1,19 +1,19 @@
 {
-  "priority": 1,
-  "title": "Quadropod",
-  "shortDescription": "A four-legged robotic platform engineered for balance, mobility, and smart control—where hardware meets intelligent motion.",
-  "cover": "/images/quadropod_cover.png",
+  "priority": 3,
+  "title": "DIY Arduino Robotic Arm",
+  "shortDescription": "Building a 6-DOF Arduino robotic arm capable of precise pick-and-place operations. Designed for ease of assembly and operation, it includes a complete circuit diagram, Arduino code, and step-by-step instructions. Ideal for learning servo motor control, embedded programming, and the fundamentals of robotics and automation.",
+  "cover": "/images/DIY-Arduino-Robotic-Arm.jpg",
   "livePreview": "",
   "type": "Personal Project",
-  "siteAge": "DEC 2025",
-  "slug": "quadropod",
+  "siteAge": "JUN 2025",
+  "slug": "DIY-Arduino-Robotic-Arm",
   "detailSections": [
     {
       "title": "Introduction",
-      "content": "Quadropod is a four-legged robotic platform designed for stability and adaptability. Unlike wheeled robots, it can navigate uneven terrain with ease. This project explores the intersection of mechanical engineering, electronics, and software control loops."
+      "content": "Building a 6-DOF Arduino robotic arm capable of precise pick-and-place operations. Designed for ease of assembly and operation, it includes a complete circuit diagram, Arduino code, and step-by-step instructions. Ideal for learning servo motor control, embedded programming, and the fundamentals of robotics and automation."
     },
     {
-      "image": "/images/quadropod_cover.png"
+      "image": "/images/DIY-Arduino-Robotic-Arm.jpg"
     },
     {
       "title": "Features",

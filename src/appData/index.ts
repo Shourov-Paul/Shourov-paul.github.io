@@ -1,10 +1,15 @@
 // Data for portfolio
 import {
+  AdobePremeierProIcon,
+  ArduinoIDEIcon,
   ExpressjsIcon,
+  Fusion360Icon,
   JavaScriptIcon,
+  KIcadIcon,
   NestjsIcon,
   NextjsIcon,
   NodejsIcon,
+  PythonIcon,
   ReactIcon,
   SocketIcon,
   TailwindCSS,
@@ -68,34 +73,34 @@ export const projects = [
 // Service Data
 export const serviceData = [
   {
-    icon: JavaScriptIcon,
-    title: 'JavaScript Development',
-    shortDescription: 'Creating dynamic and interactive web applications using JavaScript.',
+    icon: KIcadIcon,
+    title: 'KIcad For PCB Design',
+    shortDescription: 'KiCad is a powerful, open-source PCB design tool used for schematic capture, PCB layout, and manufacturing-ready board design.',
   },
   {
-    icon: ReactIcon,
-    title: 'React.js Development',
-    shortDescription: 'Building modern and responsive user interfaces with React.js.',
+    icon: Fusion360Icon,
+    title: 'Fusion 360 For 3D Modeling',
+    shortDescription: 'Fusion 360 is a powerful CAD software used for precise 3D modeling, product design, and mechanical engineering workflows.',
   },
   {
-    icon: NodejsIcon,
-    title: 'Node.js Backend',
-    shortDescription: 'Developing scalable server-side applications using Node.js.',
+    icon: ArduinoIDEIcon,
+    title: 'Arduino IDE For Microcontroller',
+    shortDescription: 'Arduino IDE is a powerful IDE used for programming microcontrollers.',
   },
   {
     icon: NextjsIcon,
-    title: 'Next.js Development',
-    shortDescription: 'Creating server-rendered React applications with Next.js.',
+    title: 'Next.js For Web Development',
+    shortDescription: 'Next.js enables modern web development with server-side rendering, static generation, and optimized performance.',
   },
   {
-    icon: TypescriptIcon,
-    title: 'TypeScript Development',
-    shortDescription: 'Ensuring robust and maintainable code with TypeScript.',
+    icon: PythonIcon,
+    title: 'Python For AI Development',
+    shortDescription: 'Python is the leading programming language for AI development, enabling machine learning, data analysis, and intelligent system design.',
   },
   {
-    icon: TailwindCSS,
-    title: 'Tailwind CSS Styling',
-    shortDescription: 'Designing beautiful and responsive interfaces with Tailwind CSS.',
+    icon: AdobePremeierProIcon,
+    title: 'Premiere Pro For Video Editing',
+    shortDescription: 'Adobe Premiere Pro is a powerful video editing software used for creating professional-quality videos.',
   },
 ]
 
@@ -138,7 +143,7 @@ export const skillList = [
 export const footerLinks = [
   { title: 'About', href: '#' },
   { title: 'Projects', href: '#projects' },
-  { title: 'Testimonials', href: '#testimonials' },
+  // { title: 'Testimonials', href: '#testimonials' },
   {
     title: 'Blogs',
     href: '#blogs',

@@ -1,23 +1,23 @@
 {
-  "priority": 1,
-  "title": "Quadropod",
-  "shortDescription": "A four-legged robotic platform engineered for balance, mobility, and smart control—where hardware meets intelligent motion.",
-  "cover": "/images/quadropod_cover.png",
+  "priority": 2,
+  "title": "Wireless Stepper Motor Controller with ESP32 and TMC2240",
+  "shortDescription": "WiFi-enabled ESP32 stepper motor control system that allows precise positioning, performance monitoring, and real-time feedback directly through a web browser—making remote motor control simple and intuitive.",
+  "cover": "/images/Wireless-Stepper-Motor-Controller.png",
   "livePreview": "",
   "type": "Personal Project",
-  "siteAge": "DEC 2025",
-  "slug": "quadropod",
+  "siteAge": "JAN 2024",
+  "slug": "wireless-stepper-motor-controller",
   "detailSections": [
     {
       "title": "Introduction",
-      "content": "Quadropod is a four-legged robotic platform designed for stability and adaptability. Unlike wheeled robots, it can navigate uneven terrain with ease. This project explores the intersection of mechanical engineering, electronics, and software control loops."
+      "content": "This project implements a WiFi-enabled stepper motor controller using ESP32 and TMC2240 drivers. It provides a web interface for precise motor control, performance monitoring, and real-time feedback."
     },
     {
-      "image": "/images/quadropod_cover.png"
+      "image": "/images/Wireless-Stepper-Motor-Controller.png"
     },
     {
       "title": "Features",
-      "content": "• **Inverse Kinematics**: Calculates precise servo angles for smooth foot positioning.<br/>• **Self-Balancing**: Uses IMU data to maintain stability on slopes.<br/>• **Wireless Control**: Operated via a custom mobile app over Bluetooth/WiFi."
+      "content": "• **WiFi Control**: Operated via a custom mobile app over Bluetooth/WiFi.<br/>• **Real-time Feedback**: Provides instant performance data and motor status.<br/>• **Precise Control**: Offers smooth and accurate motor movements."
     },
     {
       "title": "Tech Stack",
