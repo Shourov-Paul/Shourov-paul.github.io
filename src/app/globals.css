@@ -209,3 +209,13 @@ section {
 .text-glitch {
   text-shadow: 2px 2px 0px #00ffff;
 }
+
+/* Fix for Chrome Autofill background color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--color-secondary) inset !important;
+  -webkit-text-fill-color: var(--color-neutral) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}

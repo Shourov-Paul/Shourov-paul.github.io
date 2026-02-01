@@ -16,7 +16,7 @@ const Textarea: FC<TextareaProps> = ({ id, label, ...props }) => {
       <textarea
         id={id}
         {...props}
-        className="border-border focus:ring-accent text-neutral w-full resize-none rounded-lg border p-[10px] placeholder:font-thin focus:ring-2 focus:outline-none"
+        className="border-border focus:ring-accent text-neutral w-full resize-none rounded-lg border p-[10px] text-base placeholder:font-thin focus:ring-2 focus:outline-none"
       />
     </div>
   )

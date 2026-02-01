@@ -4,8 +4,8 @@
   "shortDescription": "build a real-time GPS tracker using the Raspberry Pi Pico, SIM800L GSM module, and Neo-6M GPS. The project enables accurate location tracking over cellular networks and covers complete hardware setup and data transmission, making it ideal for IoT, tracking, and embedded system applications.",
   "cover": "/images/Real-Time-GPS-Tracker-with-Raspberry-Pi-Pico-SIM800L-GSM-Module.png",
   "livePreview": "",
-  "type": "Client Work",
-  "siteAge": "JUN 2025",
+  "type": "Personal Project",
+  "siteAge": "MAY 2023",
   "slug": "Real-Time-GPS-Tracker-with-Raspberry-Pi-Pico-SIM800L-GSM-Module",
   "detailSections": [
     {

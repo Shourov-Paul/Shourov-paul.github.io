@@ -54,7 +54,8 @@ const Navbar = () => {
           </a>
         )}
 
-        <div className="md:hidden">
+        <div className="flex items-center gap-4 md:hidden">
+          <ThemeMenu />
           <button onClick={toggleMenu}>
             {isVisible ? (
               <CloseIcon className="text-primary-content" />
@@ -73,12 +74,12 @@ const Navbar = () => {
               className="border-border flex items-center border-b px-4 text-2xl md:border-y-0 md:border-e md:text-base md:first:border-s md:last:ml-auto md:last:border-none md:last:px-0 lg:px-8">
               <Link
                 href={href}
-                className={`text-primary-content hover:text-neutral w-full py-7 transition-all duration-150 md:py-0 ${pathname === href ? 'text-neutral cursor-text' : ''}`}>
+                className={`text-primary-content hover:text-neutral w-full py-7 transition-all duration-150 md:py-0 ${pathname === href ? 'text-neutral' : ''}`}>
                 {label}
               </Link>
             </li>
           ))}
-          <li className="flex items-center justify-center border-border border-b px-4 py-7 md:ml-auto md:border-none md:py-0 md:pl-8">
+          <li className="hidden border-border border-b px-4 py-7 md:ml-auto md:flex md:items-center md:justify-center md:border-none md:py-0 md:pl-8">
             <ThemeMenu />
           </li>
         </ul>
