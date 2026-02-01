@@ -29,6 +29,13 @@ export interface Heading {
   items: Heading[]
 }
 
+export interface Video {
+  id: string
+  title: string
+  description: string
+  videoUrl: string
+}
+
 export interface Testimonial {
   name: string
   title?: string

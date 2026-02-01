@@ -16,6 +16,10 @@ const navItems = [
     href: '/#projects',
   },
   {
+    label: 'VIDEO',
+    href: '/#videos',
+  },
+  {
     label: 'SKILLS',
     href: '/#skills',
   },

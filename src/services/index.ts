@@ -1,4 +1,4 @@
-import { Project, Testimonial } from '@/lib/types'
+import { Project, Testimonial, Video } from '@/lib/types'
 import { promises as fs } from 'fs'
 import path from 'path'
 
@@ -62,4 +62,15 @@ const getProjectBySlug = async (slug: string): Promise<Project | undefined> => {
   return projects.find((project) => project.slug === slug)
 }
 
-export { getAllProjects, getAllTestimonials, getProjectBySlug }
+const getVideos = async (): Promise<Video[]> => {
+  try {
+    const filePath = path.join(process.cwd(), '/content/videos/videoq.json')
+    const fileContent = await fs.readFile(filePath, 'utf8')
+    return JSON.parse(fileContent)
+  } catch (error) {
+    console.error('Error fetching videos:', error)
+    return []
+  }
+}
+
+export { getAllProjects, getAllTestimonials, getProjectBySlug, getVideos }
