@@ -36,6 +36,14 @@ export interface Video {
   videoUrl: string
 }
 
+export interface Achievement {
+  id: string
+  title: string
+  issuer: string
+  date: string
+  image: string
+}
+
 export interface Testimonial {
   name: string
   title?: string

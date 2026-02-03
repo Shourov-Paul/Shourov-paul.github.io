@@ -1,0 +1,65 @@
+[
+    {
+        "id": "cert-001",
+        "title": "Certificate of Achievement - Robolution 2025",
+        "issuer": "MIST Robotics Club",
+        "date": "November 2025",
+        "image": "/images/certificates/robolution-2025.jpg"
+    },
+    {
+        "id": "cert-002",
+        "title": "Certificate of Participation - Patent Idea Competition",
+        "issuer": "Daffodil International University",
+        "date": "November 2025",
+        "image": "/images/certificates/patent-idea-competition-2025.jpg"
+    },
+    {
+        "id": "cert-003",
+        "title": "2nd Runner Up - Product Design & Idea Competition",
+        "issuer": "PDIC 2023, Daffodil International University",
+        "date": "September 2023",
+        "image": "/images/certificates/pdic-2023.jpg"
+    },
+    {
+        "id": "cert-004",
+        "title": "Library Excellence Award",
+        "issuer": "Daffodil International University Library",
+        "date": "Spring 2024",
+        "image": "/images/certificates/library-excellence-2024.jpg"
+    },
+    {
+        "id": "cert-005",
+        "title": "Certificate of Participation - iTech Expo 2022",
+        "issuer": "IUBAT Robotics Club",
+        "date": "November 2022",
+        "image": "/images/certificates/itech-expo-2022.jpg"
+    },
+    {
+        "id": "cert-006",
+        "title": "1st Runner Up - IoT Project Showcasing",
+        "issuer": "DIU-Intra University IoT Fest 2023",
+        "date": "May 2023",
+        "image": "/images/certificates/iot-fest-2023.jpg"
+    },
+    {
+        "id": "cert-007",
+        "title": "Certificate of Completion - Industrial Training",
+        "issuer": "Ghorashal Training Center, BPDB",
+        "date": "Jan-Feb 2025",
+        "image": "/images/certificates/bpdb-training-2025.jpg"
+    },
+    {
+        "id": "cert-008",
+        "title": "Certificate of Appreciation - Industrial Training",
+        "issuer": "Ulkasemi Pvt. Limited",
+        "date": "October 2025",
+        "image": "/images/certificates/ulkasemi-training-2025.jpg"
+    },
+    {
+        "id": "cert-009",
+        "title": "Teaching Assistant Appointment",
+        "issuer": "Daffodil International University",
+        "date": "Fall 2025",
+        "image": "/images/certificates/diu-ta-offer-2025.jpg"
+    }
+]

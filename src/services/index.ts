@@ -1,4 +1,4 @@
-import { Project, Testimonial, Video } from '@/lib/types'
+import { Achievement, Project, Testimonial, Video } from '@/lib/types'
 import { promises as fs } from 'fs'
 import path from 'path'
 
@@ -73,4 +73,15 @@ const getVideos = async (): Promise<Video[]> => {
   }
 }
 
-export { getAllProjects, getAllTestimonials, getProjectBySlug, getVideos }
+const getAchievements = async (): Promise<Achievement[]> => {
+  try {
+    const filePath = path.join(process.cwd(), '/content/achievements/certificates.json')
+    const fileContent = await fs.readFile(filePath, 'utf8')
+    return JSON.parse(fileContent)
+  } catch (error) {
+    console.error('Error fetching achievements:', error)
+    return []
+  }
+}
+
+export { getAllProjects, getAllTestimonials, getAchievements, getProjectBySlug, getVideos }
