@@ -9,12 +9,12 @@ import { ChevronDownIcon, DownloadIcon } from '@/utils/icons'
 
 const AchievementsSection = ({ achievements }: { achievements: Achievement[] }) => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null)
-    const [visibleCount, setVisibleCount] = useState(3)
+    const [visibleCount, setVisibleCount] = useState(4)
     const isExpanded = visibleCount >= achievements.length
 
     const handleToggle = () => {
         if (isExpanded) {
-            setVisibleCount(3)
+            setVisibleCount(4)
             const section = document.getElementById('achievements')
             if (section) {
                 section.scrollIntoView({ behavior: 'smooth' })
@@ -28,7 +28,7 @@ const AchievementsSection = ({ achievements }: { achievements: Achievement[] }) 
         <section id="achievements" className="mb-8 scroll-mt-24">
             <SectionHeading title="ACHIEVEMENTS" subtitle="Certifications & Awards" />
 
-            <div className="my-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:my-12">
+            <div className="my-8 grid grid-cols-1 gap-8 md:my-12 md:grid-cols-2">
                 {achievements.slice(0, visibleCount).map((achievement) => (
                     <div
                         key={achievement.id}
@@ -68,7 +68,7 @@ const AchievementsSection = ({ achievements }: { achievements: Achievement[] }) 
                 ))}
             </div>
 
-            {achievements.length > 3 && (
+            {achievements.length > 4 && (
                 <div className="flex justify-center mt-8">
                     <button
                         onClick={handleToggle}

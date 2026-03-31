@@ -4,7 +4,7 @@ import useRotatingAnimation from '@/hooks/useRotatingAnimation'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
-  Codepen,
+  Youtube,
   Facebook,
   GithubIcon,
   Instagram,
@@ -50,22 +50,22 @@ const Hero = () => {
           </div>
 
           <div className="mt-8 flex w-full max-w-[364px] items-center justify-between text-neutral">
-            <Link href="https://github.com" target="_blank" className="hover:text-accent transition-colors duration-300">
+            <Link href="https://github.com/Shourov-Paul" target="_blank" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
               <GithubIcon className="size-6" />
             </Link>
-            <Link href="https://www.linkedin.com/in/shourov-paul-b052a7259/" target="_blank" className="hover:text-accent transition-colors duration-300">
+            <Link href="https://www.linkedin.com/in/shourov-paul-b052a7259/" target="_blank" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
               <LinkedIn className="size-6" />
             </Link>
-            <Link href="https://codepen.io" target="_blank" className="hover:text-accent transition-colors duration-300">
-              <Codepen className="size-6" />
+            <Link href="https://www.youtube.com/channel/UCQ18lfqzlZH-a-WyphayNWw" target="_blank" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
+              <Youtube className="size-6" />
             </Link>
-            <Link href="https://twitter.com" target="_blank" className="hover:text-accent transition-colors duration-300">
+            <Link href="https://twitter.com/shourov_pal" target="_blank" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
               <X className="size-6" />
             </Link>
-            <Link href="https://instagram.com" target="_blank" className="hover:text-accent transition-colors duration-300">
+            <Link href="https://www.instagram.com/sh0ur0v_p/" target="_blank" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
               <Instagram className="size-6" />
             </Link>
-            <Link href="https://facebook.com" target="_blank" className="hover:text-accent transition-colors duration-300">
+            <Link href="https://www.facebook.com/shourov.paul0/" target="_blank" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
               <Facebook className="size-6" />
             </Link>
           </div>
