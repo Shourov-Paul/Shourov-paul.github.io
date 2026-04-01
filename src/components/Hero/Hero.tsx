@@ -33,7 +33,7 @@ const Hero = () => {
 
           <div className="mt-6 flex flex-wrap gap-6">
             <a
-              href="/Shourov_Paul_Resume.pdf"
+              href="/CV/Shourov_Paul_Resume.pdf"
               download="Shourov_Paul_Resume.pdf"
               aria-label="Download CV"
               className="bg-accent w-[170px] cursor-pointer rounded-lg px-[14px] py-[10px] text-center text-sm font-medium text-[#00071E] transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">

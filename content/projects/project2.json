@@ -2,7 +2,7 @@
   "priority": 2,
   "title": "Wireless Stepper Motor Controller with ESP32 and TMC2240",
   "shortDescription": "WiFi-enabled ESP32 stepper motor control system that allows precise positioning, performance monitoring, and real-time feedback directly through a web browser—making remote motor control simple and intuitive.",
-  "cover": "/images/Wireless-Stepper-Motor-Controller.png",
+  "cover": "/images/projects/Wireless-Stepper-Motor-Controller.png",
   "livePreview": "",
   "type": "Personal Project",
   "siteAge": "JAN 2024",
@@ -13,7 +13,7 @@
       "content": "This project implements a WiFi-enabled stepper motor controller using ESP32 and TMC2240 drivers. It provides a web interface for precise motor control, performance monitoring, and real-time feedback."
     },
     {
-      "image": "/images/Wireless-Stepper-Motor-Controller.png"
+      "image": "/images/projects/Wireless-Stepper-Motor-Controller.png"
     },
     {
       "title": "Features",
