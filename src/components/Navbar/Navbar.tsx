@@ -60,7 +60,7 @@ const Navbar = () => {
 
         <div className="flex items-center gap-4 md:hidden">
           <ThemeMenu />
-          <button onClick={toggleMenu}>
+          <button onClick={toggleMenu} aria-label={isVisible ? 'Close menu' : 'Open menu'}>
             {isVisible ? (
               <CloseIcon className="text-primary-content" />
             ) : (

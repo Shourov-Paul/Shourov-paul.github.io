@@ -27,9 +27,9 @@ const Hero = () => {
             <span className="text-accent block text-[1.75rem] font-bold">{role}</span>
           </h1>
 
-          <h2 className="text-neutral mt-3">
+          <p className="text-neutral mt-3">
             Ambitious EEE student skilled in circuit design, signal processing, and programming, with strong expertise in Embedded Systems, PCB design, microcontroller programming, Simulation & Analysis, and Technical Drawing, seeking opportunities to contribute to innovative projects and continuous learning.
-          </h2>
+          </p>
 
           <div className="mt-6 flex flex-wrap gap-6">
             <a
@@ -50,22 +50,22 @@ const Hero = () => {
           </div>
 
           <div className="mt-8 flex w-full max-w-[364px] items-center justify-between text-neutral">
-            <Link href="https://github.com/Shourov-Paul" target="_blank" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
+            <Link href="https://github.com/Shourov-Paul" target="_blank" aria-label="GitHub Profile" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
               <GithubIcon className="size-6" />
             </Link>
-            <Link href="https://www.linkedin.com/in/shourov-paul-b052a7259/" target="_blank" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
+            <Link href="https://www.linkedin.com/in/shourov-paul-b052a7259/" target="_blank" aria-label="LinkedIn Profile" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
               <LinkedIn className="size-6" />
             </Link>
-            <Link href="https://www.youtube.com/channel/UCQ18lfqzlZH-a-WyphayNWw" target="_blank" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
+            <Link href="https://www.youtube.com/channel/UCQ18lfqzlZH-a-WyphayNWw" target="_blank" aria-label="YouTube Channel" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
               <Youtube className="size-6" />
             </Link>
-            <Link href="https://twitter.com/shourov_pal" target="_blank" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
+            <Link href="https://twitter.com/shourov_pal" target="_blank" aria-label="X (Twitter) Profile" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
               <X className="size-6" />
             </Link>
-            <Link href="https://www.instagram.com/sh0ur0v_p/" target="_blank" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
+            <Link href="https://www.instagram.com/sh0ur0v_p/" target="_blank" aria-label="Instagram Profile" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
               <Instagram className="size-6" />
             </Link>
-            <Link href="https://www.facebook.com/shourov.paul0/" target="_blank" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
+            <Link href="https://www.facebook.com/shourov.paul0/" target="_blank" aria-label="Facebook Profile" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
               <Facebook className="size-6" />
             </Link>
           </div>

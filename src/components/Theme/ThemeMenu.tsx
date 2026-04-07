@@ -29,6 +29,7 @@ const ThemeMenu = () => {
     <div ref={menuRef} className="relative z-50">
       <button
         onClick={() => setShowThemeMenu(!showThemeMenu)}
+        aria-label="Change theme"
         className="grid cursor-pointer grid-cols-2 place-content-center gap-0.5 p-1 transition-transform hover:scale-110">
         <div className="size-[7px] rounded-t-full rounded-bl-full bg-[#B13753] md:size-[10px]"></div>
         <div className="size-[7px] rounded-t-full rounded-br-full bg-[#BAA32B] md:size-[10px]"></div>

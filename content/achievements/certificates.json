@@ -4,104 +4,104 @@
         "title": "Certificate of Achievement - Robolution 2025",
         "issuer": "MIST Robotics Club",
         "date": "November 2025",
-        "image": "/images/certificates/robolution-2025.jpg"
+        "image": "/images/certificates/robolution-2025 copy.webp"
     },
     {
         "id": "cert-002",
         "title": "Certificate of Participation - Patent Idea Competition",
         "issuer": "Daffodil International University",
         "date": "November 2025",
-        "image": "/images/certificates/patent-idea-competition-2025.jpg"
+        "image": "/images/certificates/patent-idea-competition-2025.webp"
     },
     {
         "id": "cert-008",
         "title": "Certificate of Appreciation - Industrial Training",
         "issuer": "Ulkasemi Pvt. Limited",
         "date": "October 2025",
-        "image": "/images/certificates/ulkasemi-training-2025.jpg"
+        "image": "/images/certificates/ulkasemi-training-2025.webp"
     },
     {
         "id": "cert-009",
         "title": "Teaching Assistant Appointment",
         "issuer": "Daffodil International University",
         "date": "Fall 2025",
-        "image": "/images/certificates/diu-ta-offer-2025.jpg"
+        "image": "/images/certificates/diu-ta-offer-2025.webp"
     },
     {
         "id": "cert-010",
         "title": "Appreciation for the Participation of DIU-DoR Poster Presentation-2025",
         "issuer": "Daffodil International University",
         "date": "May 14, 2025",
-        "image": "/images/certificates/diu-dor-poster-2025.jpg"
+        "image": "/images/certificates/diu-dor-poster-2025.webp"
     },
     {
         "id": "cert-007",
         "title": "Certificate of Completion - Industrial Training",
         "issuer": "Ghorashal Training Center, BPDB",
         "date": "Jan-Feb 2025",
-        "image": "/images/certificates/bpdb-training-2025.jpg"
+        "image": "/images/certificates/bpdb-training-2025.webp"
     },
     {
         "id": "cert-004",
         "title": "Library Excellence Award",
         "issuer": "Daffodil International University Library",
         "date": "Spring 2024",
-        "image": "/images/certificates/library-excellence-2024.jpg"
+        "image": "/images/certificates/library-excellence-2024.webp"
     },
     {
         "id": "cert-003",
         "title": "⭐ 2nd Runner Up - Product Design & Idea Competition",
         "issuer": "PDIC 2023, Daffodil International University",
         "date": "September 2023",
-        "image": "/images/certificates/pdic-2023.jpg"
+        "image": "/images/certificates/pdic-2023 copy.webp"
     },
     {
         "id": "cert-006",
         "title": "⭐ 1st Runner Up - IoT Project Showcasing",
         "issuer": "DIU-Intra University IoT Fest 2023",
         "date": "May 2023",
-        "image": "/images/certificates/iot-fest-2023.jpg"
+        "image": "/images/certificates/iot-fest-2023.webp"
     },
     {
         "id": "cert-011",
         "title": "Certificate of Participation - LFR Segment",
         "issuer": "AUST Innovation and Design Club",
         "date": "2023",
-        "image": "/images/certificates/mindsparks-2023.jpg"
+        "image": "/images/certificates/mindsparks-2023 copy.webp"
     },
     {
         "id": "cert-005",
         "title": "Certificate of Participation - iTech Expo 2022",
         "issuer": "IUBAT Robotics Club",
         "date": "November 2022",
-        "image": "/images/certificates/itech-expo-2022.jpg"
+        "image": "/images/certificates/itech-expo-2022 copy.webp"
     },
     {
         "id": "cert-012",
         "title": "Higher Secondary Certificate - Academic Transcript",
         "issuer": "Board of Intermediate and Secondary Education, Dhaka",
         "date": "January 30, 2021",
-        "image": "/images/certificates/hsc-transcript.jpg"
+        "image": "/images/certificates/hsc-transcript.webp"
     },
     {
         "id": "cert-013",
         "title": "Higher Secondary Certificate",
         "issuer": "Board of Intermediate and Secondary Education, Dhaka",
         "date": "January 30, 2021",
-        "image": "/images/certificates/hsc-certificate.jpg"
+        "image": "/images/certificates/hsc-certificate.webp"
     },
     {
         "id": "cert-014",
         "title": "Secondary School Certificate",
         "issuer": "Board of Intermediate and Secondary Education, Dhaka",
         "date": "May 6, 2018",
-        "image": "/images/certificates/ssc-certificate.jpg"
+        "image": "/images/certificates/ssc-certificate copy.webp"
     },
     {
         "id": "cert-015",
         "title": "Secondary School Certificate - Academic Transcript",
         "issuer": "Board of Intermediate and Secondary Education, Dhaka",
         "date": "May 6, 2018",
-        "image": "/images/certificates/ssc-transcript.jpg"
+        "image": "/images/certificates/ssc-transcript.webp"
     }
 ]
