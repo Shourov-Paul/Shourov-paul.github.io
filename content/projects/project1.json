@@ -1,29 +1,43 @@
 {
   "priority": 1,
-  "title": "Quadropod",
-  "shortDescription": "A four-legged robotic platform engineered for balance, mobility, and smart control—where hardware meets intelligent motion.",
-  "cover": "/images/projects/quadropod_cover.png",
+  "title": "Quadruped Robot & Custom Web OS",
+  "shortDescription": "A comprehensive 12-DOF four-legged robotics platform featuring real-time inverse kinematics, a 12-step creep gait engine, and a sleek browser-based 3D control dashboard.",
+  "cover": "/images/projects/project1/quadropod_cover.png",
   "livePreview": "",
   "type": "Personal Project",
   "siteAge": "DEC 2025",
   "slug": "quadropod",
   "detailSections": [
     {
-      "title": "Introduction",
-      "content": "Quadropod is a four-legged robotic platform designed for stability and adaptability. Unlike wheeled robots, it can navigate uneven terrain with ease. This project explores the intersection of mechanical engineering, electronics, and software control loops."
+      "title": "Overview",
+      "content": "This project encompasses the entire lifecycle of a 12-DOF (Degree of Freedom) quadruped robot—from raw C++ embedded firmware handling complex trigonometric inverse kinematics to a modern, glassmorphic web dashboard that communicates over Web Serial API. It is designed to demonstrate advanced robotic mobility and intuitive telemetry monitoring."
     },
     {
-      "image": "/images/projects/quadropod_cover.png"
+      "image": "/images/projects/project1/quadropod_cover.png"
     },
     {
-      "title": "Features",
-      "content": "• **Inverse Kinematics**: Calculates precise servo angles for smooth foot positioning.<br/>• **Self-Balancing**: Uses IMU data to maintain stability on slopes.<br/>• **Wireless Control**: Operated via a custom mobile app over Bluetooth/WiFi."
+      "title": "Embedded Firmware & Inverse Kinematics",
+      "content": "The central controller manages a PCA9685 16-channel PWM driver via I2C at 50Hz. The custom C++ firmware executes a **3-DOF Inverse Kinematics (IK) Engine** capable of calculating exact servo angles for given XYZ foot distances. Hardware offset calibration and default neutral postures are persistently managed using EEPROM. The robot natively evaluates a dynamic **12-step creep gait engine**, orchestrating coordinated swing, push, and lift behaviors for perfectly balanced omnidirectional locomotion."
     },
     {
-      "title": "Tech Stack",
-      "code": "// Firmware Control Loop (C++)\nvoid loop() {\n  readSensors();\n  calculateIK();\n  updateServos();\n  delay(10);\n}",
-      "filename": "ControlLoop.cpp",
+      "title": "Quadruped OS Dashboard",
+      "content": "To control and monitor the robot, I engineered **Quadruped OS**, a browser-based visualization dashboard using HTML, CSS, and Vanilla JS. It connects over the Web Serial API directly to the robot for ultra-low latency. Features include:<br/><br/>• **Real-Time 3D Viewer:** Renders the robot's physical posture live using Plotly.js.<br/>• **Calibration Studio:** Visually adjust and commit EEPROM joint offsets.<br/>• **Direct IK Control:** Target specific XYZ coordinates for individual legs without manually mapping degrees.<br/>• **Omnidirectional Drive:** A built-in D-pad interface that live-streams gait vectors and speed parameters."
+    },
+    {
+      "image": "/images/projects/project1/quadruped_dashboard.png"
+    },
+    {
+      "title": "QuadrupedController.ino Anatomy",
+      "content": "The central embedded firmware spans over 500 lines of robust C++ code managing everything from hardware pulses to high-level motion planning. Here is how it functions step-by-step:<br/><br/>**1. Hardware & Memory Initialization:** Bootstraps the PCA9685 driver via I2C and sets servo frequencies to 50Hz. Crucially, it reads the onboard EEPROM to load pre-calibrated joint offsets and the saved 'home' posture, applying them immediately so the robot stands up securely and perfectly aligned.<br/><br/>**2. Serial Command Interpreter:** Continuously listens to the UART serial port for incoming string commands. It decodes a custom protocol covering direct joint positioning (`L1S1:90`), IK mapping (`MOVE:1:50,0,-50`), EEPROM storage (`SAVE`), offset calibration (`CALIB:`), and autonomous gait execution (`WALK:F:5`).<br/><br/>**3. Smooth Interpolation Loop:** To prevent sudden mechanical jerks that can damage the motors or cause the robot to collapse, the firmware uses a non-blocking `millis()` loop running every 20ms (`updateServosSmoothly()`) to seamlessly transition the current physical angles towards the requested target angles.<br/><br/>**4. Inverse Kinematics Engine:** The geometric core of the robot. It takes a Cartesian XYZ request for a leg tip and mathematically works backwards using trigonometry constraints and the Law of Cosines to calculate the precise Hip, Shoulder, and Knee angles needed to reach that 3D coordinate.<br/><br/>**5. 12-Step Creep Gait Engine:** For omnidirectional walking, the program shifts into an automated finite state machine (`updateGait()`). By executing a highly coordinated sequence of *Lift, Swing, Plant, and Push* across diagonal leg pairs, the robot achieves static stability—walking forwards, backwards, or executing zero-radius yaw turns while always keeping three feet planted on the ground."
+    },
+    {
+      "title": "Kinematic Solution Engine",
+      "code": "void calculateIK(int legIndex, float x, float y, float z) {\n  float L = sqrt(x * x + y * y);\n  float gamma = atan2(y, x);\n\n  float L1 = L - L_COXA;\n  if (L1 < 0) L1 = 0;\n  float D = sqrt(L1 * L1 + z * z);\n\n  // Prevent impossible stretching\n  if (D > (L_FEMUR + L_TIBIA)) {\n    D = L_FEMUR + L_TIBIA - 0.01;\n  }\n\n  float alpha1 = atan2(abs(z), L1);\n  float cosAlpha2 = (L_FEMUR*L_FEMUR + D*D - L_TIBIA*L_TIBIA) / (2*L_FEMUR*D);\n  float alpha2 = acos(constrain(cosAlpha2, -1.0, 1.0));\n  float alpha = alpha1 + alpha2;\n\n  float cosBeta = (L_FEMUR*L_FEMUR + L_TIBIA*L_TIBIA - D*D) / (2*L_FEMUR*L_TIBIA);\n  float beta_inner = acos(constrain(cosBeta, -1.0, 1.0));\n  float beta = PI - beta_inner;\n\n  // Apply geometry offsets and write to target angles\n  targetAngles[servoMap[legIndex][0]] = 90.0 + (gamma * 180.0 / PI);\n  targetAngles[servoMap[legIndex][1]] = 90.0 + (alpha * 180.0 / PI);\n  targetAngles[servoMap[legIndex][2]] = 90.0 + (beta * 180.0 / PI);\n}",
+      "filename": "QuadrupedController.ino",
       "language": "cpp"
+    },
+    {
+      "content": "<div class=\"mt-12 flex justify-center\"><a href=\"https://github.com/Shourov-Paul/Quadropod\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-neutral bg-secondary border border-accent cursor-pointer rounded-lg px-6 py-[10px] text-center text-sm font-medium transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg\">🚀 To Read More and View The Code</a></div>"
     }
   ]
 }

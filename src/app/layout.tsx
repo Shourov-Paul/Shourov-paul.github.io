@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     creator: '@Basit_Miyanji',
   },
+  verification: {
+    google: 'z5vyMwjsamJXI2lCyYmzt4scYhy6UoNBa7QjQZjEfng',
+  },
 }
 
 export default function RootLayout({
