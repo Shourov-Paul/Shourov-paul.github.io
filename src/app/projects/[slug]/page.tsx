@@ -1,4 +1,5 @@
 import { getAllProjects, getProjectBySlug } from '@/services'
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import CodeBlock from '@/components/UI/CodeBlock'
@@ -10,6 +11,41 @@ export async function generateStaticParams() {
         .map((project) => ({
             slug: project.slug,
         }))
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params
+    const project = await getProjectBySlug(slug)
+
+    if (!project) {
+        return {
+            title: 'Project Not Found | Shourov Paul',
+        }
+    }
+
+    const title = `${project.title} | Shourov Paul's Portfolio`
+    let description = project.type ? `Project type: ${project.type}.` : ''
+    
+    const firstContentSection = project.detailSections?.find(s => s.content)
+    if (firstContentSection) {
+        const textContent = firstContentSection.content.replace(/<[^>]*>?/gm, '').substring(0, 150)
+        description += ` ${textContent}...`
+    } else {
+        description = `Explore the ${project.title} project by Shourov Paul.`
+    }
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+        },
+        twitter: {
+            title,
+            description,
+        }
+    }
 }
 
 const ProjectDetails = async ({ params }: { params: Promise<{ slug: string }> }) => {

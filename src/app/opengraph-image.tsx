@@ -3,7 +3,7 @@ import { ImageResponse } from 'next/og'
 export const dynamic = 'force-static'
 
 // Image metadata
-export const alt = 'SOLOPRENEUR'
+export const alt = 'Shourov Paul — Embedded Systems & Robotics Engineer with Full-Stack Developing experience'
 
 export const size = {
   width: 1200,
