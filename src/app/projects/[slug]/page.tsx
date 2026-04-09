@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     let description = project.type ? `Project type: ${project.type}.` : ''
     
     const firstContentSection = project.detailSections?.find(s => s.content)
-    if (firstContentSection) {
+    if (firstContentSection && firstContentSection.content) {
         const textContent = firstContentSection.content.replace(/<[^>]*>?/gm, '').substring(0, 150)
         description += ` ${textContent}...`
     } else {
