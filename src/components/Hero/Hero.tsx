@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react'
 import useRoleSwitcher from '@/hooks/useRoleSwitcher'
 import useRotatingAnimation from '@/hooks/useRotatingAnimation'
 import Image from 'next/image'
@@ -13,8 +14,10 @@ import {
 } from '../../utils/icons'
 import { HeroImage } from '../../utils/images'
 import Ellipse from './Ellipse'
+import AnalyticsMapModal from '../MapModal/AnalyticsMapModal'
 
 const Hero = () => {
+  const [isMapOpen, setIsMapOpen] = useState(false)
   const ellipseRef = useRotatingAnimation()
   const role = useRoleSwitcher({ roles: ['ELECTRONICS engineer', 'PCB designer', 'ROBOTICS engineer', '3D model designer'] })
 
@@ -39,14 +42,16 @@ const Hero = () => {
               className="bg-accent w-[170px] cursor-pointer rounded-lg px-[14px] py-[10px] text-center text-sm font-medium text-[#00071E] transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
               Download CV
             </a>
-            <a
-              href="https://www.linkedin.com/in/shourov-paul-b052a7259/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View LinkedIn Profile"
-              className="text-neutral bg-secondary w-[170px] cursor-pointer rounded-lg px-[14px] py-[10px] text-center text-sm font-medium transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
-              LinkedIn Profile
-            </a>
+            <button
+              onClick={() => setIsMapOpen(true)}
+              aria-label="View Analytics Map"
+              className="text-neutral bg-secondary min-w-[170px] cursor-pointer rounded-lg px-[14px] py-[10px] text-center text-sm font-medium transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg flex items-center justify-center gap-2">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10b981] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#10b981]"></span>
+              </span>
+              Views: 2,847
+            </button>
           </div>
 
           <div className="mt-8 flex w-full max-w-[364px] items-center justify-between text-neutral">
@@ -88,6 +93,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      <AnalyticsMapModal isOpen={isMapOpen} onClose={() => setIsMapOpen(false)} />
     </section>
   )
 }
