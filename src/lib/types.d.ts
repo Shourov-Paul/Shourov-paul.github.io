@@ -23,6 +23,24 @@ export interface Project {
   }[]
 }
 
+export interface Blog {
+  title: string
+  shortDescription: string
+  date: string
+  coverImage: string
+  slug: string
+  keywords?: string[]
+  detailSections?: {
+    title?: string
+    content?: string
+    image?: string
+    code?: string
+    language?: string
+    filename?: string
+    interactive?: string
+  }[]
+}
+
 export interface Heading {
   id: string
   title: string

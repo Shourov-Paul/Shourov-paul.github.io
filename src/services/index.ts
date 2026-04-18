@@ -1,4 +1,4 @@
-import { Achievement, Project, Video } from '@/lib/types'
+import { Achievement, Blog, Project, Video } from '@/lib/types'
 import { promises as fs } from 'fs'
 import path from 'path'
 
@@ -40,6 +40,40 @@ const getProjectBySlug = async (slug: string): Promise<Project | undefined> => {
   return projects.find((project) => project.slug === slug)
 }
 
+const readBlogFile = async (filePath: string): Promise<Blog> => {
+  const blogData = await fs.readFile(filePath, 'utf8')
+  return JSON.parse(blogData)
+}
+
+const getAllBlogs = async (): Promise<Blog[]> => {
+  try {
+    const blogsPath = path.join(process.cwd(), '/content/blog')
+    const blogsName = await fs.readdir(blogsPath).catch(() => [])
+
+    const blogs = await Promise.all(
+      blogsName
+        .filter(name => name.endsWith('.json'))
+        .map(async (blogName) => {
+          const filePath = path.join(blogsPath, blogName)
+          const blogDetails = await readBlogFile(filePath)
+          return blogDetails
+        }),
+    )
+
+    blogs.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+    return blogs
+  } catch (error) {
+    console.error('Error:', error)
+    return []
+  }
+}
+
+const getBlogBySlug = async (slug: string): Promise<Blog | undefined> => {
+  const blogs = await getAllBlogs()
+  return blogs.find((blog) => blog.slug === slug)
+}
+
 const getVideos = async (): Promise<Video[]> => {
   try {
     const filePath = path.join(process.cwd(), '/content/videos/videoq.json')
@@ -62,4 +96,4 @@ const getAchievements = async (): Promise<Achievement[]> => {
   }
 }
 
-export { getAllProjects, getAchievements, getProjectBySlug, getVideos }
+export { getAllProjects, getAchievements, getProjectBySlug, getVideos, getAllBlogs, getBlogBySlug }

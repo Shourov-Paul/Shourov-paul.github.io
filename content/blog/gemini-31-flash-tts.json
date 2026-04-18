@@ -1,0 +1,24 @@
+{
+  "title": "Gemini 3.1 Flash with TTS",
+  "shortDescription": "A deep dive into the latest capabilities of the Gemini 3.1 Flash model and its native Text-To-Speech features.",
+  "date": "2026-04-19T00:00:00Z",
+  "coverImage": "",
+  "slug": "gemini-31-flash-tts",
+  "keywords": [
+    "Gemini 3.1 Flash",
+    "Text to Speech",
+    "TTS Configurator",
+    "Google AI",
+    "Voice Generation",
+    "AI Audio",
+    "Web Speech API",
+    "Voice Cloning Alternative"
+  ],
+  "detailSections": [
+    {
+      "title": "",
+      "content": "Enter your Gemini API key below to test driving these new voices directly from the browser natively.",
+      "interactive": "TTSConfigurator"
+    }
+  ]
+}

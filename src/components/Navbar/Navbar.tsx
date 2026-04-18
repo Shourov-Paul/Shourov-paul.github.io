@@ -16,12 +16,8 @@ const navItems = [
     href: '/#achievements',
   },
   {
-    label: 'VIDEO',
-    href: '/#videos',
-  },
-  {
-    label: 'SKILLS',
-    href: '/#skills',
+    label: 'BLOG',
+    href: '/blog',
   },
   {
     label: 'CONTACT ME',
