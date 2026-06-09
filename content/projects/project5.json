@@ -1,0 +1,56 @@
+{
+  "priority": 2,
+  "title": "ULTRAFLOAT: Intelligent IoT Water Monitor",
+  "shortDescription": "An intelligent, contactless, temperature-compensated ultrasonic water level monitoring and automated pump control system based on the ESP32-S3, resolving acoustic drift in real time.",
+  "cover": "/images/projects/project5/Cover.png",
+  "livePreview": "",
+  "type": "Personal Project",
+  "siteAge": "MAY 2026",
+  "slug": "ultrafloat",
+  "detailSections": [
+    {
+      "image": "/images/projects/project5/Cover.png"
+    },
+    {
+      "title": "Overview & Abstract",
+      "content": "This project presents **ULTRAFLOAT**, an intelligent, contactless, temperature-compensated water level monitoring and automated pump control system. It is designed to address the fundamental limitations of conventional mechanical float switches, such as binary-only state reporting, mechanical wear, mineral corrosion, and the lack of remote telemetry. ULTRAFLOAT provides continuous, high-precision distance readings and dynamic automation."
+    },
+    {
+      "title": "System Architecture",
+      "content": "ULTRAFLOAT is built using a distributed two-unit hardware architecture, communicating via a single CAT5 cable. The system blocks are structured as follows:<br/><br/><div class=\"flex justify-center my-6\"><img src=\"/images/projects/project5/system_architecture.png\" class=\"max-w-[550px] w-full rounded-xl border border-[#FFFFFF1A] shadow-lg\" alt=\"System Architecture\" /></div>"
+    },
+    {
+      "title": "Dynamic Temperature Compensation",
+      "content": "Temperature variation is a critical source of systematic error in ultrasonic sensing because the speed of sound in air varies significantly with ambient temperature (from ~340 m/s at 15°C to ~353 m/s at 36°C). This introduces systematic errors of up to 2% if left uncorrected. ULTRAFLOAT eliminates this drift through a real-time dynamic compensation algorithm governed by the relation:<br/><br/><strong>V = 331.3 + 0.606 × T</strong> (m/s)<br/><br/>where <strong>T</strong> is the ambient temperature in degrees Celsius measured by a colocated AHT20 digital sensor at the tank site. This ensures precision down to 2.5 mm across all seasonal temperature changes.<br/><br/><div class=\"flex justify-center my-6\"><img src=\"/images/projects/project5/temp_compensation_chart.png\" class=\"max-w-[550px] w-full rounded-xl border border-[#FFFFFF1A] shadow-lg\" alt=\"Temperature Compensation Chart\" /></div>"
+    },
+    {
+      "title": "Embedded Hardware & High-Efficiency Custom SMPS",
+      "content": "The system utilizes a distributed hardware design divided into two units connected by a single CAT5/RJ45 Ethernet cable which runs both 12V DC power and digital data (I²C and UART):<br/><br/>• **Main Control Unit (MCU):** Houses the ESP32-S3 microcontroller, OLED status display, relay module, status LEDs, and buzzer interface.<br/>• **Remote Sensor Unit (RSU):** Placed at the tank rim, housing the waterproof JSN-SR04M ultrasonic transducer, the AHT20 sensor, and local voltage regulation.<br/><br/>Powering the MCU is a custom-designed **Switched-Mode Power Supply (SMPS)** transforming 240V AC mains to a highly stable 12V DC output, achieving an outstanding **96% conversion efficiency**."
+    },
+    {
+      "title": "Hardware Schematic",
+      "image": "/images/projects/project5/Scematic.jpg"
+    },
+    {
+      "title": "Power Output & Oscilloscope Validation",
+      "content": "Oscilloscope testing validated the custom SMPS under load. The output waveform shows a highly stable 12.1V DC output with a peak-to-peak ripple of only **80 mV**, keeping voltage fluctuation well within safe operational limits. This clean power delivery prevents noise-induced spikes and jitter in the downstream sensor readings.<br/><br/><div class=\"grid grid-cols-1 md:grid-cols-2 gap-6 my-6 items-center\">  <div class=\"flex flex-col items-center\">    <img src=\"/images/projects/project5/smps_pcb.png\" class=\"rounded-xl border border-[#FFFFFF1A] shadow-lg max-h-[250px] object-contain\" alt=\"SMPS PCB Layout\" />    <span class=\"text-xs text-neutral mt-2\">Custom SMPS PCB Layout</span>  </div>  <div class=\"flex flex-col items-center\">    <img src=\"/images/projects/project5/oscilloscope_output.jpg\" class=\"rounded-xl border border-[#FFFFFF1A] shadow-lg max-h-[250px] object-contain\" alt=\"Oscilloscope Output\" />    <span class=\"text-xs text-neutral mt-2\">Oscilloscope Validation (80mV Pk-Pk)</span>  </div></div>"
+    },
+    {
+      "title": "Physical Realisation & Installation Phases",
+      "content": "The system prototype was constructed on a soldered Veroboard layout, containing all core MCU components. The RSU is housed in a rugged 3D-printed enclosure mounted directly to the rim of the water tank, keeping all sensitive circuitry safe and dry indoors.<br/><br/><div class=\"grid grid-cols-1 sm:grid-cols-3 gap-4 my-6\">  <div class=\"flex flex-col items-center\">    <img src=\"/images/projects/project5/veroboard_assembly.jpg\" class=\"rounded-xl border border-[#FFFFFF1A] shadow-lg max-h-[200px] object-cover w-full\" alt=\"Veroboard Assembly\" />    <span class=\"text-xs text-neutral mt-2\">Veroboard Assembly</span>  </div>  <div class=\"flex flex-col items-center\">    <img src=\"/images/projects/project5/tank_side_install.jpg\" class=\"rounded-xl border border-[#FFFFFF1A] shadow-lg max-h-[200px] object-cover w-full\" alt=\"RSU Tank Installation\" />    <span class=\"text-xs text-neutral mt-2\">RSU at Water Tank</span>  </div>  <div class=\"flex flex-col items-center\">    <img src=\"/images/projects/project5/ground_station_install.jpg\" class=\"rounded-xl border border-[#FFFFFF1A] shadow-lg max-h-[200px] object-cover w-full\" alt=\"MCU Ground Station\" />    <span class=\"text-xs text-neutral mt-2\">MCU at Ground Station</span>  </div></div>"
+    },
+    {
+      "title": "WebSocket Web Dashboard Interface",
+      "content": "ULTRAFLOAT features a single-page web application embedded directly in the ESP32-S3 flash memory as a <code>PROGMEM</code> string. Telemetry is streamed from the MCU to browser instances via a persistent **WebSocket connection**, yielding a refresh latency under **1 second** with zero external cloud dependencies. Users can configure fill limits, set custom calibration offsets, and trigger manual pump overrides.<br/><br/><div class=\"grid grid-cols-1 md:grid-cols-3 gap-6 my-6 items-start\">  <div class=\"md:col-span-2 flex flex-col items-center\">    <img src=\"/images/projects/project5/dashboard_desktop.png\" class=\"rounded-xl border border-[#FFFFFF1A] shadow-lg w-full\" alt=\"Desktop Dashboard\" />    <span class=\"text-xs text-neutral mt-2\">Desktop Dashboard View</span>  </div>  <div class=\"flex flex-col items-center\">    <img src=\"/images/projects/project5/dashboard_mobile.jpg\" class=\"rounded-xl border border-[#FFFFFF1A] shadow-lg max-h-[350px] object-contain\" alt=\"Mobile Dashboard\" />    <span class=\"text-xs text-neutral mt-2\">Responsive Mobile View</span>  </div></div>"
+    },
+    {
+      "title": "Firmware Core: Compensated Range Calculation",
+      "code": "float calculateCompensatedDistance(float durationUs, float temperatureC) {\n  // V = 331.3 + 0.606 * T (m/s)\n  float speedOfSound = 331.3 + (0.606 * temperatureC);\n\n  // Convert microsecond pulse width to seconds (Time of Flight)\n  float timeSeconds = durationUs / 1000000.0;\n\n  // Distance = (V * t) / 2\n  float distanceMeters = (speedOfSound * timeSeconds) / 2.0;\n\n  // Return distance in centimeters\n  return distanceMeters * 100.0;\n}",
+      "filename": "Ultrafloat_IK.ino",
+      "language": "cpp"
+    },
+    {
+      "content": "<div class=\"mt-12 flex justify-center\"><a href=\"https://github.com/Shourov-Paul\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-neutral bg-secondary border border-accent cursor-pointer rounded-lg px-6 py-[10px] text-center text-sm font-medium transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg\">🚀 View Developer Profile on GitHub</a></div>"
+    }
+  ]
+}

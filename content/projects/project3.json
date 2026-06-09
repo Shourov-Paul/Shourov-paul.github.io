@@ -1,5 +1,5 @@
 {
-  "priority": 3,
+  "priority": 4,
   "title": "DIY Arduino Robotic Arm",
   "shortDescription": "Building a 6-DOF Arduino robotic arm capable of precise pick-and-place operations. Designed for ease of assembly and operation, it includes a complete circuit diagram, Arduino code, and step-by-step instructions. Ideal for learning servo motor control, embedded programming, and the fundamentals of robotics and automation.",
   "cover": "/images/projects/project3/DIY-Arduino-Robotic-Arm.jpg",

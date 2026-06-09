@@ -16,6 +16,10 @@
       "image": "/images/projects/project1/quadropod_cover.png"
     },
     {
+      "title": "3D CAD Model",
+      "content": "<div class=\"w-full aspect-[4/3] max-w-[800px] mx-auto my-6 overflow-hidden rounded-xl border border-[#FFFFFF1A] shadow-lg\"><iframe src=\"https://mydiu231.autodesk360.com/shares/public/SH28cd1QT2badd0ea72b77d89021ce2b9221?mode=embed\" width=\"100%\" height=\"100%\" allowfullscreen=\"true\" webkitallowfullscreen=\"true\" mozallowfullscreen=\"true\" frameborder=\"0\"></iframe></div>"
+    },
+    {
       "title": "Embedded Firmware & Inverse Kinematics",
       "content": "The central controller manages a PCA9685 16-channel PWM driver via I2C at 50Hz. The custom C++ firmware executes a **3-DOF Inverse Kinematics (IK) Engine** capable of calculating exact servo angles for given XYZ foot distances. Hardware offset calibration and default neutral postures are persistently managed using EEPROM. The robot natively evaluates a dynamic **12-step creep gait engine**, orchestrating coordinated swing, push, and lift behaviors for perfectly balanced omnidirectional locomotion."
     },
