@@ -1,0 +1,44 @@
+{
+  "priority": 3,
+  "title": "300W Pure Sine Wave Inverter",
+  "shortDescription": "A high-efficiency 300W Pure Sine Wave Inverter transforming 12V DC battery power to clean 220V AC mains, featuring low harmonic distortion, stable SPWM control, and integrated safety circuits.",
+  "cover": "/images/projects/project6/Cover_inverter.png",
+  "livePreview": "",
+  "type": "Personal Project",
+  "siteAge": "OCT 2025",
+  "slug": "sine-wave-inverter",
+  "detailSections": [
+    {
+      "image": "/images/projects/project6/Cover_inverter.png"
+    },
+    {
+      "title": "Overview & Working Principle",
+      "content": "This project covers the design, schematic capture, and PCB layout of a high-efficiency **300W Pure Sine Wave Inverter**. Standard modified sine wave or square wave inverters generate high Total Harmonic Distortion (THD), which degrades and damages inductive loads like fan motors, refrigeration compressors, and sensitive audio/medical equipment. This system resolves these issues by reconstructing a clean, stable 50Hz AC wave from a 12V DC battery source."
+    },
+    {
+      "title": "3D Autodesk CAD Model",
+      "content": "An interactive 3D CAD visualization of the inverter enclosure assembly, showing the arrangement of heatsinks, transformer, choke, and the underlying PCB layout. You can orbit, zoom, and explode the model directly in the viewer:<br/><br/><div class=\"w-full aspect-[4/3] max-w-[800px] mx-auto my-6 overflow-hidden rounded-xl border border-[#FFFFFF1A] shadow-lg\"><iframe src=\"https://mydiu231.autodesk360.com/shares/public/SH28cd1QT2badd0ea72be543487bb0d15f86?mode=embed\" width=\"100%\" height=\"100%\" allowfullscreen=\"true\" webkitallowfullscreen=\"true\" mozallowfullscreen=\"true\" frameborder=\"0\"></iframe></div>"
+    },
+    {
+      "title": "Power Stage Architecture & SPWM Generation",
+      "content": "The inverter utilizes a high-performance two-stage power conversion architecture:<br/><br/>• **DC-DC Booster Stage:** Elevates the low-voltage 12V DC battery supply up to a high-voltage 310V - 340V DC bus. This is accomplished using a high-frequency push-pull topology driven by an SG3525 switching controller operating at 50kHz.<br/>• **DC-AC H-Bridge Inverter Stage:** Swings the high-voltage DC bus to synthesize 220V AC at 50Hz. An EG8010 ASIC controller generates high-frequency **Sinusoidal Pulse Width Modulation (SPWM)** signals, driving four power MOSFETs (IRF3205/IRF740) via IR2110 high-and-low-side gate driver ICs."
+    },
+    {
+      "title": "Power Stage PCB Layout",
+      "content": "The PCB layout is optimized for thermal dissipation and minimal electromagnetic interference. High-current copper traces are reinforced with solder-filled copper wire to withstand currents up to 30A. A low-pass LC filter at the H-bridge output filters out the 20kHz switching carrier frequency, outputting a clean 50Hz sine wave.<br/><br/><div class=\"flex justify-center my-6\"><img src=\"/images/projects/project6/Inverter_pcb.png\" class=\"max-w-[550px] w-full rounded-xl border border-[#FFFFFF1A] shadow-lg\" alt=\"Inverter PCB Layout\" /></div>"
+    },
+    {
+      "title": "Schematic Design & Filter Topology",
+      "image": "/images/projects/project6/SineWaveInverter_scematic.jpg"
+    },
+    {
+      "title": "Firmware Core: SPWM Sinusoidal Lookup Table",
+      "code": "// Sine wave lookup table values (1/2 cycle, 32 samples)\nconst uint8_t spwmTable[] PROGMEM = {\n  0, 24, 49, 74, 97, 120, 141, 161, \n  180, 197, 212, 224, 235, 242, 247, 250, \n  250, 247, 242, 235, 224, 212, 197, 180, \n  161, 141, 120, 97, 74, 49, 24, 0\n};\n\n// Interrupt service routine for high-frequency SPWM switching\nISR(TIMER1_COMPA_vect) {\n  static uint8_t index = 0;\n  static boolean halfCycle = false;\n  \n  if (halfCycle) {\n    OCR1A = spwmTable[index]; // Set positive half-cycle pulse width\n    OCR1B = 0;\n  } else {\n    OCR1A = 0;\n    OCR1B = spwmTable[index]; // Set negative half-cycle pulse width\n  }\n  \n  index++;\n  if (index >= 32) {\n    index = 0;\n    halfCycle = !halfCycle; // Toggle polarity\n  }\n}",
+      "filename": "EG8010_SPWM.ino",
+      "language": "cpp"
+    },
+    {
+      "content": "<div class=\"mt-12 flex justify-center\"><a href=\"https://github.com/Shourov-Paul\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-neutral bg-secondary border border-accent cursor-pointer rounded-lg px-6 py-[10px] text-center text-sm font-medium transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg\">🚀 View Developer Profile on GitHub</a></div>"
+    }
+  ]
+}
