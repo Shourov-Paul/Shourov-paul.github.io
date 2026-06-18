@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import logo from '../../app/favicon.ico'
+import logo from '../../app/logo_shourov.svg'
 
 interface LogoProps {
   width?: number
