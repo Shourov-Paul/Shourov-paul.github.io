@@ -70,3 +70,27 @@ export interface Testimonial {
   stars: number
   createdAt: string
 }
+
+export interface ExperienceItem {
+  id: string
+  role: string
+  company: string
+  period: string
+  description: string[]
+  technologies: string[]
+}
+
+export interface PublicationItem {
+  id: string
+  title: string
+  authors: string
+  journal: string
+  year: string
+  abstract: string
+  bibtex: string
+  htmlUrl?: string
+  pdfUrl?: string
+  citations?: number
+  image: string
+}
+

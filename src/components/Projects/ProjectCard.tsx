@@ -33,7 +33,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
   const { slug } = data
 
   return (
-    <div className="bg-secondary border-border flex flex-col justify-between rounded-[14px] border p-5 transition-transform hover:-translate-y-1 hover:shadow-lg">
+    <div className="group bg-secondary border-border flex flex-col justify-between rounded-[14px] border p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/5">
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1">
           {slug ? (
@@ -50,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
             </Link>
           ) : (
             <div className="flex flex-col gap-2">
-              <h3 className="text-secondary-content text-lg font-medium md:font-semibold">{title}</h3>
+              <h3 className="text-secondary-content group-hover:text-accent text-lg font-medium transition-colors duration-300 md:font-semibold">{title}</h3>
               {type && (
                 <span
                   className={`h-7 w-fit rounded-md bg-[#FFFFFF1A] p-1 text-sm ${type === 'New 🔥' ? 'animate-blink text-tag' : 'text-accent'} backdrop-blur-[80px]`}>

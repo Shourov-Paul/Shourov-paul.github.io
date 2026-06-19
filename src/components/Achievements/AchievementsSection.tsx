@@ -28,11 +28,11 @@ const AchievementsSection = ({ achievements }: { achievements: Achievement[] }) 
         <section id="achievements" className="mb-8 scroll-mt-24">
             <SectionHeading title="ACHIEVEMENTS" subtitle="Certifications & Awards" />
 
-            <div className="my-8 grid grid-cols-1 gap-8 md:my-12 md:grid-cols-2">
+            <div className="my-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {achievements.slice(0, visibleCount).map((achievement) => (
                     <div
                         key={achievement.id}
-                        className="group relative cursor-pointer overflow-hidden rounded-xl border border-border bg-secondary transition-all hover:border-accent hover:shadow-lg"
+                        className="group relative cursor-pointer overflow-hidden rounded-xl border border-border bg-secondary transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/5"
                         onClick={() => setSelectedImage(achievement.image)}>
                         <div className="relative aspect-[4/3] w-full overflow-hidden">
                             <Image

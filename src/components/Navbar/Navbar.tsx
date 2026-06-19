@@ -12,6 +12,14 @@ const navItems = [
     href: '/#projects',
   },
   {
+    label: 'EXPERIENCE',
+    href: '/#experience',
+  },
+  {
+    label: 'PUBLICATIONS',
+    href: '/#publications',
+  },
+  {
     label: 'ACHIEVEMENTS',
     href: '/#achievements',
   },
@@ -44,10 +52,10 @@ const Navbar = () => {
         {isVisible ? (
           <div className="text-primary-content md:hidden">MENU</div>
         ) : (
-          <a href="/">
+          <a href="/" className="flex-shrink-0">
             <div className="animate-fade-up text-primary-content relative flex items-center gap-3 transition-all duration-300 md:static">
               <Logo />
-              <span className="text-primary-content hover:text-accent cursor-pointer text-lg font-bold transition-colors duration-300">
+              <span className="text-primary-content hover:text-accent cursor-pointer text-lg font-bold transition-colors duration-300 whitespace-nowrap select-none">
                 SHOUROV PAUL
               </span>
             </div>
@@ -66,20 +74,22 @@ const Navbar = () => {
         </div>
 
         <ul
-          className={`${isVisible ? 'flex' : 'hidden'} animate-fade-in bg-primary absolute top-16 left-0 z-10 h-dvh w-dvw flex-col md:static md:top-0 md:flex md:h-full md:w-[72%] md:flex-row lg:w-[70%]`}>
-          {navItems.map(({ label, href }) => (
-            <li
-              key={href}
-              onClick={() => setIsVisible(false)}
-              className="border-border flex items-center border-b px-4 text-2xl md:border-y-0 md:border-e md:text-base md:first:border-s md:last:ml-auto md:last:border-none md:last:px-0 lg:px-8">
-              <Link
-                href={href}
-                className={`text-primary-content hover:text-neutral w-full py-7 transition-all duration-150 md:py-0 ${pathname === href ? 'text-neutral' : ''}`}>
-                {label}
-              </Link>
-            </li>
-          ))}
-          <li className="hidden border-border border-b px-4 py-7 md:ml-auto md:flex md:items-center md:justify-center md:border-none md:py-0 md:pl-8">
+          className={`${isVisible ? 'flex' : 'hidden'} animate-fade-in bg-primary absolute top-16 left-0 z-10 h-dvh w-dvw flex-col md:static md:top-0 md:flex md:h-full md:flex-row md:justify-end md:flex-1`}>
+          {navItems.map(({ label, href }) => {
+            return (
+              <li
+                key={href}
+                onClick={() => setIsVisible(false)}
+                className="border-border flex items-center border-b px-2 text-2xl md:border-y-0 md:border-e md:text-sm md:first:border-s lg:px-3 flex-shrink-0 whitespace-nowrap">
+                <Link
+                  href={href}
+                  className={`text-primary-content hover:text-neutral w-full py-4 transition-all duration-150 md:py-0 ${pathname === href ? 'text-neutral' : ''}`}>
+                  {label}
+                </Link>
+              </li>
+            )
+          })}
+          <li className="hidden border-border border-b px-2 py-4 md:flex md:items-center md:justify-center md:border-none md:py-0 md:pl-3 flex-shrink-0 whitespace-nowrap">
             <ThemeMenu />
           </li>
         </ul>

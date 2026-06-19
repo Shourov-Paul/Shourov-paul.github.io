@@ -67,7 +67,7 @@ const VideoSection = ({ videos }: { videos: Video[] }) => {
                 {videos.slice(0, visibleCount).map((video) => (
                     <div
                         key={video.id}
-                        className="border-border bg-secondary flex flex-col gap-4 rounded-2xl border p-4 transition-all duration-300 hover:border-accent">
+                        className="border-border bg-secondary flex flex-col gap-4 rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/5">
                         <div className="relative aspect-video w-full overflow-hidden rounded-xl">
                             <YouTubeFacade id={video.id} title={video.title} />
                         </div>

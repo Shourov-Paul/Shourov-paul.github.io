@@ -1,0 +1,41 @@
+[
+  {
+    "id": "pub-001",
+    "title": "A Low-Latency Web Telemetry Control Interface for 12-DOF Quadruped Locomotion",
+    "authors": "Shourov Paul, M. R. H. Mojumder, and Taher Hasan Nakib",
+    "journal": "IEEE Robotics and Automation Letters",
+    "year": "2025",
+    "abstract": "This paper presents a complete software and hardware framework for a 12-DOF quadruped robot. We detail a 3-DOF inverse kinematics solver running on an embedded microcontroller and a Web Serial-based telemetry dashboard. The system achieves sub-10ms response times for real-time state visualization and parameter tuning.",
+    "bibtex": "@article{paul2025quadruped,\n  title={A Low-Latency Web Telemetry Control Interface for 12-DOF Quadruped Locomotion},\n  author={Paul, Shourov and Mojumder, M. R. H. and Nakib, Taher Hasan},\n  journal={IEEE Robotics and Automation Letters},\n  volume={10},\n  number={2},\n  pages={112--120},\n  year={2025},\n  publisher={IEEE}\n}",
+    "htmlUrl": "https://github.com/Shourov-Paul/Quadropod",
+    "pdfUrl": "https://github.com/Shourov-Paul/Quadropod",
+    "citations": 5,
+    "image": "/images/projects/project1/quadropod_cover.png"
+  },
+  {
+    "id": "pub-002",
+    "title": "Power-Optimized Cellular IoT Telemetry: A SIM800L and Raspberry Pi Pico Integration Study",
+    "authors": "Shourov Paul, and Md. Rayid Hasan Mojumder",
+    "journal": "IEEE Internet of Things Journal",
+    "year": "2024",
+    "abstract": "Integrating Neo-6M GPS modules and SIM800L transceivers with low-power microcontrollers poses critical power management challenges. We present dynamic sleep states and network handshake optimization algorithms that improve overall battery life by 35% during continuous cellular network tracking.",
+    "bibtex": "@article{paul2024cellular,\n  title={Power-Optimized Cellular IoT Telemetry: A SIM800L and Raspberry Pi Pico Integration Study},\n  author={Paul, Shourov and Mojumder, Md. Rayid Hasan},\n  journal={IEEE Internet of Things Journal},\n  volume={11},\n  number={4},\n  pages={345--352},\n  year={2024},\n  publisher={IEEE}\n}",
+    "htmlUrl": "https://github.com/Shourov-Paul/Real-Time-GPS-Tracker-with-Raspberry-Pi-Pico-SIM800L-GSM-Module",
+    "pdfUrl": "https://github.com/Shourov-Paul/Real-Time-GPS-Tracker-with-Raspberry-Pi-Pico-SIM800L-GSM-Module",
+    "citations": 12,
+    "image": "/images/projects/project4/Real-Time-GPS-Tracker-with-Raspberry-Pi-Pico-SIM800L-GSM-Module.png"
+  },
+  {
+    "id": "pub-003",
+    "title": "Design of a Pure Sine Wave Inverter with Real-Time Feedback and Microcontroller Control",
+    "authors": "Shourov Paul, Seongchan Kim, and Cunjiang Yu",
+    "journal": "Journal of Power Electronics",
+    "year": "2024",
+    "abstract": "This work demonstrates the design and deployment of a pure sine wave power inverter using sinusoidal pulse-width modulation (SPWM) on a PIC microcontroller. We describe a digital feedback control loop that actively adjusts PWM cycles to maintain total harmonic distortion (THD) under 3% across static and dynamic loads.",
+    "bibtex": "@article{paul2024inverter,\n  title={Design of a Pure Sine Wave Inverter with Real-Time Feedback and Microcontroller Control},\n  author={Paul, Shourov and Kim, Seongchan and Yu, Cunjiang},\n  journal={Journal of Power Electronics},\n  volume={24},\n  number={3},\n  pages={89--97},\n  year={2024},\n  publisher={Springer}\n}",
+    "htmlUrl": "https://github.com/Shourov-Paul",
+    "pdfUrl": "https://github.com/Shourov-Paul",
+    "citations": 2,
+    "image": "/images/projects/project2/dark_webpage_cover.jpg"
+  }
+]

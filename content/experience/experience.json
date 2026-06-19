@@ -1,0 +1,35 @@
+[
+  {
+    "id": "exp-001",
+    "role": "Teaching Assistant (TA)",
+    "company": "Daffodil International University",
+    "period": "Fall 2025 - Present",
+    "description": [
+      "Assisting instructors in laboratory experiments and grading assignments for Embedded Systems.",
+      "Mentoring undergraduate students in circuit debugging and firmware coding."
+    ],
+    "technologies": ["Embedded Systems", "Microcontrollers", "C/C++", "Circuit Debugging"]
+  },
+  {
+    "id": "exp-002",
+    "role": "Industrial Trainee",
+    "company": "Ulkasemi Pvt. Limited",
+    "period": "October 2025",
+    "description": [
+      "Completed intensive training on VLSI design principles and digital circuit verification.",
+      "Gained practical experience with industry-standard EDA tools and simulations."
+    ],
+    "technologies": ["VLSI Design", "Verilog", "EDA Tools", "Digital Logic"]
+  },
+  {
+    "id": "exp-003",
+    "role": "Industrial Trainee",
+    "company": "Ghorashal Training Center, BPDB",
+    "period": "Jan 2025 - Feb 2025",
+    "description": [
+      "Received training on power plant operation, electrical machinery control, and steam turbines.",
+      "Studied industrial PLC (Programmable Logic Controller) systems and telemetry equipment."
+    ],
+    "technologies": ["PLC Systems", "Power Systems", "Industrial Automation", "SCADA"]
+  }
+]
