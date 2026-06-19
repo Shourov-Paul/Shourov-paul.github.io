@@ -6,30 +6,22 @@ import Image from 'next/image'
 import { useState } from 'react'
 import Modal from '../UI/Modal'
 import { ChevronDownIcon, DownloadIcon } from '@/utils/icons'
+import Link from 'next/link'
 
-const AchievementsSection = ({ achievements }: { achievements: Achievement[] }) => {
+interface AchievementsSectionProps {
+  achievements: Achievement[]
+  showSeeMore?: boolean
+}
+
+const AchievementsSection: React.FC<AchievementsSectionProps> = ({ achievements, showSeeMore = false }) => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null)
-    const [visibleCount, setVisibleCount] = useState(4)
-    const isExpanded = visibleCount >= achievements.length
-
-    const handleToggle = () => {
-        if (isExpanded) {
-            setVisibleCount(4)
-            const section = document.getElementById('achievements')
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' })
-            }
-        } else {
-            setVisibleCount(achievements.length)
-        }
-    }
 
     return (
         <section id="achievements" className="mb-8 scroll-mt-24">
             <SectionHeading title="ACHIEVEMENTS" subtitle="Certifications & Awards" />
 
             <div className="my-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {achievements.slice(0, visibleCount).map((achievement) => (
+                {achievements.map((achievement) => (
                     <div
                         key={achievement.id}
                         className="group relative cursor-pointer overflow-hidden rounded-xl border border-border bg-secondary transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/5"
@@ -69,16 +61,16 @@ const AchievementsSection = ({ achievements }: { achievements: Achievement[] }) 
                 ))}
             </div>
 
-            {achievements.length > 4 && (
+            {showSeeMore && (
                 <div className="flex justify-center mt-8">
-                    <button
-                        onClick={handleToggle}
+                    <Link
+                        href="/achievements"
                         className="flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all duration-300 border rounded-full text-secondary-content border-secondary-content/20 hover:border-accent hover:text-accent group">
-                        {isExpanded ? 'See Less' : 'See More'}
+                        See More
                         <ChevronDownIcon
-                            className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                            className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                         />
-                    </button>
+                    </Link>
                 </div>
             )}
 

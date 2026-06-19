@@ -139,7 +139,15 @@ const PublicationCard = ({ pub }: { pub: PublicationItem }) => {
   )
 }
 
-const PublicationsSection = ({ publications }: { publications: PublicationItem[] }) => {
+import Link from 'next/link'
+import { ChevronDownIcon } from '@/utils/icons'
+
+interface PublicationsSectionProps {
+  publications: PublicationItem[]
+  showSeeMore?: boolean
+}
+
+const PublicationsSection: React.FC<PublicationsSectionProps> = ({ publications, showSeeMore = false }) => {
   return (
     <section id="publications" className="mb-8 scroll-mt-24">
       <SectionHeading title="PUBLICATIONS" subtitle="Research papers, articles, and technical preprints" />
@@ -149,6 +157,19 @@ const PublicationsSection = ({ publications }: { publications: PublicationItem[]
           <PublicationCard key={pub.id} pub={pub} />
         ))}
       </div>
+
+      {showSeeMore && (
+        <div className="flex justify-center mt-8">
+          <Link
+            href="/publications"
+            className="flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all duration-300 border rounded-full text-secondary-content border-secondary-content/20 hover:border-accent hover:text-accent group">
+            See More
+            <ChevronDownIcon
+              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </Link>
+        </div>
+      )}
     </section>
   )
 }

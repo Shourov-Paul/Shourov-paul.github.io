@@ -40,6 +40,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
             <Link href={`/projects/${slug}`} className="block group">
               <div className="flex flex-col gap-2">
                 <h3 className="text-secondary-content group-hover:text-accent text-lg font-medium transition-colors md:font-semibold">{title}</h3>
+                <div className="flex items-center gap-2 flex-wrap">
+                  {type && (
+                    <span
+                      className={`h-7 w-fit rounded-md bg-[#FFFFFF1A] p-1 text-sm ${type === 'New 🔥' ? 'animate-blink text-tag' : 'text-accent'} backdrop-blur-[80px]`}>
+                      {type}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </Link>
+          ) : (
+            <div className="flex flex-col gap-2">
+              <h3 className="text-secondary-content group-hover:text-accent text-lg font-medium transition-colors duration-300 md:font-semibold">{title}</h3>
+              <div className="flex items-center gap-2 flex-wrap">
                 {type && (
                   <span
                     className={`h-7 w-fit rounded-md bg-[#FFFFFF1A] p-1 text-sm ${type === 'New 🔥' ? 'animate-blink text-tag' : 'text-accent'} backdrop-blur-[80px]`}>
@@ -47,16 +61,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
                   </span>
                 )}
               </div>
-            </Link>
-          ) : (
-            <div className="flex flex-col gap-2">
-              <h3 className="text-secondary-content group-hover:text-accent text-lg font-medium transition-colors duration-300 md:font-semibold">{title}</h3>
-              {type && (
-                <span
-                  className={`h-7 w-fit rounded-md bg-[#FFFFFF1A] p-1 text-sm ${type === 'New 🔥' ? 'animate-blink text-tag' : 'text-accent'} backdrop-blur-[80px]`}>
-                  {type}
-                </span>
-              )}
             </div>
           )}
 

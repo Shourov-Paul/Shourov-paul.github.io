@@ -9,19 +9,19 @@ import Logo from './Logo'
 const navItems = [
   {
     label: 'PROJECTS',
-    href: '/#projects',
+    href: '/projects',
   },
   {
     label: 'EXPERIENCE',
-    href: '/#experience',
+    href: '/experience',
   },
   {
     label: 'PUBLICATIONS',
-    href: '/#publications',
+    href: '/publications',
   },
   {
     label: 'ACHIEVEMENTS',
-    href: '/#achievements',
+    href: '/achievements',
   },
   {
     label: 'BLOG',
@@ -29,7 +29,7 @@ const navItems = [
   },
   {
     label: 'CONTACT ME',
-    href: '/#contact',
+    href: '/contact',
   },
 ]
 

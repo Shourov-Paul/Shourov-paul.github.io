@@ -15,11 +15,13 @@ const getAllProjects = async (): Promise<Project[]> => {
     const projectsName = await fs.readdir(projectsPath)
 
     const projects = await Promise.all(
-      projectsName.map(async (projectName) => {
-        const filePath = path.join(projectsPath, projectName)
-        const projectDetails = await readProjectFile(filePath)
-        return projectDetails
-      }),
+      projectsName
+        .filter((name) => name.endsWith('.json') && name !== 'pinned.json')
+        .map(async (projectName) => {
+          const filePath = path.join(projectsPath, projectName)
+          const projectDetails = await readProjectFile(filePath)
+          return projectDetails
+        }),
     )
 
     // Sort projects by priority
@@ -33,7 +35,15 @@ const getAllProjects = async (): Promise<Project[]> => {
   }
 }
 
-
+const getPinnedSlugs = async (): Promise<string[]> => {
+  try {
+    const filePath = path.join(process.cwd(), '/content/projects/pinned.json')
+    const fileContent = await fs.readFile(filePath, 'utf8')
+    return JSON.parse(fileContent)
+  } catch (error) {
+    return []
+  }
+}
 
 const getProjectBySlug = async (slug: string): Promise<Project | undefined> => {
   const projects = await getAllProjects()
@@ -118,4 +128,4 @@ const getPublications = async (): Promise<PublicationItem[]> => {
   }
 }
 
-export { getAllProjects, getAchievements, getProjectBySlug, getVideos, getAllBlogs, getBlogBySlug, getExperiences, getPublications }
+export { getAllProjects, getAchievements, getProjectBySlug, getVideos, getAllBlogs, getBlogBySlug, getExperiences, getPublications, getPinnedSlugs }

@@ -3,49 +3,58 @@
 import { Project } from '@/lib/types'
 import SectionHeading from '../SectionHeading/SectionHeading'
 import ProjectCard from './ProjectCard'
-import { useState } from 'react'
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
 import { ChevronDownIcon } from '@/utils/icons'
 
 interface ProjectSectionProps {
-  projects: Project[]
+  initialProjects: Project[]
+  allProjects: Project[]
 }
 
-const ProjectSection: React.FC<ProjectSectionProps> = ({ projects }) => {
-  const [visibleCount, setVisibleCount] = useState(4)
-  const isExpanded = visibleCount >= projects.length
+const ProjectSection: React.FC<ProjectSectionProps> = ({ initialProjects, allProjects }) => {
+  const [featuredProjects, setFeaturedProjects] = useState<Project[]>(initialProjects)
 
-  const handleToggle = () => {
-    if (isExpanded) {
-      setVisibleCount(4)
-      const section = document.getElementById('projects')
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' })
+  useEffect(() => {
+    const saved = localStorage.getItem('featured-projects')
+    if (saved) {
+      try {
+        const slugs = JSON.parse(saved) as string[]
+        if (slugs.length > 0) {
+          const selected = allProjects.filter((p) => p.slug && slugs.includes(p.slug))
+          selected.sort((a, b) => slugs.indexOf(a.slug!) - slugs.indexOf(b.slug!))
+          if (selected.length > 0) {
+            setFeaturedProjects(selected)
+            return
+          }
+        }
+      } catch (e) {
+        console.error(e)
       }
-    } else {
-      setVisibleCount(projects.length)
     }
-  }
+    setFeaturedProjects(initialProjects)
+  }, [initialProjects, allProjects])
 
   return (
     <section id="projects" className="mb-8 scroll-mt-24">
       <SectionHeading title="Projects" />
 
       <div className="my-8 grid grid-cols-1 gap-8 md:my-12 md:grid-cols-2">
-        {projects.slice(0, visibleCount).map((project) => (
-          <ProjectCard key={project.priority} data={project} />
+        {featuredProjects.map((project, idx) => (
+          <ProjectCard key={project.slug || `featured-${idx}`} data={project} />
         ))}
       </div>
 
-      {projects.length > 4 && (
+      {allProjects.length > 4 && (
         <div className="flex justify-center mt-8">
-          <button
-            onClick={handleToggle}
+          <Link
+            href="/projects"
             className="flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all duration-300 border rounded-full text-secondary-content border-secondary-content/20 hover:border-accent hover:text-accent group">
-            {isExpanded ? 'See Less' : 'See More'}
+            See More
             <ChevronDownIcon
-              className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
             />
-          </button>
+          </Link>
         </div>
       )}
     </section>

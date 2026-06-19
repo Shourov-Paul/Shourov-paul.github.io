@@ -1,9 +1,14 @@
-'use client'
-
 import { ExperienceItem } from '@/lib/types'
 import SectionHeading from '../SectionHeading/SectionHeading'
+import Link from 'next/link'
+import { ChevronDownIcon } from '@/utils/icons'
 
-const ExperienceSection = ({ experiences }: { experiences: ExperienceItem[] }) => {
+interface ExperienceSectionProps {
+  experiences: ExperienceItem[]
+  showSeeMore?: boolean
+}
+
+const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences, showSeeMore = false }) => {
   return (
     <section id="experience" className="mb-8 scroll-mt-24">
       <SectionHeading title="WORK EXPERIENCE" subtitle="My professional journey and industrial training" />
@@ -54,6 +59,19 @@ const ExperienceSection = ({ experiences }: { experiences: ExperienceItem[] }) =
           </div>
         ))}
       </div>
+
+      {showSeeMore && (
+        <div className="flex justify-center mt-8">
+          <Link
+            href="/experience"
+            className="flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all duration-300 border rounded-full text-secondary-content border-secondary-content/20 hover:border-accent hover:text-accent group">
+            See More
+            <ChevronDownIcon
+              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </Link>
+        </div>
+      )}
     </section>
   )
 }
