@@ -15,6 +15,7 @@ import {
 } from '@/utils/icons'
 import SectionHeading from '@/components/SectionHeading/SectionHeading'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Skills & Proficiency | Shourov Paul',
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 
 interface SkillItem {
   name: string
-  Icon: React.ComponentType<{ className?: string }>
+  Icon: any
   level: string // "Advanced" | "Intermediate" | "Familiar"
   percentage: number // for the progress bar
 }
@@ -95,7 +96,7 @@ export default function SkillsPage() {
                     className="group border border-border bg-secondary rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/5 flex items-center gap-5"
                   >
                     <div className="p-3 bg-primary border border-border rounded-xl group-hover:border-accent/40 group-hover:shadow-[0_0_15px_rgba(24,242,229,0.1)] transition-all duration-300 shrink-0">
-                      <Icon className="w-10 h-10 text-primary-content group-hover:text-accent transition-colors duration-300" />
+                      <Image src={Icon} alt={skill.name} className="w-10 h-10 object-contain text-primary-content group-hover:text-accent transition-colors duration-300" />
                     </div>
 
                     <div className="flex-grow space-y-2">
