@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import CodeBlock from '@/components/UI/CodeBlock'
 import TTSConfigurator from '@/components/Blog/TTSConfigurator'
+import MarkItDownConverter from '@/components/Blog/MarkItDownConverter'
 
 export async function generateStaticParams() {
     const blogs = await getAllBlogs()
@@ -115,6 +116,10 @@ const BlogDetails = async ({ params }: { params: Promise<{ slug: string }> }) =>
 
                         {section.interactive === 'TTSConfigurator' && (
                             <TTSConfigurator />
+                        )}
+
+                        {section.interactive === 'MarkItDownConverter' && (
+                            <MarkItDownConverter />
                         )}
                     </section>
                 ))}

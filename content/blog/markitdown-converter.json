@@ -1,0 +1,39 @@
+{
+  "title": "MarkItDown: Convert Documents, Audio, and Media to Markdown Live",
+  "shortDescription": "Explore Microsoft's MarkItDown library and test driving the live document-to-markdown converter powered by a Flask backend and React frontend.",
+  "date": "2026-06-21T00:00:00Z",
+  "coverImage": "",
+  "slug": "markitdown-converter",
+  "keywords": [
+    "MarkItDown",
+    "Document Converter",
+    "Markdown Parser",
+    "Python Flask Backend",
+    "Next.js React Frontend",
+    "OCR text extraction",
+    "Audio transcription",
+    "RAG Data Pipeline"
+  ],
+  "detailSections": [
+    {
+      "title": "Overview",
+      "content": "Microsoft's <strong>MarkItDown</strong> is a lightweight Python utility designed to convert various document and media formats into clean, structured Markdown. While most text extractors lose structure like headings, lists, tables, and links, MarkItDown is built specifically to preserve them. This makes it an ideal tool for preprocessing data for Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG) pipelines, which natively understand Markdown formatting while remaining token-efficient.<br/><br/>MarkItDown natively supports conversion from:<br/>• **Documents:** PDF, Word (.docx), PowerPoint (.pptx), Excel (.xlsx)<br/>• **Media:** Images (EXIF metadata & OCR), Audio (metadata & speech-to-text)<br/>• **Data & Archives:** ZIP archives, HTML, EPub, CSV, JSON, and XML"
+    },
+    {
+      "title": "Live Interactive Converter",
+      "content": "Try out the live converter below! Drag and drop any supported document, spreadsheet, presentation, image, or audio file. Your file will be processed securely using a Python-based Flask service hosted on Render, returning clean Markdown in real time.",
+      "interactive": "MarkItDownConverter"
+    },
+    {
+      "title": "How it Works: Frontend & Backend Architecture",
+      "content": "To implement this live demo without compromising the static hosting of this portfolio site, I designed a decoupled frontend-backend architecture:<br/><br/>1. **Frontend (React/Next.js):** The interface above handles file selection, drag-and-drop state, and UI feedback. Once a file is loaded, it generates a <code>FormData</code> payload and streams it to the backend via a POST request.<br/>2. **Backend (Python/Flask):** Runs a Flask server configured with Cross-Origin Resource Sharing (CORS) to accept requests from the portfolio's domain. When it receives a file, it saves it to a temporary local location, calls MarkItDown's `convert_local()` engine, extracts the text content, cleans up the temporary file, and sends the raw markdown back as a JSON payload.<br/>3. **Client-Side Rendering:** The React component receives the JSON, parses the markdown into formatted HTML on-the-fly using the `marked` library, and presents it with options to copy or download the resulting `.md` file."
+    },
+    {
+      "title": "Simple Python API Usage",
+      "content": "Integrating MarkItDown into your own Python data pipelines is incredibly straightforward. Here is a basic example of loading the library and converting a local PDF file:",
+      "code": "from markitdown import MarkItDown\n\n# Initialize the converter\nmd = MarkItDown()\n\n# Convert a local PDF file\nresult = md.convert(\"meeting_notes.pdf\")\n\n# Print the structured markdown output\nprint(result.text_content)",
+      "filename": "convert_doc.py",
+      "language": "python"
+    }
+  ]
+}
