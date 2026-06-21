@@ -2,7 +2,7 @@
   "priority": 1,
   "title": "Quadruped Robot & Custom Web OS",
   "shortDescription": "A comprehensive 12-DOF four-legged robotics platform featuring real-time inverse kinematics, a 12-step creep gait engine, and a sleek browser-based 3D control dashboard.",
-  "cover": "/images/projects/project1/quadropod_cover.png",
+  "cover": "/images/projects/project1/quadropod_cover_thumb.webp",
   "livePreview": "",
   "type": "Personal Project",
   "siteAge": "DEC 2025",
@@ -13,7 +13,7 @@
       "content": "This project encompasses the entire lifecycle of a 12-DOF (Degree of Freedom) quadruped robot—from raw C++ embedded firmware handling complex trigonometric inverse kinematics to a modern, glassmorphic web dashboard that communicates over Web Serial API. It is designed to demonstrate advanced robotic mobility and intuitive telemetry monitoring."
     },
     {
-      "image": "/images/projects/project1/quadropod_cover.png"
+      "image": "/images/projects/project1/quadropod_cover.webp"
     },
     {
       "title": "3D CAD Model",
@@ -28,7 +28,7 @@
       "content": "To control and monitor the robot, I engineered **Quadruped OS**, a browser-based visualization dashboard using HTML, CSS, and Vanilla JS. It connects over the Web Serial API directly to the robot for ultra-low latency. Features include:<br/><br/>• **Real-Time 3D Viewer:** Renders the robot's physical posture live using Plotly.js.<br/>• **Calibration Studio:** Visually adjust and commit EEPROM joint offsets.<br/>• **Direct IK Control:** Target specific XYZ coordinates for individual legs without manually mapping degrees.<br/>• **Omnidirectional Drive:** A built-in D-pad interface that live-streams gait vectors and speed parameters."
     },
     {
-      "image": "/images/projects/project1/quadruped_dashboard.png"
+      "image": "/images/projects/project1/quadruped_dashboard.webp"
     },
     {
       "title": "QuadrupedController.ino Anatomy",

@@ -14,7 +14,10 @@ import {
 } from '../../utils/icons'
 import { HeroImage } from '../../utils/images'
 import Ellipse from './Ellipse'
-import AnalyticsMapModal from '../MapModal/AnalyticsMapModal'
+import dynamic from 'next/dynamic'
+const AnalyticsMapModal = dynamic(() => import('../MapModal/AnalyticsMapModal'), {
+  ssr: false,
+})
 
 import { useEffect } from 'react'
 

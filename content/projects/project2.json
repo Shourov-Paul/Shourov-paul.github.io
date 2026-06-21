@@ -2,7 +2,7 @@
   "priority": 4,
   "title": "Dark-Webpage Chrome Extension",
   "shortDescription": "A highly premium glassmorphism Dark Mode and Eye Protect control center for Google Chrome with dynamic intensity and smart memory persistence.",
-  "cover": "/images/projects/project2/dark_webpage_cover.jpg",
+  "cover": "/images/projects/project2/dark_webpage_cover_thumb.webp",
   "livePreview": "https://github.com/Shourov-Paul/Dark-Webpage",
   "type": "Personal Project",
   "siteAge": "FEB 2026",
@@ -13,7 +13,7 @@
       "content": "Dark-Webpage is a highly premium, glassmorphism-themed Dark Mode and Eye Protect control center built exclusively for Google Chrome. It safely overlays an intelligent dark screen tint or a warm amber blue-light filter over any active webpage. The extension features a gorgeous floating control panel with iOS-inspired sliders, neon glowing interactions, and incredibly smooth fluid animations."
     },
     {
-      "image": "/images/projects/project2/dark_webpage_cover.jpg"
+      "image": "/images/projects/project2/dark_webpage_cover.webp"
     },
     {
       "title": "Key Features",

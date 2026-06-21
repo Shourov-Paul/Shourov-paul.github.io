@@ -2,14 +2,14 @@
   "priority": 3,
   "title": "300W Pure Sine Wave Inverter",
   "shortDescription": "A high-efficiency 300W Pure Sine Wave Inverter transforming 12V DC battery power to clean 220V AC mains, featuring low harmonic distortion, stable SPWM control, and integrated safety circuits.",
-  "cover": "/images/projects/project6/Cover_inverter.png",
+  "cover": "/images/projects/project6/Cover_inverter_thumb.webp",
   "livePreview": "",
   "type": "Personal Project",
   "siteAge": "OCT 2025",
   "slug": "sine-wave-inverter",
   "detailSections": [
     {
-      "image": "/images/projects/project6/Cover_inverter.png"
+      "image": "/images/projects/project6/Cover_inverter.webp"
     },
     {
       "title": "Overview & Working Principle",
@@ -25,11 +25,11 @@
     },
     {
       "title": "Power Stage PCB Layout",
-      "content": "The PCB layout is optimized for thermal dissipation and minimal electromagnetic interference. High-current copper traces are reinforced with solder-filled copper wire to withstand currents up to 30A. A low-pass LC filter at the H-bridge output filters out the 20kHz switching carrier frequency, outputting a clean 50Hz sine wave.<br/><br/><div class=\"flex justify-center my-6\"><img src=\"/images/projects/project6/Inverter_pcb.png\" class=\"max-w-[550px] w-full rounded-xl border border-[#FFFFFF1A] shadow-lg\" alt=\"Inverter PCB Layout\" /></div>"
+      "content": "The PCB layout is optimized for thermal dissipation and minimal electromagnetic interference. High-current copper traces are reinforced with solder-filled copper wire to withstand currents up to 30A. A low-pass LC filter at the H-bridge output filters out the 20kHz switching carrier frequency, outputting a clean 50Hz sine wave.<br/><br/><div class=\"flex justify-center my-6\"><img src=\"/images/projects/project6/Inverter_pcb.webp\" class=\"max-w-[550px] w-full rounded-xl border border-[#FFFFFF1A] shadow-lg\" alt=\"Inverter PCB Layout\" /></div>"
     },
     {
       "title": "Schematic Design & Filter Topology",
-      "image": "/images/projects/project6/SineWaveInverter_scematic.jpg"
+      "image": "/images/projects/project6/SineWaveInverter_scematic.webp"
     },
     {
       "title": "Firmware Core: SPWM Sinusoidal Lookup Table",
