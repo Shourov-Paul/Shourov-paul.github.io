@@ -50,6 +50,57 @@ const BlogDetails = async ({ params }: { params: Promise<{ slug: string }> }) =>
 
     if (!blog) return notFound()
 
+    const isMarkItDown = slug === 'markitdown-converter'
+
+    if (isMarkItDown) {
+        return (
+            <div className="min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center py-12 px-4 relative overflow-hidden select-none">
+                {/* FontAwesome Icons Link */}
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+                {/* Background glowing spheres */}
+                <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+                    <div className="absolute -top-[100px] -right-[50px] w-[500px] h-[500px] rounded-full bg-accent/15 blur-[120px] mix-blend-screen animate-pulse" style={{ animationDuration: '8s' }}></div>
+                    <div className="absolute -bottom-[200px] -left-[150px] w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[140px] mix-blend-screen animate-pulse" style={{ animationDuration: '10s' }}></div>
+                </div>
+
+                <div className="w-full max-w-4xl relative z-10">
+                    <header className="mb-8 text-center flex flex-col items-center">
+                        <div className="flex items-center gap-3.5 mb-3.5">
+                            {/* Detailed blue floppy disk save icon logo */}
+                            <svg viewBox="0 0 24 24" className="w-10 h-10 select-none" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: 'drop-shadow(0 2px 8px var(--gradient-start))' }}>
+                                <rect width="24" height="24" rx="5.5" fill="var(--gradient-start)" />
+                                <path d="M6 5.5h10l2.5 2.5V18.5a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-13z" fill="white" />
+                                <rect x="8.5" y="5.5" width="5.5" height="4" fill="var(--gradient-start)" />
+                                <rect x="10.5" y="6" width="2.5" height="3.5" fill="white" />
+                                <rect x="8.5" y="12" width="7" height="6.5" fill="#cbd5e1" rx="0.5" />
+                                <line x1="10" y1="14" x2="14" y2="14" stroke="#475569" strokeWidth="1" />
+                                <line x1="10" y1="16" x2="14" y2="16" stroke="#475569" strokeWidth="1" />
+                            </svg>
+                            <h1 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+                                MarkIt<span className="bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent">Down</span>
+                            </h1>
+                        </div>
+                        <p className="text-neutral text-sm md:text-[15px] font-medium max-w-lg mb-6 opacity-80">
+                            Convert any document, image, or media into clean Markdown instantly
+                        </p>
+                        <div className="w-full h-px bg-border/40 mb-6"></div>
+                    </header>
+
+                    <MarkItDownConverter />
+                    
+                    <div className="mt-8 text-center">
+                        <a
+                            href="/blog"
+                            className="text-neutral hover:text-accent font-semibold text-xs tracking-wider uppercase transition-colors duration-300"
+                        >
+                            &larr; Back to Blog
+                        </a>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     const formattedDate = new Date(blog.date).toLocaleDateString('en-US', {
       month: 'long',
       day: 'numeric',
