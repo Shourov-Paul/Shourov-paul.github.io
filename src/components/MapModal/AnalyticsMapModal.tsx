@@ -137,8 +137,8 @@ const AnalyticsMapModal: React.FC<MapModalProps> = ({ isOpen, onClose, views }) 
           >
             <ZoomableGroup center={[10, 20]} zoom={1} maxZoom={8}>
               <Geographies geography={geoUrl}>
-                {({ geographies }) =>
-                  geographies.map((geo) => (
+                {({ geographies }: { geographies: any[] }) =>
+                  geographies.map((geo: any) => (
                     <Geography
                       key={geo.rsmKey}
                       geography={geo}
