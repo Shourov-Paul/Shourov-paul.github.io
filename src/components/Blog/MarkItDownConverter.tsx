@@ -68,7 +68,7 @@ export default function MarkItDownConverter() {
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     const endpoint = isLocal 
       ? 'http://127.0.0.1:5000/convert' 
-      : (process.env.NEXT_PUBLIC_MARKITDOWN_API_URL || 'https://markitdown-backend-f33z.onrender.com/convert')
+      : (process.env.NEXT_PUBLIC_MARKITDOWN_API_URL || 'https://shourov-paul-markitdown.onrender.com/convert')
 
     try {
       const response = await fetch(endpoint, {
