@@ -10,7 +10,7 @@
     "htmlUrl": "https://github.com/Shourov-Paul/Quadropod",
     "pdfUrl": "https://github.com/Shourov-Paul/Quadropod",
     "citations": 5,
-    "image": "/images/projects/project1/quadropod_cover.png"
+    "image": "/images/projects/project1/quadropod_cover.webp"
   },
   {
     "id": "pub-002",
@@ -23,7 +23,7 @@
     "htmlUrl": "https://github.com/Shourov-Paul/Real-Time-GPS-Tracker-with-Raspberry-Pi-Pico-SIM800L-GSM-Module",
     "pdfUrl": "https://github.com/Shourov-Paul/Real-Time-GPS-Tracker-with-Raspberry-Pi-Pico-SIM800L-GSM-Module",
     "citations": 12,
-    "image": "/images/projects/project4/Real-Time-GPS-Tracker-with-Raspberry-Pi-Pico-SIM800L-GSM-Module.png"
+    "image": "/images/projects/project4/Real-Time-GPS-Tracker-with-Raspberry-Pi-Pico-SIM800L-GSM-Module.webp"
   },
   {
     "id": "pub-003",
@@ -36,6 +36,6 @@
     "htmlUrl": "https://github.com/Shourov-Paul",
     "pdfUrl": "https://github.com/Shourov-Paul",
     "citations": 2,
-    "image": "/images/projects/project2/dark_webpage_cover.jpg"
+    "image": "/images/projects/project2/dark_webpage_cover.webp"
   }
 ]

@@ -3,7 +3,7 @@ import json
 from PIL import Image
 
 PROJECTS_DIR = r"w:\Portpholio\Shourov-paul.github.io\public\images\projects"
-JSON_DIR = r"w:\Portpholio\Shourov-paul.github.io\content\projects"
+CONTENT_DIR = r"w:\Portpholio\Shourov-paul.github.io\content"
 
 def optimize_images():
     print("Starting image optimization...")
@@ -96,51 +96,56 @@ def optimize_images():
     return image_mappings
 
 def update_json_files(mappings):
-    print("\nUpdating JSON project files with new image paths...")
-    for file in os.listdir(JSON_DIR):
-        if file.endswith('.json') and file != 'pinned.json':
-            json_path = os.path.join(JSON_DIR, file)
-            try:
-                with open(json_path, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
-                
-                # Update main cover image to the thumbnail version
-                old_cover = data.get("cover")
-                if old_cover:
-                    # Look up if there's a thumbnail mapping
-                    thumb_key = old_cover + "_thumb"
-                    if thumb_key in mappings:
-                        data["cover"] = mappings[thumb_key]
-                        print(f"Updated {file} cover: {old_cover} -> {data['cover']}")
-                    elif old_cover in mappings:
-                        # Fallback to full-size webp if no thumbnail
-                        data["cover"] = mappings[old_cover]
-                        print(f"Updated {file} cover (no thumb): {old_cover} -> {data['cover']}")
+    print("\nUpdating JSON files in content directory with new image paths...")
+    for root, dirs, files in os.walk(CONTENT_DIR):
+        for file in files:
+            if file.endswith('.json') and file != 'pinned.json':
+                json_path = os.path.join(root, file)
+                try:
+                    with open(json_path, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    
+                    # Recursive search and update for any matching path values
+                    def replace_paths(obj):
+                        if isinstance(obj, dict):
+                            for k, v in list(obj.items()):
+                                if k == "cover" and isinstance(v, str):
+                                    thumb_key = v + "_thumb"
+                                    if thumb_key in mappings:
+                                        obj[k] = mappings[thumb_key]
+                                        print(f"Updated cover in {file}: {v} -> {obj[k]}")
+                                    elif v in mappings:
+                                        obj[k] = mappings[v]
+                                        print(f"Updated cover (no thumb) in {file}: {v} -> {obj[k]}")
+                                else:
+                                    if isinstance(v, str):
+                                        if v in mappings:
+                                            obj[k] = mappings[v]
+                                            print(f"Updated path in {file}: {v} -> {obj[k]}")
+                                        else:
+                                            # Scan for inline HTML occurrences
+                                            for old_path, new_path in mappings.items():
+                                                if not old_path.endswith('_thumb') and old_path in v:
+                                                    obj[k] = v.replace(old_path, new_path)
+                                                    print(f"Updated inline HTML path in {file}: {old_path} -> {new_path}")
+                                    else:
+                                        replace_paths(v)
+                        elif isinstance(obj, list):
+                            for i, item in enumerate(obj):
+                                if isinstance(item, str):
+                                    if item in mappings:
+                                        obj[i] = mappings[item]
+                                        print(f"Updated path in list in {file}: {item} -> {obj[i]}")
+                                else:
+                                    replace_paths(item)
 
-                # Update other images in detailSections to optimized full-size webp
-                if "detailSections" in data:
-                    for section in data["detailSections"]:
-                        # If section has "image"
-                        old_img = section.get("image")
-                        if old_img and old_img in mappings:
-                            section["image"] = mappings[old_img]
-                            print(f"Updated {file} detail section image: {old_img} -> {section['image']}")
-                        
-                        # Also scan "content" for inline img html tags
-                        content = section.get("content")
-                        if content and isinstance(content, str):
-                            # Replace any occurrences of old image paths in HTML
-                            for old_path, new_path in mappings.items():
-                                if not old_path.endswith('_thumb') and old_path in content:
-                                    content = content.replace(old_path, new_path)
-                                    print(f"Updated inline HTML image in {file}: {old_path} -> {new_path}")
-                            section["content"] = content
+                    replace_paths(data)
 
-                with open(json_path, 'w', encoding='utf-8') as f:
-                    json.dump(data, f, indent=2, ensure_ascii=False)
-                
-            except Exception as e:
-                print(f"Failed to update JSON {file}: {e}")
+                    with open(json_path, 'w', encoding='utf-8') as f:
+                        json.dump(data, f, indent=2, ensure_ascii=False)
+                    
+                except Exception as e:
+                    print(f"Failed to update JSON {file}: {e}")
 
 if __name__ == "__main__":
     mappings = optimize_images()
