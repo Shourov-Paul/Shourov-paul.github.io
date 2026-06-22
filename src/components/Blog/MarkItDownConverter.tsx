@@ -407,7 +407,7 @@ export default function MarkItDownConverter() {
 
   // ─── RESULT WORKSPACE: Sidebar + Main Preview (exact reference layout) ───
   return (
-    <div className="w-full max-w-5xl mx-auto animate-fade-in text-neutral select-none">
+    <div className="w-full max-w-[1200px] mx-auto animate-fade-in text-neutral select-none">
       {/* Error Toast */}
       {errorMessage && (
         <div
@@ -507,7 +507,7 @@ export default function MarkItDownConverter() {
             <div className="flex gap-2">
               <button
                 onClick={() => setActiveTab('formatted')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 border ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 border whitespace-nowrap ${
                   activeTab === 'formatted'
                     ? ''
                     : 'border-transparent hover:bg-[rgba(255,255,255,0.05)]'
@@ -529,7 +529,7 @@ export default function MarkItDownConverter() {
               </button>
               <button
                 onClick={() => setActiveTab('raw')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 border ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 border whitespace-nowrap ${
                   activeTab === 'raw'
                     ? ''
                     : 'border-transparent hover:bg-[rgba(255,255,255,0.05)]'
@@ -555,7 +555,7 @@ export default function MarkItDownConverter() {
             <div className="flex gap-2">
               <button
                 onClick={handleCopy}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold border transition-all duration-300"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold border transition-all duration-300 whitespace-nowrap"
                 style={
                   copied
                     ? {
@@ -575,7 +575,7 @@ export default function MarkItDownConverter() {
               </button>
               <button
                 onClick={handleDownload}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300 hover:scale-[1.02]"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300 hover:scale-[1.02] whitespace-nowrap"
                 style={{
                   background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.15))',
                   border: '1px solid rgba(16, 185, 129, 0.4)',

@@ -63,7 +63,7 @@ const BlogDetails = async ({ params }: { params: Promise<{ slug: string }> }) =>
                     <div className="absolute -bottom-[200px] -left-[150px] w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[140px] mix-blend-screen animate-pulse" style={{ animationDuration: '10s' }}></div>
                 </div>
 
-                <div className="w-full max-w-4xl relative z-10">
+                <div className="w-full max-w-[1200px] relative z-10">
                     <header className="mb-8 text-center flex flex-col items-center">
                         <div className="flex items-center gap-3.5 mb-3.5">
                             {/* Detailed blue floppy disk save icon logo */}
