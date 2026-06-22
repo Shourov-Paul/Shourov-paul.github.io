@@ -2,8 +2,6 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { marked } from 'marked'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 // Configure marked for GFM tables & breaks (matching reference project)
 marked.setOptions({
@@ -499,7 +497,7 @@ export default function MarkItDownConverter() {
         >
           {/* Previewer Header: Tabs + Actions */}
           <div
-            className="flex justify-between items-center px-5 py-3 border-b flex-wrap gap-2"
+            className="flex justify-between items-center px-5 py-3 border-b gap-2"
             style={{
               borderColor: 'var(--border, rgba(255,255,255,0.08))',
               background: 'rgba(11, 15, 25, 0.3)',
@@ -590,37 +588,31 @@ export default function MarkItDownConverter() {
           </div>
 
           {/* Previewer Body */}
-          <div className="flex-1 overflow-y-auto p-6" style={{ scrollbarWidth: 'thin' }}>
+          <div className="previewer-scroll-area flex-1 overflow-y-auto p-6">
             {activeTab === 'formatted' ? (
               <div
                 className="markdown-body max-w-none"
                 dangerouslySetInnerHTML={{ __html: getHtmlContent() }}
               />
             ) : (
-              <div className="font-mono text-sm overflow-x-auto rounded-xl overflow-hidden border" style={{ borderColor: 'var(--border, rgba(255,255,255,0.08))' }}>
-                <SyntaxHighlighter
-                  language="markdown"
-                  style={atomDark}
-                  customStyle={{
-                    margin: 0,
-                    padding: '1.25rem',
-                    backgroundColor: '#0f141c',
-                    fontSize: '0.85rem',
-                    lineHeight: '1.5',
-                    fontFamily: "'JetBrains Mono', monospace",
-                  }}
-                  showLineNumbers={true}
-                  lineNumberStyle={{
-                    minWidth: '2.2em',
-                    paddingRight: '1em',
-                    color: '#4b5563',
-                    textAlign: 'right'
-                  }}
-                  wrapLines={true}
-                >
-                  {convertedMarkdown}
-                </SyntaxHighlighter>
-              </div>
+              <pre
+                className="previewer-scroll-area"
+                style={{
+                  margin: 0,
+                  padding: '1.25rem',
+                  backgroundColor: '#0f141c',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  borderRadius: 12,
+                  overflowX: 'auto',
+                  whiteSpace: 'pre',
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: '0.85rem',
+                  lineHeight: '1.5',
+                  color: '#e5e7eb',
+                }}
+              >
+                <code>{convertedMarkdown}</code>
+              </pre>
             )}
           </div>
         </div>
@@ -635,6 +627,28 @@ export default function MarkItDownConverter() {
         }
       `}</style>
       <style jsx global>{`
+        /* Dark scrollbars */
+        .previewer-scroll-area::-webkit-scrollbar {
+          width: 8px;
+          height: 8px;
+        }
+        .previewer-scroll-area::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .previewer-scroll-area::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+        }
+        .previewer-scroll-area::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+        .previewer-scroll-area::-webkit-scrollbar-corner {
+          background: transparent;
+        }
+        .previewer-scroll-area {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255,255,255,0.1) transparent;
+        }
         .markdown-body {
           color: #e5e7eb;
           font-size: 0.95rem;
