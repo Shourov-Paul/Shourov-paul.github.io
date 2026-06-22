@@ -1,17 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
-import { 
-  AlertTriangle, 
-  Check, 
-  Copy, 
-  Download, 
-  RefreshCw, 
-  Eye, 
-  Code,
-  ArrowLeft,
-  FileText
-} from 'lucide-react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { marked } from 'marked'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
@@ -24,6 +13,52 @@ export default function MarkItDownConverter() {
   const [activeTab, setActiveTab] = useState<'formatted' | 'raw'>('formatted')
   const [copied, setCopied] = useState(false)
   const [dragOver, setDragOver] = useState(false)
+  const [progressPercent, setProgressPercent] = useState(0)
+  const [progressLabel, setProgressLabel] = useState('Reading file contents')
+  const progressInterval = useRef<NodeJS.Timeout | null>(null)
+
+  // Clean up interval on unmount
+  useEffect(() => {
+    return () => {
+      if (progressInterval.current) clearInterval(progressInterval.current)
+    }
+  }, [])
+
+  // Start simulated progress
+  const startProgress = (fileName: string) => {
+    setProgressPercent(0)
+    setProgressLabel(`Processing: ${fileName}`)
+
+    const stages = [
+      { at: 15, label: 'Reading file contents...' },
+      { at: 30, label: 'Uploading to server...' },
+      { at: 50, label: 'Running structure extraction...' },
+      { at: 70, label: 'Parsing document layout...' },
+      { at: 85, label: 'Generating markdown output...' },
+      { at: 92, label: 'Finalizing conversion...' },
+    ]
+
+    let current = 0
+    progressInterval.current = setInterval(() => {
+      current += Math.random() * 3 + 0.5
+      if (current > 92) current = 92 // Cap at 92% until real completion
+      setProgressPercent(Math.min(Math.round(current), 92))
+
+      const stage = [...stages].reverse().find(s => current >= s.at)
+      if (stage) setProgressLabel(stage.label)
+    }, 200)
+  }
+
+  const stopProgress = (success: boolean) => {
+    if (progressInterval.current) {
+      clearInterval(progressInterval.current)
+      progressInterval.current = null
+    }
+    if (success) {
+      setProgressPercent(100)
+      setProgressLabel('Conversion complete!')
+    }
+  }
 
   // Drag & Drop handlers
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -42,10 +77,11 @@ export default function MarkItDownConverter() {
     e.preventDefault()
     e.stopPropagation()
     setDragOver(false)
-    
+
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       handleFileUpload(e.dataTransfer.files[0])
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // File Select handler
@@ -61,13 +97,14 @@ export default function MarkItDownConverter() {
     setIsConverting(true)
     setErrorMessage('')
     setConvertedMarkdown('')
+    startProgress(selectedFile.name)
 
     const formData = new FormData()
     formData.append('file', selectedFile)
 
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    const endpoint = isLocal 
-      ? 'http://127.0.0.1:5000/convert' 
+    const endpoint = isLocal
+      ? 'http://127.0.0.1:5000/convert'
       : (process.env.NEXT_PUBLIC_MARKITDOWN_API_URL || 'https://shourov-paul-markitdown.onrender.com/convert')
 
     try {
@@ -83,13 +120,18 @@ export default function MarkItDownConverter() {
 
       const data = await response.json()
       if (data.success) {
+        stopProgress(true)
+        // Small delay to show 100% before transitioning
+        await new Promise(resolve => setTimeout(resolve, 400))
         setConvertedMarkdown(data.markdown)
       } else {
         throw new Error(data.error || 'Conversion failed.')
       }
     } catch (err: any) {
       console.error('Error during conversion:', err)
+      stopProgress(false)
       setErrorMessage(err.message || 'An error occurred during file conversion.')
+      setFile(null)
     } finally {
       setIsConverting(false)
     }
@@ -110,19 +152,19 @@ export default function MarkItDownConverter() {
   // Download Markdown file
   const handleDownload = () => {
     if (!convertedMarkdown || !file) return
-    
+
     const baseName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name
     const outFileName = `${baseName}.md`
 
     const blob = new Blob([convertedMarkdown], { type: 'text/markdown;charset=utf-8;' })
     const url = URL.createObjectURL(blob)
-    
+
     const a = document.createElement('a')
     a.href = url
     a.download = outFileName
     document.body.appendChild(a)
     a.click()
-    
+
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
   }
@@ -133,6 +175,7 @@ export default function MarkItDownConverter() {
     setConvertedMarkdown('')
     setErrorMessage('')
     setActiveTab('formatted')
+    setProgressPercent(0)
   }
 
   // Helper formatting size
@@ -183,19 +226,107 @@ export default function MarkItDownConverter() {
     }
   }
 
-  // LANDING STATE: Renders ONLY the dashed upload dropzone card (No outer solid card)
-  if (!file && !isConverting && !convertedMarkdown) {
+  // ─── LOADING STATE: Spinner ring + % progress ───
+  if (isConverting && file) {
+    return (
+      <div className="w-full max-w-[760px] mx-auto animate-fade-in text-neutral select-none">
+        {/* Loader Card — exact replica of reference */}
+        <div
+          className="flex flex-col items-center justify-center rounded-2xl p-12 text-center backdrop-blur-xl border"
+          style={{
+            background: 'var(--bg-secondary, rgba(17, 24, 39, 0.7))',
+            borderColor: 'var(--border, rgba(255,255,255,0.08))',
+            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.3)',
+          }}
+        >
+          {/* Spinner Ring (4-ring CSS animation) */}
+          <div className="relative inline-block" style={{ width: 80, height: 80 }}>
+            {[0, 1, 2, 3].map(i => (
+              <div
+                key={i}
+                style={{
+                  boxSizing: 'border-box',
+                  display: 'block',
+                  position: 'absolute',
+                  width: 64,
+                  height: 64,
+                  margin: 8,
+                  border: '6px solid var(--accent, #6366f1)',
+                  borderRadius: '50%',
+                  animation: 'spinnerRing 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite',
+                  borderColor: 'var(--accent, #6366f1) transparent transparent transparent',
+                  animationDelay: `${-0.45 + i * 0.15}s`,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Title */}
+          <h4 className="text-xl font-bold text-neutral mt-6 mb-2">Converting Document...</h4>
+
+          {/* File name label */}
+          <p className="text-sm text-tertiary-content/70 mb-1.5 truncate max-w-[300px]">
+            {progressLabel}
+          </p>
+
+          {/* Percentage */}
+          <p className="text-2xl font-extrabold mb-4"
+            style={{
+              background: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-end))',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            {progressPercent}%
+          </p>
+
+          {/* Progress bar */}
+          <div
+            className="w-full max-w-xs rounded-full overflow-hidden"
+            style={{ height: 6, background: 'rgba(255,255,255,0.05)' }}
+          >
+            <div
+              className="h-full rounded-full transition-all duration-200 ease-out"
+              style={{
+                width: `${progressPercent}%`,
+                background: 'linear-gradient(90deg, var(--gradient-start, #6366f1), var(--gradient-end, #06b6d4))',
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Keyframes injected inline */}
+        <style jsx>{`
+          @keyframes spinnerRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    )
+  }
+
+  // ─── LANDING STATE: Upload dropzone ───
+  if (!file && !convertedMarkdown) {
     return (
       <div className="w-full max-w-[760px] mx-auto animate-fade-in text-neutral select-none">
         {/* ERROR TOAST */}
         {errorMessage && (
-          <div className="mb-6 flex items-start gap-3 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-red-400 animate-shake">
-            <AlertTriangle className="size-5 shrink-0 mt-0.5" />
-            <div className="flex-1">
-              <h4 className="font-semibold text-sm">Conversion Failed</h4>
-              <p className="text-xs mt-1 text-red-300/90">{errorMessage}</p>
-            </div>
-            <button onClick={() => setErrorMessage('')} className="text-red-400 hover:text-red-300 text-sm font-bold ml-auto shrink-0 select-none">
+          <div
+            className="fixed bottom-8 right-8 z-50 flex items-center gap-3 rounded-xl px-6 py-4 text-white shadow-2xl animate-slide-in"
+            style={{
+              background: 'rgba(239, 68, 68, 0.95)',
+              border: '1px solid rgba(239, 68, 68, 0.2)',
+              backdropFilter: 'blur(8px)',
+              boxShadow: '0 10px 30px rgba(239, 68, 68, 0.25)',
+            }}
+          >
+            <i className="fa-solid fa-triangle-exclamation text-lg" />
+            <span className="text-sm font-medium">{errorMessage}</span>
+            <button
+              onClick={() => setErrorMessage('')}
+              className="text-white font-bold text-xl ml-2 opacity-70 hover:opacity-100 transition-opacity"
+            >
               &times;
             </button>
           </div>
@@ -205,11 +336,18 @@ export default function MarkItDownConverter() {
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
-          className={`flex flex-col items-center justify-center border-2 border-dashed rounded-2xl py-[4.5rem] px-8 transition-all duration-300 text-center cursor-pointer bg-secondary/70 backdrop-blur-md relative shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] ${
-            dragOver 
-              ? 'border-accent bg-secondary/95 scale-[1.02] shadow-[0_8px_40px_0_rgba(var(--a),0.25)]' 
-              : 'border-border/40 hover:border-accent/50 hover:bg-secondary/85 hover:shadow-accent/15 hover:-translate-y-0.5'
+          className={`flex flex-col items-center justify-center border-2 border-dashed rounded-2xl py-[4.5rem] px-8 transition-all duration-300 text-center cursor-pointer backdrop-blur-xl relative ${
+            dragOver
+              ? 'scale-[1.02]'
+              : 'hover:-translate-y-0.5'
           }`}
+          style={{
+            background: dragOver ? 'var(--bg-card-hover, rgba(26, 36, 57, 0.95))' : 'var(--bg-secondary, rgba(17, 24, 39, 0.7))',
+            borderColor: dragOver ? 'var(--accent, #06b6d4)' : 'var(--border, rgba(255,255,255,0.08))',
+            boxShadow: dragOver
+              ? '0 8px 40px 0 rgba(var(--a, 99, 102, 241), 0.25)'
+              : '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+          }}
           onClick={() => document.getElementById('markitdownFileInput')?.click()}
         >
           <input
@@ -222,8 +360,8 @@ export default function MarkItDownConverter() {
             {/* Center Cloud Icon with soft glow and theme gradient */}
             <div className="relative group/cloud flex items-center justify-center mb-2">
               <div className="absolute inset-0 bg-accent/20 rounded-full blur-xl scale-125 opacity-70 group-hover/cloud:scale-150 transition-transform duration-500"></div>
-              <i 
-                className="fa-solid fa-cloud-arrow-up text-[4.5rem] bg-clip-text text-transparent relative animate-[pulse_3.5s_infinite_ease-in-out]" 
+              <i
+                className="fa-solid fa-cloud-arrow-up text-[4.5rem] bg-clip-text text-transparent relative animate-[pulse_3.5s_infinite_ease-in-out]"
                 style={{
                   backgroundImage: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-end))'
                 }}
@@ -247,7 +385,14 @@ export default function MarkItDownConverter() {
               </p>
             </div>
 
-            <button className="bg-accent text-[#00071E] px-[1.75rem] py-[0.85rem] rounded-xl text-[0.95rem] font-semibold transition-all duration-300 shadow-accent/20 shadow-lg hover:scale-105 flex items-center gap-2 mt-2">
+            <button
+              className="px-7 py-3.5 rounded-xl text-[0.95rem] font-semibold transition-all duration-300 shadow-lg hover:scale-105 flex items-center gap-2 mt-2"
+              style={{
+                background: 'linear-gradient(135deg, var(--gradient-start, #6366f1), var(--gradient-end, #4f46e5))',
+                color: '#ffffff',
+                boxShadow: '0 4px 14px 0 rgba(99, 102, 241, 0.4)',
+              }}
+            >
               <i className="fa-regular fa-folder-open" /> Browse Files
             </button>
           </div>
@@ -256,153 +401,237 @@ export default function MarkItDownConverter() {
     )
   }
 
-  // LOADING AND RESULT WORKSPACE STATE: Renders in the premium solid glassmorphic card
+  // ─── RESULT WORKSPACE: Sidebar + Main Preview (exact reference layout) ───
   return (
-    <div className="bg-secondary/70 border border-border/40 my-6 rounded-2xl p-6 shadow-xl sm:p-8 animate-fade-in text-neutral">
-      {/* ERROR TOAST */}
+    <div className="w-full max-w-5xl mx-auto animate-fade-in text-neutral select-none">
+      {/* Error Toast */}
       {errorMessage && (
-        <div className="mb-6 flex items-start gap-3 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-red-400 animate-shake">
-          <AlertTriangle className="size-5 shrink-0 mt-0.5" />
-          <div className="flex-1">
-            <h4 className="font-semibold text-sm">Conversion Failed</h4>
-            <p className="text-xs mt-1 text-red-300/90">{errorMessage}</p>
-          </div>
-          <button onClick={() => setErrorMessage('')} className="text-red-400 hover:text-red-300 text-sm font-bold ml-auto shrink-0 select-none">
+        <div
+          className="fixed bottom-8 right-8 z-50 flex items-center gap-3 rounded-xl px-6 py-4 text-white shadow-2xl"
+          style={{
+            background: 'rgba(239, 68, 68, 0.95)',
+            border: '1px solid rgba(239, 68, 68, 0.2)',
+            backdropFilter: 'blur(8px)',
+            boxShadow: '0 10px 30px rgba(239, 68, 68, 0.25)',
+          }}
+        >
+          <i className="fa-solid fa-triangle-exclamation text-lg" />
+          <span className="text-sm font-medium">{errorMessage}</span>
+          <button
+            onClick={() => setErrorMessage('')}
+            className="text-white font-bold text-xl ml-2 opacity-70 hover:opacity-100 transition-opacity"
+          >
             &times;
           </button>
         </div>
       )}
 
-      {/* LOADER COMPONENT */}
-      {isConverting && (
-        <div className="flex flex-col items-center justify-center border border-border/40 bg-[#FFFFFF03] rounded-xl p-10 text-center animate-pulse">
-          <RefreshCw className="size-10 text-accent animate-spin mb-4" />
-          <h4 className="text-lg font-semibold text-neutral">Converting Document...</h4>
-          <p className="text-xs text-tertiary-content/70 mt-1">
-            Running structure extraction algorithms for: <span className="text-neutral font-medium">{file?.name}</span>
-          </p>
-          <div className="w-full max-w-xs bg-primary h-1 rounded-full overflow-hidden mt-6 border border-border/10">
-            <div className="h-full bg-accent w-2/3 animate-[loading_1.5s_infinite] rounded-full"></div>
+      {/* Workspace Grid: Sidebar + Main */}
+      <div className="grid gap-6 items-start" style={{ gridTemplateColumns: '280px 1fr' }}>
+        {/* ── SIDEBAR: File Stats & Info ── */}
+        <div
+          className="rounded-2xl p-6 backdrop-blur-xl border flex flex-col gap-5"
+          style={{
+            background: 'var(--bg-secondary, rgba(17, 24, 39, 0.7))',
+            borderColor: 'var(--border, rgba(255,255,255,0.08))',
+            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2)',
+          }}
+        >
+          <h4 className="text-base font-bold text-neutral flex items-center gap-2">
+            <i className="fa-solid fa-circle-info text-accent" />
+            File Information
+          </h4>
+
+          <div className="flex flex-col gap-4">
+            {/* Name */}
+            <div className="flex flex-col gap-1">
+              <span className="text-xs font-semibold text-tertiary-content/60 uppercase tracking-wider">Name</span>
+              <span className="text-sm font-medium text-neutral truncate" title={file?.name}>
+                {file?.name || 'document.pdf'}
+              </span>
+            </div>
+            {/* Size */}
+            <div className="flex flex-col gap-1">
+              <span className="text-xs font-semibold text-tertiary-content/60 uppercase tracking-wider">Size</span>
+              <span className="text-sm font-medium text-neutral">
+                {file ? formatBytes(file.size) : '0 KB'}
+              </span>
+            </div>
+            {/* Type */}
+            <div className="flex flex-col gap-1">
+              <span className="text-xs font-semibold text-tertiary-content/60 uppercase tracking-wider">Type</span>
+              <span className="text-sm font-medium text-neutral">
+                {file ? getFriendlyFileType(file.name) : 'Unknown'}
+              </span>
+            </div>
+          </div>
+
+          {/* Convert Another button */}
+          <button
+            onClick={handleReset}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold border transition-all duration-300 hover:bg-[rgba(255,255,255,0.05)]"
+            style={{
+              background: 'transparent',
+              borderColor: 'var(--border, rgba(255,255,255,0.08))',
+              color: 'var(--text-neutral, #f3f4f6)',
+            }}
+          >
+            <i className="fa-solid fa-arrow-left text-xs" /> Convert Another
+          </button>
+        </div>
+
+        {/* ── MAIN CONTENT: Previewer Card ── */}
+        <div
+          className="rounded-2xl backdrop-blur-xl border flex flex-col overflow-hidden"
+          style={{
+            background: 'var(--bg-secondary, rgba(17, 24, 39, 0.7))',
+            borderColor: 'var(--border, rgba(255,255,255,0.08))',
+            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2)',
+            minHeight: 500,
+            maxHeight: '70vh',
+          }}
+        >
+          {/* Previewer Header: Tabs + Actions */}
+          <div
+            className="flex justify-between items-center px-5 py-3 border-b flex-wrap gap-2"
+            style={{
+              borderColor: 'var(--border, rgba(255,255,255,0.08))',
+              background: 'rgba(11, 15, 25, 0.3)',
+            }}
+          >
+            {/* Tab Buttons */}
+            <div className="flex gap-2">
+              <button
+                onClick={() => setActiveTab('formatted')}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 border ${
+                  activeTab === 'formatted'
+                    ? ''
+                    : 'border-transparent hover:bg-[rgba(255,255,255,0.05)]'
+                }`}
+                style={
+                  activeTab === 'formatted'
+                    ? {
+                        color: 'var(--text-neutral, #f3f4f6)',
+                        background: 'rgba(var(--a, 99, 102, 241), 0.15)',
+                        borderColor: 'rgba(var(--a, 99, 102, 241), 0.25)',
+                      }
+                    : {
+                        color: 'var(--text-tertiary-content, #9ca3af)',
+                        background: 'transparent',
+                      }
+                }
+              >
+                <i className="fa-solid fa-eye text-xs" /> Formatted Preview
+              </button>
+              <button
+                onClick={() => setActiveTab('raw')}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 border ${
+                  activeTab === 'raw'
+                    ? ''
+                    : 'border-transparent hover:bg-[rgba(255,255,255,0.05)]'
+                }`}
+                style={
+                  activeTab === 'raw'
+                    ? {
+                        color: 'var(--text-neutral, #f3f4f6)',
+                        background: 'rgba(var(--a, 99, 102, 241), 0.15)',
+                        borderColor: 'rgba(var(--a, 99, 102, 241), 0.25)',
+                      }
+                    : {
+                        color: 'var(--text-tertiary-content, #9ca3af)',
+                        background: 'transparent',
+                      }
+                }
+              >
+                <i className="fa-solid fa-code text-xs" /> Raw Markdown
+              </button>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-2">
+              <button
+                onClick={handleCopy}
+                className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold border transition-all duration-300"
+                style={
+                  copied
+                    ? {
+                        background: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: 'rgba(16, 185, 129, 0.4)',
+                        color: '#10b981',
+                      }
+                    : {
+                        background: 'rgba(255,255,255,0.06)',
+                        borderColor: 'var(--border, rgba(255,255,255,0.08))',
+                        color: 'var(--text-neutral, #f3f4f6)',
+                      }
+                }
+              >
+                <i className={`fa-${copied ? 'solid fa-check' : 'regular fa-copy'} text-xs`} />
+                {copied ? 'Copied!' : 'Copy'}
+              </button>
+              <button
+                onClick={handleDownload}
+                className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300 hover:scale-[1.02]"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.15))',
+                  border: '1px solid rgba(16, 185, 129, 0.4)',
+                  color: '#10b981',
+                }}
+              >
+                <i className="fa-solid fa-download text-xs" /> Download
+              </button>
+            </div>
+          </div>
+
+          {/* Previewer Body */}
+          <div className="flex-1 overflow-y-auto p-6" style={{ scrollbarWidth: 'thin' }}>
+            {activeTab === 'formatted' ? (
+              <div
+                className="prose prose-invert max-w-none text-sm md:text-base leading-relaxed markdown-body"
+                dangerouslySetInnerHTML={{ __html: getHtmlContent() }}
+                style={{
+                  color: '#e5e7eb',
+                  lineHeight: '1.6',
+                }}
+              />
+            ) : (
+              <div className="font-mono text-sm overflow-x-auto rounded-xl overflow-hidden border" style={{ borderColor: 'var(--border, rgba(255,255,255,0.08))' }}>
+                <SyntaxHighlighter
+                  language="markdown"
+                  style={atomDark}
+                  customStyle={{
+                    margin: 0,
+                    padding: '1.25rem',
+                    backgroundColor: '#0f141c',
+                    fontSize: '0.85rem',
+                    lineHeight: '1.5',
+                    fontFamily: "'JetBrains Mono', monospace",
+                  }}
+                  showLineNumbers={true}
+                  lineNumberStyle={{
+                    minWidth: '2.2em',
+                    paddingRight: '1em',
+                    color: '#4b5563',
+                    textAlign: 'right'
+                  }}
+                  wrapLines={true}
+                >
+                  {convertedMarkdown}
+                </SyntaxHighlighter>
+              </div>
+            )}
           </div>
         </div>
-      )}
+      </div>
 
-      {/* RESULT WORKSPACE */}
-      {convertedMarkdown && file && (
-        <div className="flex flex-col gap-6 animate-fade-in">
-          {/* File Metadata Header */}
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-4 rounded-xl bg-primary/20 border border-border/40">
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-lg bg-primary/40 border border-border/10">
-                <FileText className="size-6 text-accent" />
-              </div>
-              <div className="min-w-0">
-                <h4 className="text-sm font-bold text-neutral truncate max-w-xs md:max-w-md">{file.name}</h4>
-                <p className="text-xs text-tertiary-content/70 flex items-center gap-2 mt-1">
-                  <span>{formatBytes(file.size)}</span>
-                  <span className="size-1 rounded-full bg-neutral/40"></span>
-                  <span>{getFriendlyFileType(file.name)}</span>
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={handleReset}
-              className="bg-primary hover:bg-[#FFFFFF1A] border-border/60 hover:border-accent text-neutral px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-300 border flex items-center gap-2 shrink-0 self-end md:self-auto"
-            >
-              <ArrowLeft className="size-3.5" /> Convert Another
-            </button>
-          </div>
-
-          {/* Workspace Body */}
-          <div className="flex flex-col border border-border/60 rounded-xl overflow-hidden bg-primary/20">
-            {/* Toolbar */}
-            <div className="flex items-center justify-between border-b border-border/60 bg-primary/50 px-4 py-2.5 flex-wrap gap-2">
-              <div className="flex items-center gap-1.5 bg-[#FFFFFF05] p-1 rounded-lg border border-[#FFFFFF05]">
-                <button
-                  onClick={() => setActiveTab('formatted')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all select-none ${
-                    activeTab === 'formatted'
-                      ? 'bg-primary text-accent border border-border/80 shadow-sm font-bold'
-                      : 'text-tertiary-content hover:text-neutral'
-                  }`}
-                >
-                  <Eye className="size-3.5" /> Formatted Preview
-                </button>
-                <button
-                  onClick={() => setActiveTab('raw')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all select-none ${
-                    activeTab === 'raw'
-                      ? 'bg-primary text-accent border border-border/80 shadow-sm font-bold'
-                      : 'text-tertiary-content hover:text-neutral'
-                  }`}
-                >
-                  <Code className="size-3.5" /> Raw Markdown
-                </button>
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={handleCopy}
-                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
-                    copied
-                      ? 'bg-green-500/10 border-green-500/20 text-green-400'
-                      : 'bg-primary hover:bg-[#FFFFFF1A] border-border/40 hover:border-accent text-neutral'
-                  }`}
-                >
-                  {copied ? (
-                    <>
-                      <Check className="size-3.5" /> Copied!
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="size-3.5" /> Copy
-                    </>
-                  )}
-                </button>
-                <button
-                  onClick={handleDownload}
-                  className="bg-accent hover:bg-accent/90 text-[#00071E] px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-md shadow-accent/10 hover:scale-102"
-                >
-                  <Download className="size-3.5" /> Download
-                </button>
-              </div>
-            </div>
-
-            {/* Content Preview */}
-            <div className="p-5 max-h-[500px] overflow-y-auto leading-relaxed select-text">
-              {activeTab === 'formatted' ? (
-                <div 
-                  className="prose prose-invert max-w-none text-neutral text-sm md:text-base space-y-4 markdown-body"
-                  dangerouslySetInnerHTML={{ __html: getHtmlContent() }}
-                />
-              ) : (
-                <div className="font-mono text-sm overflow-x-auto rounded-lg overflow-hidden border border-border/20">
-                  <SyntaxHighlighter
-                    language="markdown"
-                    style={atomDark}
-                    customStyle={{
-                      margin: 0,
-                      padding: '1.25rem',
-                      backgroundColor: '#0a0f18',
-                      fontSize: '0.85rem',
-                      lineHeight: '1.6',
-                    }}
-                    showLineNumbers={true}
-                    lineNumberStyle={{
-                      minWidth: '2.2em',
-                      paddingRight: '1em',
-                      color: '#4b5563',
-                      textAlign: 'right'
-                    }}
-                    wrapLines={true}
-                  >
-                    {convertedMarkdown}
-                  </SyntaxHighlighter>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Responsive: stack on mobile */}
+      <style jsx>{`
+        @media (max-width: 900px) {
+          div[style*="grid-template-columns: 280px 1fr"] {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }
