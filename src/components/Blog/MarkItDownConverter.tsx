@@ -5,6 +5,12 @@ import { marked } from 'marked'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
+// Configure marked for GFM tables & breaks (matching reference project)
+marked.setOptions({
+  gfm: true,
+  breaks: true,
+})
+
 export default function MarkItDownConverter() {
   const [file, setFile] = useState<File | null>(null)
   const [isConverting, setIsConverting] = useState(false)
@@ -587,12 +593,8 @@ export default function MarkItDownConverter() {
           <div className="flex-1 overflow-y-auto p-6" style={{ scrollbarWidth: 'thin' }}>
             {activeTab === 'formatted' ? (
               <div
-                className="prose prose-invert max-w-none text-sm md:text-base leading-relaxed markdown-body"
+                className="markdown-body max-w-none"
                 dangerouslySetInnerHTML={{ __html: getHtmlContent() }}
-                style={{
-                  color: '#e5e7eb',
-                  lineHeight: '1.6',
-                }}
               />
             ) : (
               <div className="font-mono text-sm overflow-x-auto rounded-xl overflow-hidden border" style={{ borderColor: 'var(--border, rgba(255,255,255,0.08))' }}>
@@ -624,12 +626,124 @@ export default function MarkItDownConverter() {
         </div>
       </div>
 
-      {/* Responsive: stack on mobile */}
+      {/* Responsive + Markdown Body Styles (matching reference project) */}
       <style jsx>{`
         @media (max-width: 900px) {
           div[style*="grid-template-columns: 280px 1fr"] {
             grid-template-columns: 1fr !important;
           }
+        }
+      `}</style>
+      <style jsx global>{`
+        .markdown-body {
+          color: #e5e7eb;
+          font-size: 0.95rem;
+          line-height: 1.6;
+          font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 {
+          color: #ffffff;
+          font-weight: 700;
+          margin-top: 1.5rem;
+          margin-bottom: 0.75rem;
+        }
+        .markdown-body h1 {
+          font-size: 1.75rem;
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+          padding-bottom: 0.3em;
+        }
+        .markdown-body h2 {
+          font-size: 1.4rem;
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+          padding-bottom: 0.3em;
+        }
+        .markdown-body h3 { font-size: 1.15rem; }
+        .markdown-body p,
+        .markdown-body ul,
+        .markdown-body ol,
+        .markdown-body blockquote,
+        .markdown-body table {
+          margin-bottom: 1rem;
+        }
+        .markdown-body ul, .markdown-body ol {
+          padding-left: 2rem;
+        }
+        .markdown-body li {
+          margin-bottom: 0.25rem;
+        }
+        .markdown-body blockquote {
+          border-left: 4px solid var(--accent, #6366f1);
+          background: rgba(99, 102, 241, 0.05);
+          padding: 0.5rem 1rem;
+          color: #9ca3af;
+          border-radius: 0 12px 12px 0;
+        }
+        .markdown-body code {
+          font-family: 'JetBrains Mono', monospace;
+          background: rgba(255, 255, 255, 0.08);
+          padding: 0.2rem 0.4rem;
+          border-radius: 4px;
+          font-size: 0.85rem;
+        }
+        .markdown-body pre {
+          background: #0f141c;
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 12px;
+          padding: 1rem;
+          overflow-x: auto;
+          margin-bottom: 1rem;
+        }
+        .markdown-body pre code {
+          background: transparent;
+          padding: 0;
+          border-radius: 0;
+          font-size: 0.85rem;
+        }
+        .markdown-body table {
+          width: 100%;
+          border-collapse: collapse;
+          display: table;
+        }
+        .markdown-body thead {
+          display: table-header-group;
+        }
+        .markdown-body tbody {
+          display: table-row-group;
+        }
+        .markdown-body tr {
+          display: table-row;
+        }
+        .markdown-body th, .markdown-body td {
+          border: 1px solid rgba(255,255,255,0.08);
+          padding: 0.5rem 0.75rem;
+          text-align: left;
+          display: table-cell;
+        }
+        .markdown-body th {
+          background: rgba(255, 255, 255, 0.04);
+          font-weight: 600;
+          color: #ffffff;
+        }
+        .markdown-body tr:nth-child(even) {
+          background: rgba(255, 255, 255, 0.01);
+        }
+        .markdown-body img {
+          max-width: 100%;
+          border-radius: 12px;
+          margin: 1rem 0;
+          border: 1px solid rgba(255,255,255,0.08);
+        }
+        .markdown-body a {
+          color: var(--accent, #6366f1);
+          text-decoration: none;
+        }
+        .markdown-body a:hover {
+          text-decoration: underline;
+        }
+        .markdown-body hr {
+          border: none;
+          border-top: 1px solid rgba(255,255,255,0.08);
+          margin: 1.5rem 0;
         }
       `}</style>
     </div>
