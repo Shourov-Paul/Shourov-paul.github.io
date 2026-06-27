@@ -27,10 +27,6 @@ const navItems = [
     label: 'BLOG',
     href: '/blog',
   },
-  {
-    label: 'CONTACT ME',
-    href: '/contact',
-  },
 ]
 
 import ScrollProgress from '../ScrollProgress/ScrollProgress'

@@ -1,4 +1,4 @@
-import { Achievement, Blog, Project, Video, ExperienceItem, PublicationItem } from '@/lib/types'
+import { Achievement, Blog, Project, Video, ExperienceItem, PublicationItem, EducationItem } from '@/lib/types'
 import { promises as fs } from 'fs'
 import path from 'path'
 
@@ -128,4 +128,15 @@ const getPublications = async (): Promise<PublicationItem[]> => {
   }
 }
 
-export { getAllProjects, getAchievements, getProjectBySlug, getVideos, getAllBlogs, getBlogBySlug, getExperiences, getPublications, getPinnedSlugs }
+const getEducation = async (): Promise<EducationItem[]> => {
+  try {
+    const filePath = path.join(process.cwd(), '/content/education/education.json')
+    const fileContent = await fs.readFile(filePath, 'utf8')
+    return JSON.parse(fileContent)
+  } catch (error) {
+    console.error('Error fetching education:', error)
+    return []
+  }
+}
+
+export { getAllProjects, getAchievements, getProjectBySlug, getVideos, getAllBlogs, getBlogBySlug, getExperiences, getPublications, getPinnedSlugs, getEducation }

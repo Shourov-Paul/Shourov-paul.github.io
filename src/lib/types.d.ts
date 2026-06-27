@@ -80,6 +80,17 @@ export interface ExperienceItem {
   technologies: string[]
 }
 
+export interface EducationItem {
+  id: string
+  degree: string
+  institution: string
+  period: string
+  grade: string
+  details?: string
+  certificateUrl?: string
+  transcriptUrl?: string
+}
+
 export interface PublicationItem {
   id: string
   title: string

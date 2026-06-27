@@ -75,33 +75,5 @@
         "issuer": "IUBAT Robotics Club",
         "date": "November 2022",
         "image": "/images/certificates/itech-expo-2022 copy.webp"
-    },
-    {
-        "id": "cert-012",
-        "title": "Higher Secondary Certificate - Academic Transcript",
-        "issuer": "Board of Intermediate and Secondary Education, Dhaka",
-        "date": "January 30, 2021",
-        "image": "/images/certificates/hsc-transcript.webp"
-    },
-    {
-        "id": "cert-013",
-        "title": "Higher Secondary Certificate",
-        "issuer": "Board of Intermediate and Secondary Education, Dhaka",
-        "date": "January 30, 2021",
-        "image": "/images/certificates/hsc-certificate.webp"
-    },
-    {
-        "id": "cert-014",
-        "title": "Secondary School Certificate",
-        "issuer": "Board of Intermediate and Secondary Education, Dhaka",
-        "date": "May 6, 2018",
-        "image": "/images/certificates/ssc-certificate copy.webp"
-    },
-    {
-        "id": "cert-015",
-        "title": "Secondary School Certificate - Academic Transcript",
-        "issuer": "Board of Intermediate and Secondary Education, Dhaka",
-        "date": "May 6, 2018",
-        "image": "/images/certificates/ssc-transcript.webp"
     }
 ]

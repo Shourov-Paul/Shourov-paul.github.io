@@ -5,8 +5,9 @@ import ServiceSection from '@/components/Services/ServiceSection'
 import VideoSection from '@/components/Videos/VideoSection'
 import AchievementsSection from '@/components/Achievements/AchievementsSection'
 import ExperienceSection from '@/components/Experience/ExperienceSection'
+import EducationSection from '@/components/Education/EducationSection'
 import PublicationsSection from '@/components/Publications/PublicationsSection'
-import { getAllProjects, getAchievements, getVideos, getExperiences, getPublications, getPinnedSlugs } from '@/services'
+import { getAllProjects, getAchievements, getVideos, getExperiences, getPublications, getPinnedSlugs, getEducation } from '@/services'
 
 export default async function Home() {
   const allProjects = await getAllProjects()
@@ -15,6 +16,7 @@ export default async function Home() {
   const achievements = await getAchievements()
   const experiences = await getExperiences()
   const publications = await getPublications()
+  const education = await getEducation()
 
   // Pre-sort featured projects based on the pinned config at build time
   let initialFeatured = allProjects.filter((p) => p.slug && pinnedSlugs.includes(p.slug))
@@ -30,7 +32,8 @@ export default async function Home() {
       <Hero />
       <div className="mx-auto my-8 max-w-[1200px] px-4 md:my-[3.75rem] space-y-16 md:space-y-24">
         <ProjectSection initialProjects={initialFeatured} allProjects={allProjects} />
-        <ExperienceSection experiences={experiences.slice(0, 2)} showSeeMore={experiences.length > 2} />
+        <ExperienceSection experiences={experiences.slice(0, 1)} showSeeMore={experiences.length > 1} />
+        <EducationSection education={education.slice(0, 1)} showSeeMore={education.length > 1} />
         <PublicationsSection publications={publications.slice(0, 2)} showSeeMore={publications.length > 2} />
         <AchievementsSection achievements={achievements.slice(0, 4)} showSeeMore={achievements.length > 4} />
         <VideoSection videos={videos} />

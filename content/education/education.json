@@ -1,0 +1,27 @@
+[
+  {
+    "id": "edu-001",
+    "degree": "B.Sc. in Electrical & Electronic Engineering",
+    "institution": "Daffodil International University, Dhaka",
+    "period": "2022 - 2025",
+    "grade": "CGPA: 3.88 / 4.00",
+    "certificateUrl": "/images/certificates/DIU_CERTIFICATE_TRANSCRIPT.pdf"
+  },
+  {
+    "id": "edu-002",
+    "degree": "Higher Secondary Certificate (HSC) — Science",
+    "institution": "Savar Model College, Dhaka",
+    "period": "2018 - 2020",
+    "grade": "GPA: 5.00 / 5.00",
+    "certificateUrl": "/images/certificates/HSC_CERTIFICATE_TRANSCRIPT.pdf"
+  },
+  {
+    "id": "edu-003",
+    "degree": "Secondary School Certificate (SSC) — Science",
+    "institution": "Dhamrai Hardinge High School and College, Dhaka",
+    "period": "2012 - 2018",
+    "grade": "GPA: 5.00 / 5.00",
+    "details": "Gov. Scholarship",
+    "certificateUrl": "/images/certificates/SSC_CERTIFICATE_TRANSCRIPT.pdf"
+  }
+]

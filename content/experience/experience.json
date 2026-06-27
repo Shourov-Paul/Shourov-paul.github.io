@@ -3,12 +3,17 @@
     "id": "exp-001",
     "role": "Teaching Assistant (TA)",
     "company": "Daffodil International University",
-    "period": "Fall 2025 - Present",
+    "period": "Fall 2025",
     "description": [
       "Assisting instructors in laboratory experiments and grading assignments for Embedded Systems.",
       "Mentoring undergraduate students in circuit debugging and firmware coding."
     ],
-    "technologies": ["Embedded Systems", "Microcontrollers", "C/C++", "Circuit Debugging"]
+    "technologies": [
+      "Embedded Systems",
+      "Microcontrollers",
+      "C/C++",
+      "Circuit Debugging"
+    ]
   },
   {
     "id": "exp-002",
@@ -19,7 +24,12 @@
       "Completed intensive training on VLSI design principles and digital circuit verification.",
       "Gained practical experience with industry-standard EDA tools and simulations."
     ],
-    "technologies": ["VLSI Design", "Verilog", "EDA Tools", "Digital Logic"]
+    "technologies": [
+      "VLSI Design",
+      "Verilog",
+      "EDA Tools",
+      "Digital Logic"
+    ]
   },
   {
     "id": "exp-003",
@@ -30,6 +40,11 @@
       "Received training on power plant operation, electrical machinery control, and steam turbines.",
       "Studied industrial PLC (Programmable Logic Controller) systems and telemetry equipment."
     ],
-    "technologies": ["PLC Systems", "Power Systems", "Industrial Automation", "SCADA"]
+    "technologies": [
+      "PLC Systems",
+      "Power Systems",
+      "Industrial Automation",
+      "SCADA"
+    ]
   }
 ]
