@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Modal from '../UI/Modal'
 import { ChevronDownIcon, DownloadIcon } from '@/utils/icons'
 import Link from 'next/link'
+import MatlabCodyCard from './MatlabCodyCard'
 
 interface AchievementsSectionProps {
   achievements: Achievement[]

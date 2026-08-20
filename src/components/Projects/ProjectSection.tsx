@@ -7,6 +7,8 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { ChevronDownIcon } from '@/utils/icons'
 
+import MatlabCodyCard from '../Achievements/MatlabCodyCard'
+
 interface ProjectSectionProps {
   initialProjects: Project[]
   allProjects: Project[]
@@ -37,6 +39,9 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({ initialProjects, allPro
 
   return (
     <section id="projects" className="mb-8 scroll-mt-24">
+      <div className="mb-8">
+        <MatlabCodyCard />
+      </div>
       <SectionHeading title="Projects" />
 
       <div className="my-8 grid grid-cols-1 gap-8 md:my-12 md:grid-cols-2">

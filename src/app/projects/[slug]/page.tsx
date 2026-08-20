@@ -48,6 +48,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
 }
 
+const parseMarkdownHtml = (content: string) => {
+    if (!content) return ''
+    return content
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`(.*?)`/g, '<code>$1</code>')
+}
+
 const ProjectDetails = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params
     const project = await getProjectBySlug(slug)
@@ -61,8 +68,9 @@ const ProjectDetails = async ({ params }: { params: Promise<{ slug: string }> })
                     {project.title}
                 </h1>
                 <div className="text-neutral flex justify-center gap-4 text-sm uppercase tracking-wider">
-                    {project.siteAge && <span>{project.siteAge}</span>}
-                    {project.type && <span>| {project.type}</span>}
+                    <span>{project.type}</span>
+                    <span>•</span>
+                    <span>{project.siteAge}</span>
                 </div>
             </header>
 
@@ -77,7 +85,7 @@ const ProjectDetails = async ({ params }: { params: Promise<{ slug: string }> })
                         {section.content && (
                             <div
                                 className="text-primary-content text-lg leading-relaxed"
-                                dangerouslySetInnerHTML={{ __html: section.content }}
+                                dangerouslySetInnerHTML={{ __html: parseMarkdownHtml(section.content) }}
                             />
                         )}
 

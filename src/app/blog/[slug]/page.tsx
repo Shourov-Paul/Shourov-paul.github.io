@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import CodeBlock from '@/components/UI/CodeBlock'
 import TTSConfigurator from '@/components/Blog/TTSConfigurator'
 import MarkItDownConverter from '@/components/Blog/MarkItDownConverter'
+import TL431Calculator from '@/components/Blog/TL431Calculator'
 
 export async function generateStaticParams() {
     const blogs = await getAllBlogs()
@@ -42,6 +43,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             description,
         }
     }
+}
+
+const parseMarkdownHtml = (content: string) => {
+    if (!content) return ''
+    return content
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`(.*?)`/g, '<code>$1</code>')
 }
 
 const BlogDetails = async ({ params }: { params: Promise<{ slug: string }> }) => {
@@ -141,7 +149,7 @@ const BlogDetails = async ({ params }: { params: Promise<{ slug: string }> }) =>
                         {section.content && (
                             <div
                                 className="text-primary-content text-lg leading-relaxed"
-                                dangerouslySetInnerHTML={{ __html: section.content }}
+                                dangerouslySetInnerHTML={{ __html: parseMarkdownHtml(section.content) }}
                             />
                         )}
 
@@ -171,6 +179,10 @@ const BlogDetails = async ({ params }: { params: Promise<{ slug: string }> }) =>
 
                         {section.interactive === 'MarkItDownConverter' && (
                             <MarkItDownConverter />
+                        )}
+
+                        {section.interactive === 'TL431Calculator' && (
+                            <TL431Calculator />
                         )}
                     </section>
                 ))}

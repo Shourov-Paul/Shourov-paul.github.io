@@ -17,7 +17,7 @@
     },
     {
       "title": "Features",
-      "content": "• **Inverse Kinematics**: Calculates precise servo angles for smooth foot positioning.<br/>• **Self-Balancing**: Uses IMU data to maintain stability on slopes.<br/>• **Wireless Control**: Operated via a custom mobile app over Bluetooth/WiFi."
+      "content": "• <strong>Inverse Kinematics:</strong> Calculates precise servo angles for smooth foot positioning.<br/>• <strong>Self-Balancing:</strong> Uses IMU data to maintain stability on slopes.<br/>• <strong>Wireless Control:</strong> Operated via a custom mobile app over Bluetooth/WiFi."
     },
     {
       "title": "Tech Stack",

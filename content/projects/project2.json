@@ -17,11 +17,11 @@
     },
     {
       "title": "Key Features",
-      "content": "• **Ultra-Modern Glassmorphism UI:** A draggable floating control panel featuring iOS-inspired sliders and sleek neon interactions.<br/>• **Dynamic Dark Mode:** Instantly injects an intelligent dark screen tint over any active webpage with adjustable intensity.<br/>• **Eye Protect Mode:** Toggles a warm amber blue-light filtering overlay to precisely protect your visual health during late-night coding sessions.<br/>• **Integrated Lock-Screen Clock:** A beautiful ambient hero clock that tracks real-time data seamlessly inside the panel.<br/>• **Smart Memory State Persistence:** The extension actively saves absolute X/Y window coordinates, toggle states, and slider intensities directly into Chrome's memory, guaranteeing your layout stays precisely where you left it across tabs and after full page reloads."
+      "content": "• <strong>Ultra-Modern Glassmorphism UI:</strong> A draggable floating control panel featuring iOS-inspired sliders and sleek neon interactions.<br/>• <strong>Dynamic Dark Mode:</strong> Instantly injects an intelligent dark screen tint over any active webpage with adjustable intensity.<br/>• <strong>Eye Protect Mode:</strong> Toggles a warm amber blue-light filtering overlay to precisely protect your visual health during late-night coding sessions.<br/>• <strong>Integrated Lock-Screen Clock:</strong> A beautiful ambient hero clock that tracks real-time data seamlessly inside the panel.<br/>• <strong>Smart Memory State Persistence:</strong> The extension actively saves absolute X/Y window coordinates, toggle states, and slider intensities directly into Chrome's memory, guaranteeing your layout stays precisely where you left it across tabs and after full page reloads."
     },
     {
       "title": "Tech Stack",
-      "content": "• **Frontend:** Vanilla JavaScript (67%), CSS3 (33%), HTML5<br/>• **Architecture:** Chrome Extensions API (Manifest V3), Chrome Local Storage API for memory persistence"
+      "content": "• <strong>Frontend:</strong> Vanilla JavaScript (67%), CSS3 (33%), HTML5<br/>• <strong>Architecture:</strong> Chrome Extensions API (Manifest V3), Chrome Local Storage API for memory persistence"
     },
     {
       "content": "<div class=\"mt-12 flex justify-center\"><a href=\"https://github.com/Shourov-Paul/Dark-Webpage\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-neutral bg-secondary border border-accent cursor-pointer rounded-lg px-6 py-[10px] text-center text-sm font-medium transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg\">🚀 To Read More and View The Code</a></div>"

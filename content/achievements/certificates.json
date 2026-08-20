@@ -1,5 +1,12 @@
 [
     {
+        "id": "cert-012",
+        "title": "Certificate of Presentation - IEEE PEEIACON 2026",
+        "issuer": "IEEE IAS Bangladesh Chapter & AUST",
+        "date": "August 2026",
+        "image": "/images/certificates/Peeiacon_2026.webp"
+    },
+    {
         "id": "cert-001",
         "title": "Certificate of Achievement - Robolution 2025",
         "issuer": "MIST Robotics Club",

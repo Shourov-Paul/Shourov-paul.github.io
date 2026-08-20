@@ -17,7 +17,7 @@
     },
     {
       "title": "Features",
-      "content": "• **Real-time GPS Tracking**: Continuous location updates via GSM module.<br/>• **Cellular Data Transmission**: Sends GPS coordinates over cellular networks.<br/>• **Power Efficient**: Optimized for long-term operation with minimal power consumption."
+      "content": "• <strong>Real-time GPS Tracking:</strong> Continuous location updates via GSM module.<br/>• <strong>Cellular Data Transmission:</strong> Sends GPS coordinates over cellular networks.<br/>• <strong>Power Efficient:</strong> Optimized for long-term operation with minimal power consumption."
     },
     {
       "title": "Tech Stack",

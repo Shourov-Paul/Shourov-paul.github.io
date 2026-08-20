@@ -13,7 +13,7 @@
     },
     {
       "title": "Overview & Working Principle",
-      "content": "This project covers the design, schematic capture, and PCB layout of a high-efficiency **300W Pure Sine Wave Inverter**. Standard modified sine wave or square wave inverters generate high Total Harmonic Distortion (THD), which degrades and damages inductive loads like fan motors, refrigeration compressors, and sensitive audio/medical equipment. This system resolves these issues by reconstructing a clean, stable 50Hz AC wave from a 12V DC battery source."
+      "content": "This project covers the design, schematic capture, and PCB layout of a high-efficiency <strong>300W Pure Sine Wave Inverter</strong>. Standard modified sine wave or square wave inverters generate high Total Harmonic Distortion (THD), which degrades and damages inductive loads like fan motors, refrigeration compressors, and sensitive audio/medical equipment. This system resolves these issues by reconstructing a clean, stable 50Hz AC wave from a 12V DC battery source."
     },
     {
       "title": "3D Autodesk CAD Model",
@@ -21,7 +21,7 @@
     },
     {
       "title": "Power Stage Architecture & SPWM Generation",
-      "content": "The inverter utilizes a high-performance two-stage power conversion architecture:<br/><br/>• **DC-DC Booster Stage:** Elevates the low-voltage 12V DC battery supply up to a high-voltage 310V - 340V DC bus. This is accomplished using a high-frequency push-pull topology driven by an SG3525 switching controller operating at 50kHz.<br/>• **DC-AC H-Bridge Inverter Stage:** Swings the high-voltage DC bus to synthesize 220V AC at 50Hz. An EG8010 ASIC controller generates high-frequency **Sinusoidal Pulse Width Modulation (SPWM)** signals, driving four power MOSFETs (IRF3205/IRF740) via IR2110 high-and-low-side gate driver ICs."
+      "content": "The inverter utilizes a high-performance two-stage power conversion architecture:<br/><br/>• <strong>DC-DC Booster Stage:</strong> Elevates the low-voltage 12V DC battery supply up to a high-voltage 310V - 340V DC bus. This is accomplished using a high-frequency push-pull topology driven by an SG3525 switching controller operating at 50kHz.<br/>• <strong>DC-AC H-Bridge Inverter Stage:</strong> Swings the high-voltage DC bus to synthesize 220V AC at 50Hz. An EG8010 ASIC controller generates high-frequency <strong>Sinusoidal Pulse Width Modulation (SPWM)</strong> signals, driving four power MOSFETs (IRF3205/IRF740) via IR2110 high-and-low-side gate driver ICs."
     },
     {
       "title": "Power Stage PCB Layout",
