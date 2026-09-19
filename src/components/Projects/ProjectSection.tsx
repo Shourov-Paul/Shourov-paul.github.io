@@ -26,7 +26,7 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({ initialProjects, allPro
           const selected = allProjects.filter((p) => p.slug && slugs.includes(p.slug))
           selected.sort((a, b) => slugs.indexOf(a.slug!) - slugs.indexOf(b.slug!))
           if (selected.length > 0) {
-            setFeaturedProjects(selected)
+            setFeaturedProjects(selected.slice(0, 4))
             return
           }
         }
@@ -34,7 +34,7 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({ initialProjects, allPro
         console.error(e)
       }
     }
-    setFeaturedProjects(initialProjects)
+    setFeaturedProjects(initialProjects.slice(0, 4))
   }, [initialProjects, allProjects])
 
   return (
@@ -45,7 +45,7 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({ initialProjects, allPro
       <SectionHeading title="Projects" />
 
       <div className="my-8 grid grid-cols-1 gap-8 md:my-12 md:grid-cols-2">
-        {featuredProjects.map((project, idx) => (
+        {featuredProjects.slice(0, 4).map((project, idx) => (
           <ProjectCard key={project.slug || `featured-${idx}`} data={project} />
         ))}
       </div>

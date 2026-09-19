@@ -1,0 +1,47 @@
+{
+  "priority": 4,
+  "title": "STM32-Every: Compact STM32F411 Development Board",
+  "shortDescription": "A high-performance, breadboard-friendly microcontroller development board powered by the STM32F411CEU6 ARM Cortex-M4 MCU. Features USB Type-C, integrated 1-cell LiPo charger, dual crystals, high-current 3.3V LDO, RTC backup, and castellated pins.",
+  "cover": "/images/projects/project7/cover.webp",
+  "livePreview": "",
+  "type": "Hardware Project",
+  "siteAge": "JUL 2026",
+  "slug": "stm32-every",
+  "detailSections": [
+    {
+      "image": "/images/projects/project7/board_3d.webp"
+    },
+    {
+      "title": "Overview & Design Objectives",
+      "content": "<strong>STM32-Every</strong> is a custom, feature-dense development board engineered in KiCad around the powerful <strong>STM32F411CEU6</strong> ARM Cortex-M4 32-bit microcontroller (running at up to 100 MHz with 512 KB Flash, 128 KB SRAM, and hardware DSP/FPU).<br/><br/>While standard development boards like the classic Blue Pill or Black Pill lack integrated battery charging, ESD protection, and modern connectivity, STM32-Every was designed from the ground up to solve these constraints: incorporating a reversible USB Type-C interface, an onboard single-cell LiPo charger with automatic power-path selection, precision high-speed and real-time clock crystals, and dual castellated 20-pin headers for seamless breadboarding or SMT carrier module assembly."
+    },
+    {
+      "title": "Interactive 3D Autodesk CAD Model",
+      "content": "Explore the full interactive 3D CAD model of the STM32-Every board below. You can orbit, zoom, pan, and examine all SMD components, castellated pin headers, buttons, and thermal pads directly in your browser:<br/><br/><div class=\"w-full aspect-[4/3] max-w-[800px] mx-auto my-6 overflow-hidden rounded-xl border border-[#FFFFFF1A] shadow-lg\"><iframe src=\"https://mydiu231.autodesk360.com/shares/public/SH28cd1QT2badd0ea72b5cf5b18391c0eb53?mode=embed\" width=\"100%\" height=\"100%\" allowfullscreen=\"true\" webkitallowfullscreen=\"true\" mozallowfullscreen=\"true\" frameborder=\"0\"></iframe></div>"
+    },
+    {
+      "title": "Schematic Design & Subsystems",
+      "content": "The schematic is divided into modular, high-reliability functional blocks:<br/><br/>• <strong>USB Type-C Interface:</strong> Reversible Type-C receptacle with dual 5.1 kΩ pull-down resistors (CC1/CC2) for standard 5V/3A negotiation and a dedicated DT1042-04S0-7 TVS array suppressing electrostatic discharge transients on USB D+/D- and VBUS lines.<br/>• <strong>1-Cell LiPo Charger & Power Path:</strong> Integrates an LTC4054ES5-4.2 constant-current/constant-voltage Li-Ion/LiPo battery management IC with onboard red <code>CHRG</code> status indicator. A low-Vf Schottky diode (1N5819WS) and P-channel power MOSFET (AO3401A) implement seamless automatic power switching between external USB and a 2mm JST battery connector.<br/>• <strong>Power Regulation & Analog Isolation:</strong> 3.3V power is delivered through a high-efficiency HT75xx-1 SOT-89 LDO with low-ESR ceramic decoupling capacitor banks. A ferrite bead (FB1) isolates digital VDD from analog VDDA to suppress high-frequency switching noise during precision ADC operations.<br/>• <strong>Clock Generation & RTC:</strong> Features a 25 MHz High-Speed External (HSE) crystal for system PLL clocking, alongside a 32.768 kHz Low-Speed External (LSE) crystal connected with a BAT54C diode network for battery-backed Real-Time Clock operation.<br/>• <strong>Control & Debugging:</strong> Includes dedicated tactile pushbuttons for Hardware Reset (<code>NRST</code>), Bootloader mode (<code>BOOT0</code>), and User Input (<code>PA0</code>), plus a blue User LED (<code>PC13</code>), green Power LED, and a 4-pin ST-LINK SWD programming header (SWDIO, SWCLK, 3.3V, GND).",
+      "image": "/images/projects/project7/schematic.webp"
+    },
+    {
+      "title": "PCB Layout & Routing Strategy",
+      "content": "The PCB layout is designed for maximum signal integrity, thermal dissipation, and mechanical versatility:<br/><br/>• <strong>Thermal Relief & Ground Pour:</strong> Large copper ground planes on both top and bottom layers provide low impedance return paths, with a dense via matrix and 4.9 GND thermal polygon tying the central microcontroller ground pad directly to the ground planes.<br/>• <strong>High-Speed Differential Routing:</strong> USB D+ and D- lines are routed with matched trace lengths, minimal via count, and continuous ground reference to guarantee clean eye diagrams for USB 2.0 Full Speed (12 Mbps) communication.<br/>• <strong>Dual-Purpose Castellated Headers:</strong> Two 20-pin rows (0.1\" / 2.54mm pitch) feature castellated edge pads, allowing the board to either be populated with standard male pin headers for breadboard prototyping or reflow-soldered flat onto a motherboard as an SMT compute module.",
+      "image": "/images/projects/project7/pcb_layout.webp"
+    },
+    {
+      "title": "KiCad 3D Assembly Inspection",
+      "content": "The fully rendered 3D board assembly highlighting component placement, solder mask clearance, and gold-plated castellated connector pads:",
+      "image": "/images/projects/project7/3d_viewer.webp"
+    },
+    {
+      "title": "Firmware Core: System Clock & GPIO Configuration",
+      "code": "/*\n * STM32-Every Hardware Test Firmware (STM32F411CEU6)\n * Configures HSE (25MHz) to 100MHz System Clock and toggles User LED\n */\n#include \"stm32f4xx_hal.h\"\n\n#define USER_LED_PIN    GPIO_PIN_13\n#define USER_LED_PORT   GPIOC\n#define USER_BTN_PIN    GPIO_PIN_0\n#define USER_BTN_PORT   GPIOA\n\nvoid SystemClock_Config(void) {\n  RCC_OscInitTypeDef RCC_OscInitStruct = {0};\n  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};\n\n  __HAL_RCC_PWR_CLK_ENABLE();\n  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);\n\n  // Enable HSE (25 MHz) and configure PLL for 100 MHz SYSCLK\n  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;\n  RCC_OscInitStruct.HSEState = RCC_HSE_ON;\n  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;\n  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;\n  RCC_OscInitStruct.PLL.PLLM = 25;\n  RCC_OscInitStruct.PLL.PLLN = 200;\n  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2; // 100 MHz\n  RCC_OscInitStruct.PLL.PLLQ = 4;\n  HAL_RCC_OscConfig(&RCC_OscInitStruct);\n\n  // Set clock dividers for AHB, APB1, APB2\n  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK\n                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;\n  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;\n  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;\n  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;\n  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;\n  HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3);\n}\n\nint main(void) {\n  HAL_Init();\n  SystemClock_Config();\n\n  __HAL_RCC_GPIOC_CLK_ENABLE();\n  GPIO_InitTypeDef GPIO_InitStruct = {0};\n  GPIO_InitStruct.Pin = USER_LED_PIN;\n  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;\n  GPIO_InitStruct.Pull = GPIO_NOPULL;\n  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;\n  HAL_GPIO_Init(USER_LED_PORT, &GPIO_InitStruct);\n\n  while (1) {\n    HAL_GPIO_TogglePin(USER_LED_PORT, USER_LED_PIN); // Blink PC13\n    HAL_Delay(500);\n  }\n}",
+      "filename": "main.c",
+      "language": "c"
+    },
+    {
+      "content": "<div class=\"mt-12 flex justify-center\"><a href=\"https://github.com/Shourov-Paul\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-neutral bg-secondary border border-accent cursor-pointer rounded-lg px-6 py-[10px] text-center text-sm font-medium transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg\">🚀 View Developer Profile on GitHub</a></div>"
+    }
+  ]
+}

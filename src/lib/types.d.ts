@@ -103,5 +103,8 @@ export interface PublicationItem {
   pdfUrl?: string
   citations?: number
   image: string
+  category?: 'Conference' | 'Journal' | 'Submitted' | string
+  status?: 'Presented' | 'Under Review' | 'Published' | string
+  certificateUrl?: string
 }
 

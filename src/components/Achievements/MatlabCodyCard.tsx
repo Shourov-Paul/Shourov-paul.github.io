@@ -14,9 +14,9 @@ interface MatlabCodyCardProps {
 
 export default function MatlabCodyCard({
     name = 'Shourov',
-    rank = '1262',
-    badges = '15',
-    score = '2022',
+    rank = '730',
+    badges = '21',
+    score = '2927',
     profileUrl = 'https://www.mathworks.com/matlabcentral/profile/authors/41736197?s_tid=cody_local_to_profile'
 }: MatlabCodyCardProps) {
     return (

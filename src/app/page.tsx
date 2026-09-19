@@ -21,6 +21,7 @@ export default async function Home() {
   // Pre-sort featured projects based on the pinned config at build time
   let initialFeatured = allProjects.filter((p) => p.slug && pinnedSlugs.includes(p.slug))
   initialFeatured.sort((a, b) => pinnedSlugs.indexOf(a.slug!) - pinnedSlugs.indexOf(b.slug!))
+  initialFeatured = initialFeatured.slice(0, 4)
 
   // Fallback to first 4 projects if no valid pinned projects config
   if (initialFeatured.length === 0) {
@@ -34,7 +35,7 @@ export default async function Home() {
         <ProjectSection initialProjects={initialFeatured} allProjects={allProjects} />
         <ExperienceSection experiences={experiences.slice(0, 1)} showSeeMore={experiences.length > 1} />
         <EducationSection education={education.slice(0, 1)} showSeeMore={education.length > 1} />
-        <PublicationsSection publications={publications.slice(0, 2)} showSeeMore={publications.length > 2} />
+        <PublicationsSection publications={publications} showSeeMore={false} />
         <AchievementsSection achievements={achievements.slice(0, 4)} showSeeMore={achievements.length > 4} />
         <VideoSection videos={videos} />
         <ServiceSection />
