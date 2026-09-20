@@ -47,6 +47,7 @@ const YouTubeFacade = ({ id, title }: { id: string; title: string }) => {
 const VideoSection = ({ videos }: { videos: Video[] }) => {
     const [visibleCount, setVisibleCount] = useState(2)
     const isExpanded = visibleCount >= videos.length
+    const remaining = videos.length - visibleCount
 
     const handleToggle = () => {
         if (isExpanded) {
@@ -84,7 +85,7 @@ const VideoSection = ({ videos }: { videos: Video[] }) => {
                     <button
                         onClick={handleToggle}
                         className="flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all duration-300 border rounded-full text-secondary-content border-secondary-content/20 hover:border-accent hover:text-accent group">
-                        {isExpanded ? 'See Less' : 'See More'}
+                        {isExpanded ? 'See Less' : `+${remaining} See More`}
                         <ChevronDownIcon
                             className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
                         />

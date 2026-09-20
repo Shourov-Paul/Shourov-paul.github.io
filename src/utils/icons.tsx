@@ -368,6 +368,91 @@ const PhoneIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
   )
 }
 
+const GoogleScholarIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
+  return (
+    <svg
+      role="img"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <title>Google Scholar</title>
+      <path
+        fill="currentColor"
+        d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.24 14.978 9.5 12 9.5c-2.977 0-5.548 1.74-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"
+      />
+    </svg>
+  )
+}
+
+const OrcidIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
+  return (
+    <svg
+      role="img"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <title>ORCID</title>
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .946.431.946.947 0 .525-.421.947-.946.947-.525 0-.947-.422-.947-.947 0-.516.422-.947.947-.947zM6.647 7.416h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.3v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"
+      />
+    </svg>
+  )
+}
+
+const ResearchGateIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
+  return (
+    <svg
+      role="img"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <title>ResearchGate</title>
+      <rect x="0.75" y="0.75" width="22.5" height="22.5" rx="5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+      <text
+        x="12"
+        y="16.3"
+        textAnchor="middle"
+        fontSize="10"
+        fontWeight="700"
+        fontFamily="Arial, Helvetica, sans-serif"
+        fill="currentColor">
+        RG
+      </text>
+    </svg>
+  )
+}
+
+const PcbWayIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
+  return (
+    <svg
+      role="img"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <title>PCBWay</title>
+      <rect x="1.5" y="1.5" width="21" height="21" rx="2.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M6.5 6.5V17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M6.5 6.5H13C14.3807 6.5 15.5 7.61929 15.5 9C15.5 10.3807 14.3807 11.5 13 11.5H6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="17.5" cy="9" r="1.25" fill="currentColor" />
+      <path d="M11 11.5V15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M11 15H17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="17.5" cy="15" r="1.25" fill="currentColor" />
+    </svg>
+  )
+}
+
 const Youtube: FC<SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
@@ -404,6 +489,7 @@ export {
   Facebook,
   Fusion360Icon,
   GithubIcon,
+  GoogleScholarIcon,
   Instagram,
   JavaScriptIcon,
   KIcadIcon,
@@ -413,10 +499,13 @@ export {
   NestjsIcon,
   NextjsIcon,
   NodejsIcon,
+  OrcidIcon,
+  PcbWayIcon,
   PhoneIcon,
   PreviewIcon,
   PythonIcon,
   ReactIcon,
+  ResearchGateIcon,
   SocketIcon,
   Star,
   StarIcon,

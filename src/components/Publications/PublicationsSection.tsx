@@ -5,7 +5,26 @@ import SectionHeading from '../SectionHeading/SectionHeading'
 import Image from 'next/image'
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { ChevronDownIcon } from '@/utils/icons'
+import { ChevronDownIcon, GoogleScholarIcon, OrcidIcon, ResearchGateIcon } from '@/utils/icons'
+
+// External academic profile links shown under the section heading
+const researchProfiles = [
+  {
+    label: 'Google Scholar',
+    href: 'https://scholar.google.com/citations?view_op=list_works&hl=en&user=PSu4uPgAAAAJ',
+    icon: GoogleScholarIcon,
+  },
+  {
+    label: 'ORCID',
+    href: 'https://orcid.org/0009-0009-6664-7839',
+    icon: OrcidIcon,
+  },
+  {
+    label: 'ResearchGate',
+    href: 'https://www.researchgate.net/profile/Shourov-Paul?ev=hdr_xprf',
+    icon: ResearchGateIcon,
+  },
+]
 
 // Certificate Lightbox Modal Component
 const CertificateModal = ({
@@ -332,15 +351,15 @@ const PublicationCard = ({ pub }: { pub: PublicationItem }) => {
 
 interface PublicationsSectionProps {
   publications: PublicationItem[]
-  showSeeMore?: boolean
+  /** When set, renders a short home-page preview: only this many publications, tabs hidden,
+   *  and a "See More" link that navigates to the full /publications page. Omit for the full page. */
+  previewCount?: number
 }
 
 type TabCategory = 'All' | 'Conference' | 'Submitted' | 'Journal'
 
-const PublicationsSection: React.FC<PublicationsSectionProps> = ({
-  publications,
-  showSeeMore = false,
-}) => {
+const PublicationsSection: React.FC<PublicationsSectionProps> = ({ publications, previewCount }) => {
+  const isPreview = typeof previewCount === 'number'
   const [activeTab, setActiveTab] = useState<TabCategory>('All')
 
   // Calculate publication counts per tab category
@@ -359,11 +378,15 @@ const PublicationsSection: React.FC<PublicationsSectionProps> = ({
     return counts
   }, [publications])
 
-  // Filter publications based on active tab category
+  // Filter publications based on active tab category (full page only)
   const filteredPublications = useMemo(() => {
     if (activeTab === 'All') return publications
     return publications.filter((pub) => pub.category === activeTab)
   }, [publications, activeTab])
+
+  // In preview mode, just take the top N overall; on the full page, show everything for the active tab
+  const displayedPublications = isPreview ? publications.slice(0, previewCount) : filteredPublications
+  const remaining = isPreview ? publications.length - (previewCount ?? 0) : 0
 
   const tabs: { key: TabCategory; label: string }[] = [
     { key: 'All', label: 'All' },
@@ -379,40 +402,58 @@ const PublicationsSection: React.FC<PublicationsSectionProps> = ({
         subtitle="Research papers, conference proceedings, articles, and preprints"
       />
 
-      {/* Filter Tabs Navigation */}
-      <div className="my-6 flex flex-wrap gap-2 p-1.5 bg-secondary/40 border border-border/80 rounded-2xl w-fit">
-        {tabs.map((tab) => {
-          const count = categoryCounts[tab.key]
-          const isActive = activeTab === tab.key
-          return (
-            <button
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key)}
-              className={`flex items-center gap-2 px-4 py-2 text-xs md:text-sm font-semibold rounded-xl transition-all duration-300 cursor-pointer ${
-                isActive
-                  ? 'bg-accent/15 border border-accent text-accent shadow-sm'
-                  : 'text-tertiary-content hover:text-white hover:bg-secondary border border-transparent'
-              }`}
-            >
-              <span>{tab.label}</span>
-              <span
-                className={`px-1.5 py-0.5 text-[10px] font-mono rounded-md ${
+      {/* External Research Profile Links */}
+      <div className="mt-4 flex flex-wrap items-center gap-2.5">
+        {researchProfiles.map(({ label, href, icon: Icon }) => (
+          <a
+            key={label}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-full border border-border text-tertiary-content transition-all duration-300 hover:border-accent hover:text-accent"
+          >
+            <Icon className="w-4 h-4" />
+            {label}
+          </a>
+        ))}
+      </div>
+
+      {/* Filter Tabs Navigation (full page only, not in the home preview) */}
+      {!isPreview && (
+        <div className="my-6 flex flex-wrap gap-2 p-1.5 bg-secondary/40 border border-border/80 rounded-2xl w-fit">
+          {tabs.map((tab) => {
+            const count = categoryCounts[tab.key]
+            const isActive = activeTab === tab.key
+            return (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`flex items-center gap-2 px-4 py-2 text-xs md:text-sm font-semibold rounded-xl transition-all duration-300 cursor-pointer ${
                   isActive
-                    ? 'bg-accent text-black font-bold'
-                    : 'bg-primary/80 border border-border text-tertiary-content'
+                    ? 'bg-accent/15 border border-accent text-accent shadow-sm'
+                    : 'text-tertiary-content hover:text-white hover:bg-secondary border border-transparent'
                 }`}
               >
-                {count}
-              </span>
-            </button>
-          )
-        })}
-      </div>
+                <span>{tab.label}</span>
+                <span
+                  className={`px-1.5 py-0.5 text-[10px] font-mono rounded-md ${
+                    isActive
+                      ? 'bg-accent text-black font-bold'
+                      : 'bg-primary/80 border border-border text-tertiary-content'
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            )
+          })}
+        </div>
+      )}
 
       {/* Publications List */}
       <div className="my-6 flex flex-col transition-all duration-300 min-h-[200px]">
-        {filteredPublications.length > 0 ? (
-          filteredPublications.map((pub) => (
+        {displayedPublications.length > 0 ? (
+          displayedPublications.map((pub) => (
             <PublicationCard key={pub.id} pub={pub} />
           ))
         ) : (
@@ -422,13 +463,13 @@ const PublicationsSection: React.FC<PublicationsSectionProps> = ({
         )}
       </div>
 
-      {showSeeMore && (
+      {isPreview && remaining > 0 && (
         <div className="flex justify-center mt-8">
           <Link
             href="/publications"
             className="flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all duration-300 border rounded-full text-secondary-content border-secondary-content/20 hover:border-accent hover:text-accent group"
           >
-            See More Publications
+            +{remaining} See More
             <ChevronDownIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>

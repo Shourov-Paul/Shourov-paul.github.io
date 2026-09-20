@@ -6,9 +6,12 @@ import { ChevronDownIcon, PreviewIcon } from '@/utils/icons'
 interface EducationSectionProps {
   education: EducationItem[]
   showSeeMore?: boolean
+  totalCount?: number
 }
 
-const EducationSection: React.FC<EducationSectionProps> = ({ education, showSeeMore = false }) => {
+const EducationSection: React.FC<EducationSectionProps> = ({ education, showSeeMore = false, totalCount }) => {
+  const remaining = (totalCount ?? education.length) - education.length
+
   return (
     <section id="education" className="mb-8 scroll-mt-24">
       <SectionHeading title="EDUCATION" subtitle="My academic journey and qualifications" />
@@ -70,7 +73,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({ education, showSeeM
             href="/education"
             className="flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all duration-300 border rounded-full text-secondary-content border-secondary-content/20 hover:border-accent hover:text-accent group"
           >
-            See More
+            {remaining > 0 ? `+${remaining} See More` : 'See More'}
             <ChevronDownIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>

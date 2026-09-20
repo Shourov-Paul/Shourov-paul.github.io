@@ -9,6 +9,7 @@ import { ChevronDownIcon } from '@/utils/icons'
 const ServiceSection = () => {
   const [visibleCount, setVisibleCount] = useState(3)
   const isExpanded = visibleCount >= serviceData.length
+  const remaining = serviceData.length - visibleCount
 
   const handleToggle = () => {
     if (isExpanded) {
@@ -45,7 +46,7 @@ const ServiceSection = () => {
           <button
             onClick={handleToggle}
             className="flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all duration-300 border rounded-full text-secondary-content border-secondary-content/20 hover:border-accent hover:text-accent group">
-            {isExpanded ? 'See Less' : 'See More'}
+            {isExpanded ? 'See Less' : `+${remaining} See More`}
             <ChevronDownIcon
               className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
             />

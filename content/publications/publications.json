@@ -22,7 +22,7 @@
     "status": "Presented",
     "abstract": "ULTRAFLOAT introduces an ESP32-S3-powered non-contact water level measurement and automated pump control system using ultrasonic sensing integrated with real-time dynamic speed-of-sound temperature compensation for industrial and municipal water monitoring.",
     "bibtex": "@inproceedings{paul2026ultrafloat,\n  title={ULTRAFLOAT: An ESP32-S3-Based Non-Contact Water Level Sensing and Pump Control Platform with Dynamic Speed-of-Sound Compensation},\n  author={Paul, Shourov and Mobin, Samiul Islam and Sayem, Abu and Karim, Mohammad Rezaul},\n  booktitle={International Conference on Sensing and Automation Technologies},\n  year={2026}\n}",
-    "certificateUrl": "",
+    "certificateUrl": "/images/certificates/RAAICON_2026.jpg",
     "image": "/images/publications/ultrafloat_architecture.png"
   },
   {

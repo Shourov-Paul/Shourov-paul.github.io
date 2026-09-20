@@ -5,7 +5,7 @@ import SectionHeading from '../SectionHeading/SectionHeading'
 import ProjectCard from './ProjectCard'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { ChevronDownIcon } from '@/utils/icons'
+import { ChevronDownIcon, PcbWayIcon } from '@/utils/icons'
 
 import MatlabCodyCard from '../Achievements/MatlabCodyCard'
 
@@ -44,6 +44,17 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({ initialProjects, allPro
       </div>
       <SectionHeading title="Projects" />
 
+      <div className="mt-4 flex flex-wrap items-center gap-2.5">
+        <a
+          href="https://www.pcbway.com/project/member/?bmbno=F952195F-D624-46"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-full border border-border text-tertiary-content transition-all duration-300 hover:border-accent hover:text-accent">
+          <PcbWayIcon className="w-4 h-4" />
+          PCBWay
+        </a>
+      </div>
+
       <div className="my-8 grid grid-cols-1 gap-8 md:my-12 md:grid-cols-2">
         {featuredProjects.slice(0, 4).map((project, idx) => (
           <ProjectCard key={project.slug || `featured-${idx}`} data={project} />
@@ -55,7 +66,7 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({ initialProjects, allPro
           <Link
             href="/projects"
             className="flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all duration-300 border rounded-full text-secondary-content border-secondary-content/20 hover:border-accent hover:text-accent group">
-            See More
+            +{allProjects.length - 4} See More
             <ChevronDownIcon
               className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
             />

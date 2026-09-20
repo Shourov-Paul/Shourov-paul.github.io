@@ -1,5 +1,12 @@
 [
     {
+        "id": "cert-013",
+        "title": "Certificate of Presentation - RAAICON 2026",
+        "issuer": "International Conference on Sensing and Automation Technologies",
+        "date": "September 2026",
+        "image": "/images/certificates/RAAICON_2026.jpg"
+    },
+    {
         "id": "cert-012",
         "title": "Certificate of Presentation - IEEE PEEIACON 2026",
         "issuer": "IEEE IAS Bangladesh Chapter & AUST",

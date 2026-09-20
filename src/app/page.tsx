@@ -33,10 +33,10 @@ export default async function Home() {
       <Hero />
       <div className="mx-auto my-8 max-w-[1200px] px-4 md:my-[3.75rem] space-y-16 md:space-y-24">
         <ProjectSection initialProjects={initialFeatured} allProjects={allProjects} />
-        <ExperienceSection experiences={experiences.slice(0, 1)} showSeeMore={experiences.length > 1} />
-        <EducationSection education={education.slice(0, 1)} showSeeMore={education.length > 1} />
-        <PublicationsSection publications={publications} showSeeMore={false} />
-        <AchievementsSection achievements={achievements.slice(0, 4)} showSeeMore={achievements.length > 4} />
+        <ExperienceSection experiences={experiences.slice(0, 1)} showSeeMore={experiences.length > 1} totalCount={experiences.length} />
+        <EducationSection education={education.slice(0, 1)} showSeeMore={education.length > 1} totalCount={education.length} />
+        <PublicationsSection publications={publications} previewCount={3} />
+        <AchievementsSection achievements={achievements.slice(0, 4)} showSeeMore={achievements.length > 4} totalCount={achievements.length} />
         <VideoSection videos={videos} />
         <ServiceSection />
         <ContactSection />
