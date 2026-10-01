@@ -236,6 +236,7 @@ const PublicationCard = ({ pub }: { pub: PublicationItem }) => {
               {pub.certificateUrl && (
                 <button
                   onClick={() => setShowCertificate(true)}
+                  data-cursor-text="Click to see"
                   className="flex items-center gap-1 px-3 py-1 text-xs font-mono font-bold border border-accent/60 bg-accent/10 text-accent hover:bg-accent hover:text-black transition-all rounded cursor-pointer"
                 >
                   <svg

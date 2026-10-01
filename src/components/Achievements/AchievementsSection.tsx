@@ -27,6 +27,7 @@ const AchievementsSection: React.FC<AchievementsSectionProps> = ({ achievements,
                 {achievements.map((achievement) => (
                     <div
                         key={achievement.id}
+                        data-cursor-text="Click to see"
                         className="group relative cursor-pointer overflow-hidden rounded-xl border border-border bg-secondary transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/5"
                         onClick={() => setSelectedImage(achievement.image)}>
                         <div className="relative aspect-[4/3] w-full overflow-hidden">

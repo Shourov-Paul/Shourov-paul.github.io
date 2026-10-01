@@ -477,3 +477,38 @@ input:-webkit-autofill:active {
   0%, 100% { opacity: 0; transform: scale(0.5) translateY(0); }
   50% { opacity: 0.6; transform: scale(1.2) translateY(-20px); }
 }
+
+/* Cat Cursor Companion Animations */
+@keyframes tailWag {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(18deg); }
+}
+.animate-tail-wag {
+  animation: tailWag 1.2s ease-in-out infinite;
+  transform-origin: 25px 75px;
+}
+
+@keyframes earTwitch {
+  0%, 90%, 100% { transform: rotate(0deg); }
+  93% { transform: rotate(-10deg); }
+  96% { transform: rotate(10deg); }
+}
+.animate-ear-twitch {
+  animation: earTwitch 3s ease-in-out infinite;
+}
+
+@keyframes floatFade {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(1) translateY(0); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4) translateY(-35px); }
+}
+.animate-float-fade {
+  animation: floatFade 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bounceShort {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.animate-bounce-short {
+  animation: bounceShort 1.5s ease-in-out infinite;
+}
