@@ -9,30 +9,18 @@ interface Particle {
   emoji: string
 }
 
-const PIKACHU_CLICK_PROMPTS = [
-  'Pika pika! Click me! ⚡',
-  'Pikachu says view this! 💛',
-  'Thunder shock! Open this~ ⚡',
-  'Pika! So cool! ✨',
-  'Click to see, pika! 🐾',
-  'Pikachu is excited! 😻',
-  'Sparkling choice! ⚡',
-  'Chuuu! Tap here! 💛',
-]
-
 const PIKACHU_FRAMES = [
-  '/images/cursor/pikachu_frame_1.png',
-  '/images/cursor/pikachu_frame_2.png',
-  '/images/cursor/pikachu_frame_3.png',
+  '/images/cursor/pikachu_frame_1.webp',
+  '/images/cursor/pikachu_frame_2.webp',
+  '/images/cursor/pikachu_frame_3.webp',
 ]
 
 export default function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
+  const [isClickableHovered, setIsClickableHovered] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
   const [isIdle, setIsIdle] = useState(false)
   const [direction, setDirection] = useState<'left' | 'right'>('right')
-  const [speechText, setSpeechText] = useState('')
   const [particles, setParticles] = useState<Particle[]>([])
   const [currentFrameIndex, setCurrentFrameIndex] = useState(0)
 
@@ -42,6 +30,7 @@ export default function CustomCursor() {
   const idleTimer = useRef<NodeJS.Timeout | null>(null)
   const animFrameId = useRef<number | null>(null)
   const particleId = useRef(0)
+  const isClickableRef = useRef(false)
 
   // Cycle animation frames for electric wiggling Pikachu
   useEffect(() => {
@@ -66,6 +55,31 @@ export default function CustomCursor() {
       }, 3500)
     }
 
+    const checkIsClickable = (el: HTMLElement | null): boolean => {
+      if (!el) return false
+      if (
+        el.closest(
+          'a, button, input, textarea, select, summary, label, [role="button"], [role="link"], [role="tab"], [role="checkbox"], [role="radio"], [role="switch"], [role="menuitem"], .cursor-pointer, [onclick], [data-cursor-clickable]'
+        )
+      ) {
+        return true
+      }
+      let curr: HTMLElement | null = el
+      let depth = 0
+      while (curr && curr !== document.body && depth < 3) {
+        try {
+          if (window.getComputedStyle(curr).cursor === 'pointer') {
+            return true
+          }
+        } catch {
+          break
+        }
+        curr = curr.parentElement
+        depth++
+      }
+      return false
+    }
+
     const onMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY }
       if (!isVisible) setIsVisible(true)
@@ -81,32 +95,16 @@ export default function CustomCursor() {
 
       resetIdleTimer()
 
-      // Check hovered elements for interactive feedback
+      // Check if hovering over any clickable element
       const target = e.target as HTMLElement | null
-      if (!target) return
-
-      const interactiveEl = target.closest<HTMLElement>(
-        'a, button, input, textarea, select, summary, [role="button"], .cursor-pointer, [data-cursor-text], [data-cursor]'
-      )
-
-      if (interactiveEl) {
-        if (!isHovered) {
-          setIsHovered(true)
-          const customPrompt = interactiveEl.getAttribute('data-cursor-text')
-          if (customPrompt) {
-            setSpeechText(customPrompt)
-          } else {
-            const randomPrompt = PIKACHU_CLICK_PROMPTS[Math.floor(Math.random() * PIKACHU_CLICK_PROMPTS.length)]
-            setSpeechText(randomPrompt)
-          }
-        }
-      } else {
-        setIsHovered(false)
-        setSpeechText('')
-      }
+      const clickable = checkIsClickable(target)
+      isClickableRef.current = clickable
+      setIsClickableHovered((prev) => (prev !== clickable ? clickable : prev))
     }
 
     const onMouseDown = (e: MouseEvent) => {
+      if (isClickableRef.current) return
+
       setIsClicked(true)
 
       const emojis = ['⚡', '💛', '✨', '🐾', '🔴', '⭐']
@@ -160,14 +158,9 @@ export default function CustomCursor() {
       if (idleTimer.current) clearTimeout(idleTimer.current)
       if (animFrameId.current) cancelAnimationFrame(animFrameId.current)
     }
-  }, [isVisible, isHovered])
+  }, [isVisible])
 
   if (!isVisible) return null
-
-  // Determine Pikachu active sprite
-  const activeSprite = isHovered
-    ? '/images/cursor/pikachu_pointer.png'
-    : PIKACHU_FRAMES[currentFrameIndex]
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[9999]">
@@ -189,49 +182,52 @@ export default function CustomCursor() {
       {/* Pikachu Cursor Companion Container */}
       <div
         id="pikachu-cursor-container"
-        className="fixed top-0 left-0 flex flex-col items-center justify-center"
+        className="fixed top-0 left-0 pointer-events-none"
         style={{ willChange: 'transform' }}
       >
-        {/* Speech Bubble on Hover / Click / Idle */}
-        {(isHovered || isClicked || isIdle) && (
-          <div
-            className={`absolute -top-11 px-3.5 py-1.5 rounded-2xl bg-amber-950/90 border border-amber-400/80 text-amber-300 text-xs font-bold font-mono shadow-[0_0_15px_rgba(251,191,36,0.3)] backdrop-blur-md transition-all duration-300 whitespace-nowrap flex items-center gap-1.5 animate-bounce-short z-20 ${
-              direction === 'left' ? '-translate-x-4' : 'translate-x-4'
-            }`}
-          >
-            {isIdle ? (
+        {/* Inner wrapper that slowly fades/shrinks away when hovering clickable elements */}
+        <div
+          className={`flex flex-col items-center justify-center transition-all duration-500 ease-out ${
+            isClickableHovered
+              ? 'opacity-0 scale-75 blur-[1px] pointer-events-none'
+              : 'opacity-100 scale-100 blur-0'
+          }`}
+        >
+          {/* Speech Bubble on Idle */}
+          {!isClickableHovered && isIdle && (
+            <div
+              className={`absolute -top-11 px-3.5 py-1.5 rounded-2xl bg-amber-950/90 border border-amber-400/80 text-amber-300 text-xs font-bold font-mono shadow-[0_0_15px_rgba(251,191,36,0.3)] backdrop-blur-md transition-all duration-300 whitespace-nowrap flex items-center gap-1.5 animate-bounce-short z-20 ${
+                direction === 'left' ? '-translate-x-4' : 'translate-x-4'
+              }`}
+            >
               <span className="text-amber-200">zZZ Pika... 💤</span>
-            ) : isClicked ? (
-              <span className="text-amber-300 font-extrabold">Thunder Pounce! ⚡</span>
-            ) : (
-              <span>{speechText}</span>
-            )}
-            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-amber-950 border-r border-b border-amber-400/80 rotate-45" />
+              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-amber-950 border-r border-b border-amber-400/80 rotate-45" />
+            </div>
+          )}
+
+          {/* Animated Pokemon Smile Pikachu Image */}
+          <div className="relative flex items-center justify-center">
+            {/* Electric Aura Glow */}
+            <div
+              className={`absolute inset-0 rounded-full bg-amber-400/25 blur-md transition-all duration-500 ${
+                isClickableHovered ? 'opacity-0 scale-50' : 'opacity-40 scale-100'
+              }`}
+            />
+
+            <img
+              src={PIKACHU_FRAMES[currentFrameIndex]}
+              alt="Pokemon Smile Pikachu Cursor"
+              style={{
+                width: '52px',
+                height: '52px',
+                transform: `scaleX(${direction === 'left' ? -1 : 1}) scale(${
+                  isClicked ? 0.9 : 1
+                })`,
+                transition: 'transform 0.15s ease-out',
+              }}
+              className="relative z-10 object-contain drop-shadow-[0_4px_12px_rgba(234,179,8,0.6)] select-none pointer-events-none"
+            />
           </div>
-        )}
-
-        {/* Animated Pokemon Smile Pikachu Image */}
-        <div className="relative flex items-center justify-center">
-          {/* Electric Aura Glow */}
-          <div
-            className={`absolute inset-0 rounded-full bg-amber-400/25 blur-md transition-opacity duration-300 ${
-              isHovered ? 'opacity-100 scale-125' : 'opacity-40 scale-100'
-            }`}
-          />
-
-          <img
-            src={activeSprite}
-            alt="Pokemon Smile Pikachu Cursor"
-            style={{
-              width: '52px',
-              height: '52px',
-              transform: `scaleX(${direction === 'left' ? -1 : 1}) scale(${
-                isHovered ? 1.2 : isClicked ? 0.9 : 1
-              })`,
-              transition: 'transform 0.15s ease-out',
-            }}
-            className="relative z-10 object-contain drop-shadow-[0_4px_12px_rgba(234,179,8,0.6)] select-none pointer-events-none"
-          />
         </div>
       </div>
     </div>

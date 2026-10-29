@@ -10,7 +10,7 @@
     "abstract": "This paper presents the design and numerical analysis of a novel hexagonal-shaped suspended-core microstructured optical fiber tailored for broadband mid-infrared (mid-IR) supercontinuum generation. The proposed fiber structure optimizes chromatic dispersion and non-linear properties to achieve ultra-broadband spectral broadening.",
     "bibtex": "@inproceedings{paul2026hexagonal,\n  title={A novel hexagonal shaped suspended core microsrructured fiber for mid-infrared supercontinuum generation},\n  author={Paul, Shourov and Mobin, Samiul Islam and Sayem, Abu and Rafi, Rakayet and Karim, Mohammad Rezaul},\n  booktitle={2026 IEEE International Conference on Power, Electrical, Electronics and Industrial Applications (PEEIACON)},\n  pages={1--6},\n  year={2026},\n  organization={IEEE}\n}",
     "certificateUrl": "/images/certificates/Peeiacon_2026.webp",
-    "image": "/images/publications/hexagonal_supercontinuum_spectrum.png"
+    "image": "/images/publications/hexagonal_supercontinuum_spectrum.webp"
   },
   {
     "id": "pub-005",
@@ -22,8 +22,8 @@
     "status": "Presented",
     "abstract": "ULTRAFLOAT introduces an ESP32-S3-powered non-contact water level measurement and automated pump control system using ultrasonic sensing integrated with real-time dynamic speed-of-sound temperature compensation for industrial and municipal water monitoring.",
     "bibtex": "@inproceedings{paul2026ultrafloat,\n  title={ULTRAFLOAT: An ESP32-S3-Based Non-Contact Water Level Sensing and Pump Control Platform with Dynamic Speed-of-Sound Compensation},\n  author={Paul, Shourov and Mobin, Samiul Islam and Sayem, Abu and Karim, Mohammad Rezaul},\n  booktitle={International Conference on Sensing and Automation Technologies},\n  year={2026}\n}",
-    "certificateUrl": "/images/certificates/RAAICON_2026.jpg",
-    "image": "/images/publications/ultrafloat_architecture.png"
+    "certificateUrl": "/images/certificates/RAAICON_2026.webp",
+    "image": "/images/publications/ultrafloat_architecture.webp"
   },
   {
     "id": "pub-006",
@@ -35,7 +35,7 @@
     "status": "Under Review",
     "abstract": "Presents a novel circular-shaped suspended core microstructured fiber design for mid-infrared light sources, demonstrating high nonlinearity, zero-dispersion wavelength tuning, and high power conversion efficiency across mid-IR wavelengths.",
     "bibtex": "@article{paul2026circular,\n  title={Mid-Infrared Light Source Design through Circular Shaped Suspended Core Technique},\n  author={Paul, Shourov and others},\n  journal={Submitted for Publication},\n  year={2026}\n}",
-    "image": "/images/publications/circular_suspended_core.jpg"
+    "image": "/images/publications/circular_suspended_core.webp"
   },
   {
     "id": "pub-007",
@@ -47,7 +47,7 @@
     "status": "Under Review",
     "abstract": "Proposes a geometry-parameterized deep neural network architecture to accurately model and predict mid-infrared supercontinuum spectral evolution in chalcogenide (As2Se3/As2S3) hexagonal suspended-core microstructured fibers with accelerated computational throughput.",
     "bibtex": "@article{paul2026dnn_supercontinuum,\n  title={A Geometry-Parameterized Deep Neural Network for Mid-Infrared Supercontinuum Evolution in an As2Se3/As2S3 Hexagonal Suspended-Core Fiber},\n  author={Paul, Shourov and others},\n  journal={Submitted for Publication},\n  year={2026}\n}",
-    "image": "/images/publications/dnn_supercontinuum.jpg"
+    "image": "/images/publications/dnn_supercontinuum.webp"
   },
   {
     "id": "pub-008",
@@ -59,6 +59,6 @@
     "status": "Under Review",
     "abstract": "We propose and numerically demonstrate an all-solid chalcogenide hexagonal suspended-core fiber for broadband mid-infrared (MIR) supercontinuum (SC) generation, in which arsenic triselenide (As2Se3) forms the hexagonal core, six radial struts, and the outer support ring, while arsenic trisulfide (As2S3) fills the six cladding sector regions. Generalized nonlinear Schrödinger equation simulations using a 50 fs, 3 kW sech² pump pulse at 4.1 µm over a 10 mm fiber predict ultrabroadband SC spanning approximately 2–16 µm.",
     "bibtex": "@article{paul2026design_hexagonal_journal,\n  title={Design and analysis of a novel hexagonal shaped suspended-core microstructured fiber for mid-infrared supercontinuum generation},\n  author={Paul, Shourov and Mobin, Md Samiul Islam and Sayem, Abu and Rafi, Rakayet and Ismail, Mohammad and Karim, M R},\n  journal={Submitted for Publication},\n  year={2026}\n}",
-    "image": "/images/publications/hexagonal_suspended_core.png"
+    "image": "/images/publications/hexagonal_suspended_core.webp"
   }
 ]

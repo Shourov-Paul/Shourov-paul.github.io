@@ -47,6 +47,7 @@ export const metadata: Metadata = {
 }
 
 import CustomCursor from '@/components/UI/CustomCursor'
+import SidebarNav from '@/components/Navigation/SidebarNav'
 
 export default function RootLayout({
   children,
@@ -57,6 +58,7 @@ export default function RootLayout({
     <html lang="en" data-theme="dark">
       <body className={`${firaCode.className}`}>
         <CustomCursor />
+        <SidebarNav />
         <header className="sticky top-0 z-50">
           <script
             type="application/ld+json"

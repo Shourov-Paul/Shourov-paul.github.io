@@ -10,7 +10,7 @@ import {
   GithubIcon,
   Instagram,
   LinkedIn,
-  X,
+  WhatsApp,
 } from '../../utils/icons'
 import { HeroImage } from '../../utils/images'
 import Ellipse from './Ellipse'
@@ -47,7 +47,7 @@ const Hero = () => {
   }, [])
 
   return (
-    <section className="bg-primary bg-small-glow bg-small-glow-position md:bg-large-glow-position lg:bg-large-glow min-h-[calc(dvh-4rem)] bg-no-repeat">
+    <section id="hero" className="bg-primary bg-small-glow bg-small-glow-position md:bg-large-glow-position lg:bg-large-glow min-h-[calc(dvh-4rem)] bg-no-repeat scroll-mt-24">
       <div className="mx-auto flex max-w-[1200px] flex-col-reverse items-center gap-4 px-4 pt-4 pb-10 md:grid md:grid-cols-2 lg:p-4">
         <div className="flex min-h-48 flex-col justify-between lg:min-h-56 lg:max-w-[33.75rem]">
           <h1>
@@ -94,8 +94,8 @@ const Hero = () => {
             <Link href="https://www.youtube.com/channel/UCQ18lfqzlZH-a-WyphayNWw" target="_blank" aria-label="YouTube Channel" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
               <Youtube className="size-6" />
             </Link>
-            <Link href="https://twitter.com/shourov_pal" target="_blank" aria-label="X (Twitter) Profile" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
-              <X className="size-6" />
+            <Link href="https://wa.me/8801629887610" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
+              <WhatsApp className="size-6" />
             </Link>
             <Link href="https://www.instagram.com/sh0ur0v_p/" target="_blank" aria-label="Instagram Profile" className="hover:text-accent transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1">
               <Instagram className="size-6" />
